@@ -26,13 +26,32 @@ Consider now $G \subset \mathcal{L}(X)=\mathcal{L}(X,X)$ a subset of bounded lin
 \\
 \textbf{Claim:} There exists $F: X \to \mathbb{R}$ linear with $F_{ \mid Y} = f, F \leq p$ on $X$ and $F(Ax)=F(x)$ for all $x \in X$ and $A \in G$. 
 \begin{proof}
-Given the hint to consider $q(x):= \inf_{A_1, \dots , A_n} \frac{1}{n} p(A_1x + \dots + A_nx)$ for $x \in X$. Here the infimum is taken over finitely many $A_i \in G$. Then it is clear that $q$ is sublinear because all the $A_i:X \to X$ are linear and $p$ itself is sublinear. \\
+Given the hint to consider $q(x):= \inf_{A_1, \dots , A_n} \frac{1}{n} p(A_1x + \dots + A_nx)$ for $x \in X$. Here the infimum is taken over finitely many $A_i \in G$. Then it is clear that $q$ is sublinear because all the $A_i:X \to X$ are linear and $p$ itself is sublinear. More formally this can be shown as described in the Hints to this Exercise Sheet, but it really breaks down to using these two assumptions on $p$, thus I will be very sketchy about the \textit{proof.} \\
 \\
+It is trivial to verify that for $\lambda \geq 0$ we have $q( \lambda x) = \lambda q(x)$ on $X$. Let now $x,y \in X$ be arbitrary by the definition of the infimum we can find for $\epsilon >0$, $A_1, \dots , A_n \in G$ and $B_1, \dots , B_m \in G$ such that 
+\begin{align*}
+q(x) &\leq \frac{1}{n}p(A_1x + \dots + A_nx) \leq q(x) + \epsilon/2  \\
+q(y) &\leq \frac{1}{m}p(B_1 y + \dots + A_m y) \leq q(y) + \epsilon/2 
+\end{align*}
+We easily find the two lower bounds
+\begin{align*}
+\frac{1}{n}p(A_1 x + \dots + A_nx ) = \frac{1}{mn} \sum_{k=1}^m  p ( A_1 x + \dots + A_n x) \\ \geq \frac{1}{mn} \sum_{k=1}^m p p(B_k A_1 x + \dots + B_k A_n x ) 
+\end{align*}
+and similarly 
+\begin{align*}
+\frac{1}{m}p( B_1 y + \dots + B_m y) \geq \frac{1}{mn} \sum_{k=1}^n p(A_k B_1 y + \dots + A_k B_m y) 
+\end{align*}
+\newpage
+Bringing both of this estimates together,  using that $p$ is sublinear, the linearty of the $A_i$ and the commutativity of $G$ eventually leads to
+\begin{align*}
+q(x) + q(y) + \epsilon \geq \frac{1}{mn}p \left( \sum_{k=1}^m \sum_{l=1}^n B_k A_l (x + y ) \right) \geq q(x+y)
+\end{align*}
+Since $\epsilon >0$ was arbitrary we conclude the sublinearty of $q$. \\\\
 Moreover for $y \in Y$ and $A_1, \dots ,  A_n \in G$ where $n \in \mathbb{N}$ we have
 \begin{align*}
 f(A_1y + \dots + A_ny)= f(A_1y) + \dots + f(A_ny)= n f(y) 
 \end{align*}
-But also $f(A_1y + \dots + A_ny) \leq p(A_1y + \dots + A_ny)$ by assumption and thus we have $f(y) \leq \frac{1}{n}p(A_1y + \dots + A_ny)$ for all $A_1, \dots ,  A_n \in G$. Taking the infimum we conclude that $f(y) \leq q(y)$ on $Y$. 
+But also $f(A_1y + \dots + A_ny) \leq p(A_1y + \dots + A_ny)$ by assumption and thus we have $f(y) \leq \frac{1}{n}p(A_1y + \dots + A_ny)$ for all $A_1, \dots ,  A_n \in G$. That is $f$ is a lower bound of the expression $\frac{1}{n}p(A_1 (\cdot) + \dots + A_n( \cdot))$ on $Y$, by the definition of the infimum as the greatest lower bound we conclude that $f(y) \leq q(y)$ on $Y$. 
 \\\\
 By \textbf{Hahn-Banach Theorem} there exists $F: X \to \mathbb{R}$ linear with $F_{ \mid Y} = f$ and $F(x) \leq q(x)$ for all $x \in X$. However since we also have that $p(A_1x + \dots + A_nx) \leq p(A_1x) + \dots + p(A_nx) \leq n p(x)$ it also follows that $q \leq p$ on $X$ which takes care of the first part of the claim. \\
 \\
@@ -45,7 +64,9 @@ If we now apply this to the special case where $A_i = A^{i-1} \in G$ for $i= 1 ,
 \begin{align*}
 q(Ax-x) \leq \frac{1}{n}p(A^nx -x) \leq \frac{1}{n}( p(A^nx)+p(-x)) \leq \frac{1}{n}(p(x)+ p(-x))  
 \end{align*}
-Passing this statement to the limit as $n \to \infty$ we obtain that $q(Ax-x) \leq 0$. This implies that $F(Ax-x) \leq 0$ because $F \leq q$ on $X$. Thus we've got the inequality
+Passing this statement to the limit as $n \to \infty$ we obtain that $q(Ax-x) \leq 0$.
+\newpage 
+ This implies that $F(Ax-x) \leq 0$ because $F \leq q$ on $X$. Thus we've got the inequality
 \begin{align*}
 F(Ax) \leq F(x)
 \end{align*}
@@ -73,8 +94,8 @@ Now we recall that $J_X, J_Y$ are linear isometries and quite generally, the com
 \\
 \\
 Recall from \textbf{Thereom 4.3.4.} That for a Banach Space $X$ we have $X$ is reflexive if and only if $X^*$ is reflexive. We will need that later. 
-\\\\
-Also recall from \textbf{Exercise Sheet 6 Exercise 5} that if $X,Y$ are Banach spaces and $T: X \to Y$ is a continuous isomorphism then $X$ is reflexive if and only if $Y$ is reflexive. 
+%\\\\
+%Also recall from \textbf{Exercise Sheet 6 Exercise 5} that if $X,Y$ are Banach spaces and $T: X \to Y$ is a continuous isomorphism then $X$ is reflexive if and only if $Y$ is reflexive. 
 \\\\
 \textbf{Claim 1:} Let $f: X\to Y$ be an linear, continuous and injective map, then $f^*: Y^* \to X^*$ is surjective. 
 \\\\
@@ -90,7 +111,7 @@ Hence we have that $\Psi$ is continuous and thus $\Psi \in \text{Im}(f)^*$. By \
 f^*(\Psi)= \Psi \circ f = x^*
 \end{align*}
 which entails that $f^*$ is surjective as claimed. \hfill $\Box$ \\\\
-Applying this result now to our $f:X \to Y^{*}$ which is a linear isometry we obtain that $f^*:Y^{**} \to X^*$ is surjective. Moreover, by assumption $f^*$ is an linear isometry we now have that $f^*$ is in fact an continuous isomorphism between $Y^{**}$ and $X^*$ and since $X^*$ is reflexive, so is $Y^{**}$.
+Applying this result now to our $f:X \to Y^{*}$ which is a linear isometry we obtain that $f^*:Y^{**} \to X^*$ is surjective. Moreover, by assumption $f^*$ is an linear isometry we now have that $f^*$ is in fact an continuous isomorphism between $Y^{**}$ and $X^*$.
 \\\\
 Since by assumption $f^*$ is an linear isometry (in particular injective) we also get that $f^{**}: X^{**} \to Y^{***}$ is surjective. \\ But now we have that $J_{Y^*} \circ f = f^{**} \circ J_X: X \to Y^{***}$ is surjective as the composition of surjective maps \textit{(recall that $X$ is reflexive by assumption)}, thus $J_{Y^*}$ has to be surjective too. This entails that $Y^*$ is reflexive and this is the case if and only if $Y$ is reflexive, i.e. $J_Y$ is an isometric isomorphisms. \\
 \\
@@ -226,6 +247,18 @@ b) Let $\mathcal{P}$ be the vector space of real polynomials in one variable,  e
 \begin{align*}
 B(p,q)= \int_0^1 p(t)q(t)dt
 \end{align*}
-Show that $B$ is a (real valued) bilinear functional on $\mathcal{P}$ which is continuous variable separately, but that $B$ is not continuous on $\mathcal{P} \times \mathcal{P}$. 
+Show that $B$ is a (real valued) bilinear functional on $\mathcal{P}$ which is continuous in each variable separately, but that $B$ is not continuous on $\mathcal{P} \times \mathcal{P}$. 
 
+\begin{proof}
+The Bilinearty of $B$ follows immediately by the fact, that the integral is linear. Fix now $q \in \mathcal{P}$ arbitrary, then we have for all $p \in \mathcal{P}$ that
+\begin{align*}
+|B(p,q)| = \left| \int_0^1 p(t)q(t)dt \right| \leq \int_0^1 |p(t)| |q(t)| dt  &\leq \sup_{t \in [0,1] } | q(t) | \int_0^1 |p(t)| dt \\ & \leq c_q \| p\| 
+\end{align*}
+Since $q \in \mathcal{P}$ is continuous. This shows that $B( \cdot, q)$ is continuous,  i.e. $B$ is continuous in its first variable. By the exact same reasoning we establish that $B$ is continuous in its second variable. 
+\newpage
+We still need to show that $B$ is not continuous on $\mathcal{P} \times \mathcal{P}$. We remark that this is no contradiction to our statement that we've just showed in a). Indeed our vector space $\mathcal{P}$ of real valued polynomials in one variable is not complete, in particular its no Banach space. 
+\\
+\\
+There is a hint given on how to approach this problem. But I have a daunting feeling that it's incorrect, so I will leave this problem open. 
+\end{proof}
 \end{document}
