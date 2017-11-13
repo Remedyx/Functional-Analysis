@@ -1,0 +1,147 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\author{Marco Bertenghi}
+
+\begin{document}
+\section{Dual Space of $L^1$}
+If $\Omega$ is a $\sigma$-finite space, we have $(L^1( \Omega))^* = L^\infty( \Omega)$. In this exercise we show that this is not always the case, if $\Omega$ is not $\sigma$-finite. 
+\\\\
+Let $X = \mathbb{R}$ and $\mathcal{A}= \lbrace B \subset X : B \text{ is countable or $B^c$ is countable} \rbrace$. Let $\mu$ be the counting measure, i.e. for $B \in \mathcal{A}$ let $\mu(B)$ be the number of elements of $B$, possibly $\infty$. 
+\\\\
+\textbf{a)} Show that $\mathcal{A}$ is a $\sigma$-Algebra and $\mu$ is a measure, but the measure space $(X, \mathcal{A}, \mu)$ is not $\sigma$-finite. 
+\begin{proof}
+We will show the different statements
+\\\\
+\textbf{Claim 1:} $\mathcal{A}$ is a $\sigma$-Algebra.
+\\\\
+\textbf{Proof of Claim 1:} Evidently we have $X \in \mathcal{A}$ because $X^c = \emptyset$ is countable. Moreover, by the very definition of $\mathcal{A}$ we have that if $A \in \mathcal{A}$ then always $A^c \in \mathcal{A}$.
+\\
+\\
+ Finally consider a sequence $(A_n)_{n \in \mathbb{N}} \subset \mathcal{A}$ in $\mathcal{A}$. Then either there is at least one $A_i \in \mathcal{A}$ cocountable for some $i \in \mathbb{N}$ or all the $A_n$'s are countable. In the first case we have that
+ \begin{align*}
+ \left( \bigcup_{n \in \mathbb{N}} A_n \right)^c = \bigcap_{n \in \mathbb{N}} A_n^c \subset A_i^c 
+ \end{align*}
+ Which is countable as the subset of the countable set $A_i^c$. In the second case we simply remark that the countable union of countable sets is again countable. This entails that $\mathcal{A}$ is a $\sigma$-Algebra.  \hfill $\Box$ 
+ \\\\
+\textbf{Claim 2:} $\mu : \mathcal{A} \to [0,  \infty]$ is a measure. 
+\\\\
+\textbf{Proof of Claim 2:} The positivity of the measure is clear because we work with the cardinality of the sets. Further it is clear that the empty set has cardinality $0$ and thus $\mu( \emptyset ) = 0$. We only need to verify the countable additivity property of $\mu$. 
+\newpage 
+Let $(A_n)_{ n \in \mathbb{N}}$ be a sequence of pairwise disjoint sets in $\mathcal{A}$.\\
+\\
+Then by definition of the counting measure we have
+\begin{align*}
+\mu \left( \bigcup_{n \in \mathbb{N}} A_n \right) = \left| \bigcup_{n \in \mathbb{N}} A_n \right| = \sum_{n \in \mathbb{N}} |A_n| = \sum_{n \in \mathbb{N}} \mu(A_n) 
+\end{align*}
+Because our sets are mutually disjoints. We also notice that this expression makes sense in any case, i.e. the RHS is infinite/finite so is the LHS. \hfill $\Box$
+\\
+\\
+\textbf{Claim 3:} The measure space $(X, \mathcal{A}, \mu)$ is not $\sigma$-finite. 
+\\\\
+\textbf{Proof of Claim 3:} We say that $(X, \mathcal{A},  \mu)$ is $\sigma$-finite if we can find a sequence $(A_n)_{n \in \mathbb{N}}$ in $\mathcal{A}$ with $\mu$-finite measure such that $X= \bigcup_{n \in \mathbb{N}} A_n$. 
+\\\\
+Assume for contradiction that $( X= \mathbb{R}, \mathcal{A}, \mu)$ is $\sigma$-finite. Then we have
+\begin{align*}
+\mathbb{R}= \bigcup_{n \in \mathbb{N}} A_n \text{ with } \mu(A_i)= |A_i| < \infty \text{ for all } i \in \mathbb{N}
+\end{align*}
+But if all the $A_n$ have finite counting measure, they must in particular be countable because all finite sets are countable. This however would entail that $\mathbb{R}$ is also countable as the countable union of countable sets. This is clearly a contradiction. 
+\end{proof}
+\newpage
+\noindent \textbf{b)} Show that there exists a $\Psi \in (L^1(X, \mu))^*$ that can not be represented as \begin{align*}
+\Psi(f) = \int fg d \mu \text{ for all } f \in L^1(X, \mu)
+\end{align*}
+with some $g \in L^\infty (X, \mu) $ 
+\begin{proof}
+Let $E \subset X= \mathbb{R}$ be a set that is not in our sigma algebra $\mathcal{A}$. Let $f \in L^1( X, \mu)$ be arbitrary and let us define
+\begin{align*}
+\Psi(f):= \sum_{x \in E} f(x) 
+\end{align*}
+Clearly we have that $\Psi$ is a linear function $\Psi: L^1(X, \mu) \to \mathbb{K}$. Moreover since $f \in L^1(X, \mu)$ we have that
+\begin{align*}
+|\Psi(f)| = \left | \sum_{x \in E} f(x) \right| \leq \sum_{x \in E} |f(x)|  \leq \|f\|_{L^1}
+\end{align*}
+Thus $\Psi$ is bounded and therefore continuous, so indeed we have $\Psi \in (L^1(X, \mu))^*$. Let us now suppose for contradiction that there is some $g \in L^\infty (X, \mu)$ such that \begin{align*}
+\Psi(f) = \int fg d \mu = \sum_{x \in X} f(x)g(x) \overset{!}= \sum_{x \in E} f(x)
+\end{align*}
+This inequality can only hold if $g= \mathcal{X}_E$, but clearly $g \notin L^\infty(X, \mu)$ because by assumption we have that $E$ is not a measurable set. 
+\end{proof}
+\newpage
+\section{Integral equation}
+\section{Theorem of Baire}
+A subset $A$ of a metric space $M$ is called \textbf{nowhere dense} if $\overset{\circ}{\overline{A}}=(\overline{A})^\circ = \emptyset$. The subset $A$ is called \textbf{meagre}, if there exists a sequence of nowhere dense sets $A_i$, such that $A= \bigcup_{i=1}^\infty A_i$. 
+\\\\
+\textbf{a)} Show that $A$ is nowhere dense if $M \setminus \overline{A}$ is dense in $M$. 
+\begin{proof}
+I don't think that there is anything to show, we have:
+\begin{align*}
+A \text{ is nowhere dense} &\iff \left( \overline{A}\right)^\circ = \emptyset \\
+& \iff M \setminus \left( \overline{A}\right)^\circ = M \text{ (by passing to the complement)} \\
+& \iff \overline{M \setminus \overline{A}} = M  \text{ (see claim below)}\\
+& \iff \overline{M \setminus \overline{A}} \text{ is dense in } M 
+\end{align*}
+\textbf{Claim:} Let $(X,d)$ be a metric space and $A \subset X$, then we have \\ $\overline{A^c}= \left(A^\circ \right)^c$. \\
+\\
+\textbf{Proof of Claim:} We have by definition
+\begin{align*}
+\overline{A}&= \bigcap \lbrace F \supset A \mid F \text{ is closed in } X \rbrace \\
+A^\circ &= \bigcup \lbrace G \subset A \mid G \text{ is open in } X \rbrace 
+\end{align*}
+Use De Morgan Laws and we're done. \hfill $\Box$
+\\\\
+\end{proof}
+\newpage
+\noindent \textbf{b)} Show that there exists a meagre set $A \subset \mathbb{R}$, such that $\mathbb{R} \setminus A$ has Lebesgue measure zero. 
+\begin{proof}
+We first recall the central results from Class:
+\\\\
+\textbf{Lemma 5.1.1.} Let $(X, \tau)$ be a topological space. The following statements are equivalent:
+\begin{enumerate}
+\item Let $(A_i)_{i \in \mathbb{N}}$ be a sequence of closed sets in $X$. If the interior of each $A_i$ is empty , then also the interior of $\bigcup_{i=1}^\infty A_i$ is empty. 
+\item Let $(B_i)_{i \in \mathbb{N}}$ be a sequence of open sets in $X$. If each $B_i$ is dense in $X$, then also $\bigcap_{i=1}^\infty B_i$ is dense in $X$. 
+\end{enumerate}
+\textbf{Definition:} A topological space $(X,  \tau)$ is called a Baire space, if condition $1)$ or $2)$ above (and thus both) are satisfied.\\
+\\
+The big result that Baire provided tells us now that in fact complete metric spaces are Baire spaces, i.e. build a category.
+\\
+\\
+\textbf{Theorem 5.1.3. (Baire's Category Theorem):} Every complete metric space is a Baire space.
+\\\\
+Since $\mathbb{R}$ is complete, it is in particular a Baire space, thus we have the equivalence of $1)$ and $2)$ above. 
+\\\\
+Let now $k \in \mathbb{N}$ and $q_n \in \mathbb{Q}$ for all $\mathbb{N}$. We then set
+\begin{align*}
+U_k:= \bigcup_{n \in \mathbb{N}} \left(q_n -2^{-(n+k)}, q_n + 2^{-(n+k)}\right) = \bigcup_{n \in \mathbb{N}} I_{n,k}
+\end{align*}
+All the $I_{n,k}$ are open have Lebesgue measure (length) $2^{1-(n+k)}$. Using the subadditivity of the Lebesgue measure and the geometric sum we get that 
+\begin{align*}
+\lambda (U_k) \leq 2^{1-k}\sum_{n \in \mathbb{N}} 2^{-n} = 2^{2-k} < \infty \text{ for all } k \in \mathbb{N}
+\end{align*}
+Now we set
+\begin{align*}
+N:= \bigcap_{k \in \mathbb{N}} U_k 
+\end{align*}
+Since we have $U_{k+1} \subset U_k$ and $\lambda(U_k) < \infty$ we get that 
+\begin{align*}
+\lambda (N) = \lambda \left( \bigcap_{k \in \mathbb{K}} U_k \right) = \lim_{k \to \infty} \lambda (U_k) \leq \lim_{k \to \infty} 2^{2-k} = 0 
+\end{align*}
+which entails that $N$ is a nullset. 
+\newpage
+Moreover we have that all the $U_k$ are open as the union of open sets and they are also dense in $\mathbb{R}$, because we have chosen the dense sequence $q_n \in \mathbb{Q}$. More precisely, we have that $U_k$ is an open covering of $\mathbb{Q}$, in particular we have:
+\begin{align*}
+\mathbb{Q} \subset U_k \subset \mathbb{R} \implies \mathbb{R}=\overline{\mathbb{Q}} \subset \overline{U_k} \subset \mathbb{R} \implies \overline{U_k} = \mathbb{R}
+\end{align*}
+By Baire's theorem we thus get that also $N$ as the intersection of said $U_k$ is dense. Now we obtain that
+\begin{align*}
+M:= N^c = \bigcup_{k \in \mathbb{N}} \overline{U_k^c}
+\end{align*}
+We claim that $M \subset \mathbb{R}$ is meagre. Indeed, from \textbf{a)} we know that $U_k^c$ is nowhere dense if and only if $\overline{U_k}$ is dense in $\mathbb{R}$, but we already have that established. 
+\end{proof}
+\section{Induced Topologies}
+\section{Criterion for weak convergence}
+\end{document}
