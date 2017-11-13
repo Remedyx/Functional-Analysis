@@ -62,7 +62,7 @@ Let $E \subset X= \mathbb{R}$ be a set that is not in our sigma algebra $\mathca
 \begin{align*}
 \Psi(f):= \sum_{x \in E} f(x) 
 \end{align*}
-Clearly we have that $\Psi$ is a linear function $\Psi: L^1(X, \mu) \to \mathbb{K}$. Moreover since $f \in L^1(X, \mu)$ we have that
+This is well-defined, because we assume $f \in L^1(X, \mu)$. Clearly we also have that $\Psi$ is a linear function $\Psi: L^1(X, \mu) \to \mathbb{K}$. Moreover since $f \in L^1(X, \mu)$ we have that
 \begin{align*}
 |\Psi(f)| = \left | \sum_{x \in E} f(x) \right| \leq \sum_{x \in E} |f(x)|  \leq \|f\|_{L^1}
 \end{align*}
@@ -142,6 +142,59 @@ M:= N^c = \bigcup_{k \in \mathbb{N}} \overline{U_k^c}
 \end{align*}
 We claim that $M \subset \mathbb{R}$ is meagre. Indeed, from \textbf{a)} we know that $U_k^c$ is nowhere dense if and only if $\overline{U_k}$ is dense in $\mathbb{R}$, but we already have that established. 
 \end{proof}
+\newpage
 \section{Induced Topologies}
+\textbf{a)} Let $X$ be a set and $(\tau_\alpha)_{ \alpha \in A}$ be a family of topologies on $X$, where $A$ is an arbitrary index set. Show that the intersection $\bigcap_{ \alpha \in A} \tau_\alpha$ is again a topology on $X$. 
+\begin{proof}
+We have $\emptyset, X \in \bigcap_{ \alpha \in A} \tau_\alpha$, indeed we have $\tau, X \in \tau_\alpha$ for every $\alpha \in A$ because they are all topologies on $X$. 
+\\\\
+Let now $I$ be an arbitrary index set and suppose that for all $i \in I$ we have $A_i \in \bigcap_{ \alpha \in A} \tau_\alpha$. It follows that $A_i \in \tau_\alpha$ for all $\alpha \in A$. Since all the $\tau_\alpha$'s are topologies we obtain that \begin{align*}
+\bigcup_{i \in I} A_i \in \tau_\alpha \text{ for all } \alpha \in A \implies \bigcup_{i \in I } A_i \in \bigcap_{ \alpha \in A} \tau_\alpha.
+\end{align*}
+Let now $n \in \mathbb{N}$ and let $A_1, \dots , A_n \in \bigcap_{ \alpha \in A} \tau_\alpha$. We then have for $i=1,\dots ,n$ that $A_i \in \tau_\alpha$ for all $\alpha \in A$. Since all the $\tau_\alpha$ are topologies we have that 
+\begin{align*}
+\bigcap_{i=1}^n A_i \in \tau_\alpha \text{ for all } \alpha \in A \implies \bigcap_{i=1}^n A_i \in \bigcap_{ \alpha \in A} \tau_\alpha
+\end{align*}
+consequently $\bigcap_{ \alpha \in A} \tau_\alpha$ is a topology, as claimed. 
+\end{proof}
+\noindent \textbf{b)} Let $X$ be a set and $\mathcal{F}$ a family of maps $f:X \to Y_f$, where each $Y_f$ is a topological space. We define
+\begin{align*}
+\mathcal{S}:= \lbrace f^{-1}(V): f \in \mathcal{F}, V \subset Y_f \text{ open} \rbrace 
+\end{align*}
+and
+\begin{align*}
+\tau_{\mathcal{F}} := \bigcap \lbrace \tau : \tau \text{ is a topology on $X$ and } \mathcal{S} \subset \tau \rbrace 
+\end{align*}
+Prove that 
+\begin{align*}
+\tau_{\mathcal{F}} = \lbrace \mathcal{O}: \mathcal{O} \text{ is an arbitrary union of finite intersections of sets } B \in \mathcal{S} \rbrace. 
+\end{align*}
+\begin{proof}
+We will show both inclusions separately. For the $\supset$ inclusion, we consider any $\mathcal{O}$ that can be written as the arbitrary union of finite intersections of sets $B \in \mathcal{S}$. By definition $\tau_\mathcal{F}$ is the smallest topology on $X$ such that the maps $f: X \to Y_f$ are continuous, thus by definition of $\tau_\mathcal{F}$ and the axioms of a topology (stable under arbitrary union and finite intersection) the inclusion $\supset$ is given. 
+\newpage
+Conversely, to establish the $\subset$ inclusion we remark again  that $\tau_\mathcal{F}$ is by definition the smallest topology on $X$ such that the maps $f:X \to Y_f$ are continuous. Thus it suffices to prove that 
+\begin{align*}
+\mathcal{T}=\lbrace \mathcal{O}: \mathcal{O} \text{ is an arbitrary union of finite intersections of sets } B \in \mathcal{S} \rbrace. 
+\end{align*} 
+is a topology on $X$, then the $\subset$ inclusion follows. 
+\\\\
+Indeed we have $\emptyset \in \mathcal{T}$ because $\emptyset \subset Y_f$ is open and $f^{-1}(\emptyset)= \emptyset$, i.e. $\emptyset \in \mathcal{S}$, in particular we can write the emptyset as an arbitrary union of of finite intersections of sets $B \in \mathcal{S}$. 
+\\\\
+Moreover we have $X \in \mathcal{T}$. Indeed we have for all $x \in X$ that $\lbrace x \rbrace \subset Y_f$ because $Y_f$ is a topology on $X$, in particular we have $X \in Y_f$. Thus we can write (THIS NEEDS WORK!)
+\begin{align*}
+X= \bigcup_{\substack{\lbrace x \rbrace \subset Y_f \\ x \in X}} f^{-1}(\lbrace x \rbrace)
+\end{align*}
+Let now $I$ be an arbitrary index set and suppose that for all $i \in I$ we have that $A_i \in \mathcal{T}$. This means that every $A_i$ can be written as an arbitrary union of finite intersections of sets $B \in \mathcal{S}$ for all $i \in I$. But if we take an arbitrary union of said $A_i$, then  by definition this is just yet another arbitrary union of finite intersections of sets $B \in \mathcal{S}$ and thus
+\begin{align*}
+\bigcup_{i \in I} A_i \in \mathcal{T}
+\end{align*}
+Let now $n \in \mathbb{N}$ and consider $A_1, \dots , A_n \in \mathcal{T}$. As above, this entails that each of the $A_i$ for $i=1, \dots , n$ can be written as an arbitrary union of finite intersections of sets $B \in \mathcal{S}$. \\
+\\
+Recall from elementary set theory that for arbitrary index sets $I,J$, $X$ a set and $X_{i,j} \subset X$ we have the distribution of arbitrary over arbitrary intersection, that is
+\begin{align*}
+\bigcap_{i \in I} \bigcup_{j \in J} X_{i,j} = \bigcup_{(j_i) \in J^I}  \bigcap_{i \in I} X_{i,j_i}
+\end{align*}
+\end{proof}
+\newpage
 \section{Criterion for weak convergence}
 \end{document}
