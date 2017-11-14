@@ -1,0 +1,263 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\author{Marco Bertenghi}
+
+\newcommand{\wto}{\rightharpoonup}
+
+\begin{document}
+\section{Dual Space of $L^1$}
+If $\Omega$ is a $\sigma$-finite space, we have $(L^1( \Omega))^* = L^\infty( \Omega)$. In this exercise we show that this is not always the case, if $\Omega$ is not $\sigma$-finite. 
+\\\\
+Let $X = \mathbb{R}$ and $\mathcal{A}= \lbrace B \subset X : B \text{ is countable or $B^c$ is countable} \rbrace$. Let $\mu$ be the counting measure, i.e. for $B \in \mathcal{A}$ let $\mu(B)$ be the number of elements of $B$, possibly $\infty$. 
+\\\\
+\textbf{a)} Show that $\mathcal{A}$ is a $\sigma$-Algebra and $\mu$ is a measure, but the measure space $(X, \mathcal{A}, \mu)$ is not $\sigma$-finite. 
+\begin{proof}
+We will show the different statements
+\\\\
+\textbf{Claim 1:} $\mathcal{A}$ is a $\sigma$-Algebra.
+\\\\
+\textbf{Proof of Claim 1:} Evidently we have $X \in \mathcal{A}$ because $X^c = \emptyset$ is countable. Moreover, by the very definition of $\mathcal{A}$ we have that if $A \in \mathcal{A}$ then always $A^c \in \mathcal{A}$.
+\\
+\\
+ Finally consider a sequence $(A_n)_{n \in \mathbb{N}} \subset \mathcal{A}$ in $\mathcal{A}$. Then either there is at least one $A_i \in \mathcal{A}$ cocountable for some $i \in \mathbb{N}$ or all the $A_n$'s are countable. In the first case we have that
+ \begin{align*}
+ \left( \bigcup_{n \in \mathbb{N}} A_n \right)^c = \bigcap_{n \in \mathbb{N}} A_n^c \subset A_i^c 
+ \end{align*}
+ Which is countable as the subset of the countable set $A_i^c$. In the second case we simply remark that the countable union of countable sets is again countable. This entails that $\mathcal{A}$ is a $\sigma$-Algebra.  \hfill $\Box$ 
+ \\\\
+\textbf{Claim 2:} $\mu : \mathcal{A} \to [0,  \infty]$ is a measure. 
+\\\\
+\textbf{Proof of Claim 2:} The positivity of the measure is clear because we work with the cardinality of the sets. Further it is clear that the empty set has cardinality $0$ and thus $\mu( \emptyset ) = 0$. We only need to verify the countable additivity property of $\mu$. 
+\newpage 
+Let $(A_n)_{ n \in \mathbb{N}}$ be a sequence of pairwise disjoint sets in $\mathcal{A}$.\\
+\\
+Then by definition of the counting measure we have
+\begin{align*}
+\mu \left( \bigcup_{n \in \mathbb{N}} A_n \right) = \left| \bigcup_{n \in \mathbb{N}} A_n \right| = \sum_{n \in \mathbb{N}} |A_n| = \sum_{n \in \mathbb{N}} \mu(A_n) 
+\end{align*}
+Because our sets are mutually disjoints. We also notice that this expression makes sense in any case, i.e. the RHS is infinite/finite so is the LHS. \hfill $\Box$
+\\
+\\
+\textbf{Claim 3:} The measure space $(X, \mathcal{A}, \mu)$ is not $\sigma$-finite. 
+\\\\
+\textbf{Proof of Claim 3:} We say that $(X, \mathcal{A},  \mu)$ is $\sigma$-finite if we can find a sequence $(A_n)_{n \in \mathbb{N}}$ in $\mathcal{A}$ with $\mu$-finite measure such that $X= \bigcup_{n \in \mathbb{N}} A_n$. 
+\\\\
+Assume for contradiction that $( X= \mathbb{R}, \mathcal{A}, \mu)$ is $\sigma$-finite. Then we have
+\begin{align*}
+\mathbb{R}= \bigcup_{n \in \mathbb{N}} A_n \text{ with } \mu(A_i)= |A_i| < \infty \text{ for all } i \in \mathbb{N}
+\end{align*}
+But if all the $A_n$ have finite counting measure, they must in particular be countable because all finite sets are countable. This however would entail that $\mathbb{R}$ is also countable as the countable union of countable sets. This is clearly a contradiction. 
+\end{proof}
+\newpage
+\noindent \textbf{b)} Show that there exists a $\Psi \in (L^1(X, \mu))^*$ that can not be represented as \begin{align*}
+\Psi(f) = \int fg d \mu \text{ for all } f \in L^1(X, \mu)
+\end{align*}
+with some $g \in L^\infty (X, \mu) $ 
+\begin{proof}
+Let $E \subset X= \mathbb{R}$ be a set that is not in our sigma algebra $\mathcal{A}$. Let $f \in L^1( X, \mu)$ be arbitrary and let us define
+\begin{align*}
+\Psi(f):= \sum_{x \in E} f(x) 
+\end{align*}
+This is well-defined, because we assume $f \in L^1(X, \mu)$. Clearly we also have that $\Psi$ is a linear function $\Psi: L^1(X, \mu) \to \mathbb{K}$. Moreover since $f \in L^1(X, \mu)$ we have that
+\begin{align*}
+|\Psi(f)| = \left | \sum_{x \in E} f(x) \right| \leq \sum_{x \in E} |f(x)|  \leq \|f\|_{L^1}
+\end{align*}
+Thus $\Psi$ is bounded and therefore continuous, so indeed we have $\Psi \in (L^1(X, \mu))^*$. Let us now suppose for contradiction that there is some $g \in L^\infty (X, \mu)$ such that \begin{align*}
+\Psi(f) = \int fg d \mu = \sum_{x \in X} f(x)g(x) \overset{!}= \sum_{x \in E} f(x)
+\end{align*}
+This inequality can only hold if $g= \mathcal{X}_E$, but clearly $g \notin L^\infty(X, \mu)$ because by assumption we have that $E$ is not a measurable set. 
+\end{proof}
+\newpage
+\section{Integral equation}
+\section{Theorem of Baire}
+A subset $A$ of a metric space $M$ is called \textbf{nowhere dense} if $\overset{\circ}{\overline{A}}=(\overline{A})^\circ = \emptyset$. The subset $A$ is called \textbf{meagre}, if there exists a sequence of nowhere dense sets $A_i$, such that $A= \bigcup_{i=1}^\infty A_i$. 
+\\\\
+\textbf{a)} Show that $A$ is nowhere dense if $M \setminus \overline{A}$ is dense in $M$. 
+\begin{proof}
+I don't think that there is anything to show, we have:
+\begin{align*}
+A \text{ is nowhere dense} &\iff \left( \overline{A}\right)^\circ = \emptyset \\
+& \iff M \setminus \left( \overline{A}\right)^\circ = M \text{ (by passing to the complement)} \\
+& \iff \overline{M \setminus \overline{A}} = M  \text{ (see claim below)}\\
+& \iff \overline{M \setminus \overline{A}} \text{ is dense in } M 
+\end{align*}
+\textbf{Claim:} Let $(X,d)$ be a metric space and $A \subset X$, then we have \\ $\overline{A^c}= \left(A^\circ \right)^c$. \\
+\\
+\textbf{Proof of Claim:} We have by definition
+\begin{align*}
+\overline{A}&= \bigcap \lbrace F \supset A \mid F \text{ is closed in } X \rbrace \\
+A^\circ &= \bigcup \lbrace G \subset A \mid G \text{ is open in } X \rbrace 
+\end{align*}
+Use De Morgan Laws and we're done. \hfill $\Box$
+\\\\
+\end{proof}
+\newpage
+\noindent \textbf{b)} Show that there exists a meagre set $A \subset \mathbb{R}$, such that $\mathbb{R} \setminus A$ has Lebesgue measure zero. 
+\begin{proof}
+We first recall the central results from Class:
+\\\\
+\textbf{Lemma 5.1.1.} Let $(X, \tau)$ be a topological space. The following statements are equivalent:
+\begin{enumerate}
+\item Let $(A_i)_{i \in \mathbb{N}}$ be a sequence of closed sets in $X$. If the interior of each $A_i$ is empty , then also the interior of $\bigcup_{i=1}^\infty A_i$ is empty. 
+\item Let $(B_i)_{i \in \mathbb{N}}$ be a sequence of open sets in $X$. If each $B_i$ is dense in $X$, then also $\bigcap_{i=1}^\infty B_i$ is dense in $X$. 
+\end{enumerate}
+\textbf{Definition:} A topological space $(X,  \tau)$ is called a Baire space, if condition $1)$ or $2)$ above (and thus both) are satisfied.\\
+\\
+The big result that Baire provided tells us now that in fact complete metric spaces are Baire spaces, i.e. build a category.
+\\
+\\
+\textbf{Theorem 5.1.3. (Baire's Category Theorem):} Every complete metric space is a Baire space.
+\\\\
+Since $\mathbb{R}$ is complete, it is in particular a Baire space, thus we have the equivalence of $1)$ and $2)$ above. 
+\\\\
+Let now $k \in \mathbb{N}$ and $q_n \in \mathbb{Q}$ for all $\mathbb{N}$. We then set
+\begin{align*}
+U_k:= \bigcup_{n \in \mathbb{N}} \left(q_n -2^{-(n+k)}, q_n + 2^{-(n+k)}\right) = \bigcup_{n \in \mathbb{N}} I_{n,k}
+\end{align*}
+All the $I_{n,k}$ are open have Lebesgue measure (length) $2^{1-(n+k)}$. Using the subadditivity of the Lebesgue measure and the geometric sum we get that 
+\begin{align*}
+\lambda (U_k) \leq 2^{1-k}\sum_{n \in \mathbb{N}} 2^{-n} = 2^{2-k} < \infty \text{ for all } k \in \mathbb{N}
+\end{align*}
+Now we set
+\begin{align*}
+N:= \bigcap_{k \in \mathbb{N}} U_k 
+\end{align*}
+Since we have $U_{k+1} \subset U_k$ and $\lambda(U_k) < \infty$ we get that 
+\begin{align*}
+\lambda (N) = \lambda \left( \bigcap_{k \in \mathbb{K}} U_k \right) = \lim_{k \to \infty} \lambda (U_k) \leq \lim_{k \to \infty} 2^{2-k} = 0 
+\end{align*}
+which entails that $N$ is a nullset. 
+\newpage
+Moreover we have that all the $U_k$ are open as the union of open sets and they are also dense in $\mathbb{R}$, because we have chosen the dense sequence $q_n \in \mathbb{Q}$. More precisely, we have that $U_k$ is an open covering of $\mathbb{Q}$, in particular we have:
+\begin{align*}
+\mathbb{Q} \subset U_k \subset \mathbb{R} \implies \mathbb{R}=\overline{\mathbb{Q}} \subset \overline{U_k} \subset \mathbb{R} \implies \overline{U_k} = \mathbb{R}
+\end{align*}
+By Baire's theorem we thus get that also $N$ as the intersection of said $U_k$ is dense. Now we obtain that
+\begin{align*}
+M:= N^c = \bigcup_{k \in \mathbb{N}} \overline{U_k^c}
+\end{align*}
+We claim that $M \subset \mathbb{R}$ is meagre. Indeed, from \textbf{a)} we know that $U_k^c$ is nowhere dense if and only if $\overline{U_k}$ is dense in $\mathbb{R}$, but we already have that established. 
+\end{proof}
+\newpage
+\section{Induced Topologies}
+\textbf{a)} Let $X$ be a set and $(\tau_\alpha)_{ \alpha \in A}$ be a family of topologies on $X$, where $A$ is an arbitrary index set. Show that the intersection $\bigcap_{ \alpha \in A} \tau_\alpha$ is again a topology on $X$. 
+\begin{proof}
+If $A=\emptyset$ then $\bigcup_{\alpha \in A} \tau_\alpha = \mathcal{P}(X)$ and we obtain the discrete topology on $X$. Assume now that $A \neq \emptyset$. We have $\emptyset, X \in \bigcap_{ \alpha \in A} \tau_\alpha$, indeed we have $\tau, X \in \tau_\alpha$ for every $\alpha \in A$ because they are all topologies on $X$. 
+\\\\
+Let now $I$ be an arbitrary index set and suppose that for all $i \in I$ we have $A_i \in \bigcap_{ \alpha \in A} \tau_\alpha$. It follows that $A_i \in \tau_\alpha$ for all $\alpha \in A$. Since all the $\tau_\alpha$'s are topologies we obtain that \begin{align*}
+\bigcup_{i \in I} A_i \in \tau_\alpha \text{ for all } \alpha \in A \implies \bigcup_{i \in I } A_i \in \bigcap_{ \alpha \in A} \tau_\alpha.
+\end{align*}
+Let now $n \in \mathbb{N}$ and let $A_1, \dots , A_n \in \bigcap_{ \alpha \in A} \tau_\alpha$. We then have for $i=1,\dots ,n$ that $A_i \in \tau_\alpha$ for all $\alpha \in A$. Since all the $\tau_\alpha$ are topologies we have that 
+\begin{align*}
+\bigcap_{i=1}^n A_i \in \tau_\alpha \text{ for all } \alpha \in A \implies \bigcap_{i=1}^n A_i \in \bigcap_{ \alpha \in A} \tau_\alpha
+\end{align*}
+consequently $\bigcap_{ \alpha \in A} \tau_\alpha$ is a topology, as claimed. 
+\end{proof}
+\noindent \textbf{b)} Let $X$ be a set and $\mathcal{F}$ a family of maps $f:X \to Y_f$, where each $Y_f$ is a topological space. We define
+\begin{align*}
+\mathcal{S}:= \lbrace f^{-1}(V): f \in \mathcal{F}, V \subset Y_f \text{ open} \rbrace 
+\end{align*}
+and
+\begin{align*}
+\tau_{\mathcal{F}} := \bigcap \lbrace \tau : \tau \text{ is a topology on $X$ and } \mathcal{S} \subset \tau \rbrace 
+\end{align*}
+Prove that 
+\begin{align*}
+\tau_{\mathcal{F}} = \lbrace \mathcal{O}: \mathcal{O} \text{ is an arbitrary union of finite intersections of sets } B \in \mathcal{S} \rbrace. 
+\end{align*}
+\begin{proof}
+First we remark that by \textbf{a)} $\tau_\mathcal{F}$ is indeed a topology on $X$. We will show both inclusions separately. For the $\supset$ inclusion, we consider any $\mathcal{O}$ that can be written as the arbitrary union of finite intersections of sets $B \in \mathcal{S}$. By definition $\tau_\mathcal{F}$ is the smallest topology on $X$ such that the maps $f: X \to Y_f$ are continuous, thus by definition of $\tau_\mathcal{F}$ and the axioms of a topology (stable under arbitrary union and finite intersection) the inclusion $\supset$ is given. 
+\newpage
+Conversely, to establish the $\subset$ inclusion we remark again  that $\tau_\mathcal{F}$ is by definition the smallest topology on $X$ such that the maps $f:X \to Y_f$ are continuous. Thus it suffices to prove that 
+\begin{align*}
+\mathcal{T}=\lbrace \mathcal{O}: \mathcal{O} \text{ is an arbitrary union of finite intersections of sets } B \in \mathcal{S} \rbrace. 
+\end{align*} 
+is a topology on $X$, then the $\subset$ inclusion follows. 
+\\\\
+Towards that, we first establish the following result:
+\\
+\\
+\textbf{Lemma:} Let $X$ be a set and let $\mathfrak{O} \subset \mathcal{P}(X)$ be a collection of subsets of $X$, such that
+\begin{enumerate}
+\item $\emptyset$ and $X$ are in $\mathfrak{O}$ .
+\item $\mathfrak{O}$ is closed under finite intersections.
+\end{enumerate}
+Then 
+\begin{align*}
+\mathcal{T}:= \left\{ \bigcup_{O \in \mathcal{O}} O \mid \mathcal{O} \subset \mathfrak{O} \right\} \text{ is a topology on $X$}.
+\end{align*}
+\textbf{Proof of Lemma:} By definition, $\mathcal{T}$ contains the emptyset as well as $X$ since those were already contained in  $\mathfrak{O}$. Moreover, again by definition, $\mathcal{T}$ is closed under arbitrary unions. Thus we only need to show that $\mathcal{T}$ is closed under finite intersections. 
+\\\\
+Let $A_1$ and $A_2$ be two elements of $\mathcal{T}$. Then, by definition of $\mathcal{T}$, there exist $\mathcal{O}_1$ and $\mathcal{O}_2$, subsets of $\mathfrak{O}$, such that
+\begin{align*}
+A_1 = \bigcup_{O_1 \in \mathcal{O}_1} O_1  \text{ and } A_2 = \bigcup_{O_2 \in \mathcal{O}_2} O_2 
+\end{align*} 
+We then have
+\begin{align*}
+A_1 \cap A_2  =\bigcup_{O_1 \in \mathcal{O}_1} O_1 \cap \bigcup_{O_2 \in \mathcal{O}_2} O_2 = \bigcup_{ \substack{ O_1 \in \mathcal{O}_1 \\ O_2 \in \mathcal{O}_2}} O_1 \cap O_2 
+\end{align*}
+Setting $\mathcal{O}= \lbrace O_1 \cap O_2 \mid O_1 \in \mathcal{O}_1, \ O_2 \in \mathcal{O}_2 \rbrace$, then $\mathcal{O}$ is a subset of $\mathfrak{O}$ since by assumption $\mathfrak{O}$ is closed under finite intersections, we thus get
+\begin{align*}
+A_1 \cap A_2 = \bigcup_{O \in \mathcal{O}} O \in \mathcal{T}
+\end{align*}
+By induction over $n \in \mathbb{N}$, using the same construction as above for the induction step, we obtain that $\mathcal{T}$ is closed under finite intersections. \hfill $\Box$
+\newpage
+Corollarly to the above Lemma we can now establish that 
+\begin{align*}
+\mathcal{T}=\lbrace \mathcal{O}: \mathcal{O} \text{ is an arbitrary union of finite intersections of sets } B \in \mathcal{S} \rbrace. 
+\end{align*}
+is a Topology on $X$. In the above case we have
+\begin{align*}
+\mathfrak{O}= \lbrace  U_1 \cap \cdots \cap U_n \mid n \in \mathbb{N}, U_i \in \mathcal{S} \text{ for all } i=1, \dots ,n \rbrace \subset \mathcal{P}(X)
+\end{align*}
+Where
+\begin{align*}
+\mathcal{S}= \lbrace f^{-1}(V): f \in \mathcal{F}, V \subset Y_f \text{ open} \rbrace 
+\end{align*}
+By definition, we have that $\mathfrak{O}$ is closed under finite intersections. Further we have $\emptyset \in \mathcal{S}$ because $\emptyset \subset Y_f$ is open and $f^{-1}(\emptyset)=\emptyset$, thus it follows that $\emptyset \in \mathfrak{O}$. 
+\\\\
+Moreover we have $X \in \mathfrak{O}$. Indeed we have $X \in \mathcal{S}$ because $Y_f \subset Y_f$ is open in $Y_f$ and $f^{-1}(Y_f)=X$, i.e. $X \in \mathcal{S}$ and thus $X \in \mathfrak{O}.$ By the Lemma that we've established it follows that $\mathcal{T}$ is indeed a topology on $X$.
+\\\\
+Bringing the arguments together one last time for readability. We have shown that $\tau_\mathcal{F} \supset \mathcal{T}$. Then we used the Lemma to show that $\mathcal{T}$ is a topology on $X$. But by definition $\tau_\mathcal{F}$ is the smallest topology on $X$ that contains $\mathcal{S}$, i.e. the smallest topology such that the maps $f:X \to Y_f$ are continuous. But we also have clearly have that $\mathcal{S} \in \mathcal{T}$ since we already have $\mathcal{S} \subset \mathfrak{O}$. Thus it follows that $\tau_\mathcal{F} \subset \mathcal{T}$. 
+\end{proof}
+\newpage
+\section{Criterion for weak convergence}
+Let $X$ be a normed vector space and $Y \subset X^*$ a dense subset. Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in $X$. Show that $x_n$ converges weakly to $x \in X$ if and only if $\sup_{n \in \mathbb{N}} \| x_n\| < \infty$ and $f(x_n) \to f(x)$ for all $f \in Y$. 
+\begin{proof}
+We recall the Lemma from class which gives a characterization of weak convergence and the proposition that states that weakly convergent sequences are bounded. 
+\\\\
+\textbf{Lemma 6.2.1.} Let $X$ be a normed space. For a sequence $(x_n)_{n \in \mathbb{N}}$, we have $x_n \rightharpoonup x$ if and only if $f(x_n) \to f(x)$ for all $f \in X^*$. 
+\\\\
+\textbf{Proposition 6.2.2.} Let $X$ be a normed space, $(x_n)_{n \in \mathbb{N}}$ a sequence on $X$ with $x_n \rightharpoonup x$. Then $(x_n)_{n \in \mathbb{N}}$ is bounded and 
+\begin{align*}
+\| x \| \leq \liminf_{k \to \infty} \|x_k \|
+\end{align*}
+Assume now that $x_n \wto x$. Then by the above Proposition we already know that $(x_n)_{n \in \mathbb{N}}$ must be bounded, in particular $\sup_{n \in \mathbb{N}} \| x_n \| <  \infty$.  Moreover we have that \begin{align*}
+f(x_n) \overset{n \to \infty} \longrightarrow f(x) \text{ for all } f \in X^*
+\end{align*} 
+Since $Y \subset X^*$ and the above convergence is true for all $f \in X^*$, it must also be true for all $f \in Y$. \\
+\\
+Conversely assume that $\sup_{n \in \mathbb{N}} \| x_n \| < \infty$ and that 
+\begin{align*}
+f(x_n) \overset{n \to \infty} \longrightarrow f(x) \text{ for all } f \in Y
+\end{align*}
+But $Y \subset X^*$ is not only a subset of $X^*$ but also dense in $X^*$. That means for all $f \in X^*$ we can find a sequence $(f_k)_{k \in \mathbb{N}}$ in $Y$ such that $f_k \to f$ in $X^*$. Hence let $f \in X^*$ be arbitrary and choose a sequence $(f_k)_{k \in \mathbb{N}}$ as above to approximate it. Thus we have by assumption that 
+\begin{align*}
+f_k(x_n) \overset{n \to \infty} \longrightarrow f_k(x) \text{ for all } k \in \mathbb{N}
+\end{align*}
+We then obtain by the triangle inequality because by assumption we can bound $x_n$ by some constant $M >0$ for all $n \in \mathbb{N}$ that 
+\begin{align*}
+|f(x_n)-f(x)| &\leq |f (x_n)-f_k(x_n)| + |f_k(x_n)-f_k(x)| + |f_k(x) - f(x)| \\
+&= | (f-f_k)(x_n)| + |f_k(x_n)-f_k(x)| + |(f_k-f)(x)| \\
+& \leq \| f-f_k\|_{X^*} \| x_n\| + |f_k(x_n) - f_k(x)| + \|f_k-f\|_{X^*} \|x\| \\
+& \leq M\| f-f_k \|_{X^*}  + |f_k(x_n)-f_k(x)| + \|f_k-f\|_{X^*} \|x\| 
+\end{align*}
+Choosing $k,n \in \mathbb{N}$ large enough we obtain that $f(x_n) \to f(x)$ as $n \to \infty$ for all $f \in X^*$ and thanks to the Lemma this is equivalent to saying that $x_n \wto x$. 
+\end{proof}
+\end{document}
