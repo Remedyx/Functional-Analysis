@@ -75,6 +75,62 @@ This inequality can only hold if $g= \mathcal{X}_E$, but clearly $g \notin L^\in
 \end{proof}
 \newpage
 \section{Integral equation}
+Let $X \subset \mathbb{R}^m$ be a Lebesgue-measurable set and let $L \in L^2(X \times X)$ and $f \in L^2(X)$. Moreover,  let $u \in L^2(X)$ and $c> \|L\|_{L^2(X \times X)}$. Show that the integral equation 
+\begin{align*}
+cf(x) + u(x) = \int_X L(x,y) f(y)dy \text{ for almost all } x \in X 
+\end{align*}
+has exactly one solution $f \in L^2(X)$. 
+\begin{proof}
+We recall Theorem 4.4.3. of Lax-Milgram
+\\\\
+\textbf{Theorem 4.4.3. (Lax-Milgram).} Let $H$ be a Hilber space over $\mathbb{K}$, and let $a:H \times H \to \mathbb{K}$ be a sesquilinear form (i.e. $a$ is linear in the second argument and antilinear in the first argument). Assume that there are constants $0 <c_0 \leq C_0 < \infty$ such that
+\begin{align*}
+|a(x,y)| & \leq C_0 \|x \| \|y \| \text{ for all } x,y \in H \text{ (continuity)} \\
+\text{Re }a (x,x) & \geq c_0 \| x \|^2 \text{ for all } x \in H \text{ (coercivity)}
+\end{align*}
+Then there exists a linear operator $A: H \to H$ with 
+\begin{align*}
+a(x,y)=(Ax,y) \text{ for all } x,y \in H 
+\end{align*}
+Moreover $A \in \mathcal{L}(H)$ is invertible, with 
+\begin{align*}
+\| A \| \leq C_0 \text{ and } \|A^{-1}\| \leq \frac{1}{c_0}
+\end{align*}
+Let us now define for $x \in X$ \begin{align*}
+g_f(x):= \int_X L(x,y) f(y) dy 
+\end{align*}
+We claim that this is an $L^2(X)$ function. Indeed we have
+\begin{align*}
+\int_X |g_f(x)|^2 dx &= \int_X \left( \left| \int_X L(x,y)f(y)dy \right| \right)^2 dx \\
+& \overset{\text{Hölder}}\leq \int_X \left( \int_X L(x,y)^2dy \int_X f(y)^2 dy \right) dx  \\
+&\overset{\text{Fubini}}= \|f\|_2 \int_{X \times X} L(x,y)^2 dx dy \\ &  = \|f\|_{L^2(X)} \|L\|_{L^2(X \times X)}  < \infty 
+\end{align*}
+Thus $g_f \in L^2(X)$ as claimed. This calculations also shows that if we interpret $g$ as a function from $L^2(X)$ to $L^2(X)$ that it is indeed linear and bounded and thus $g \in \mathcal{L}(L^2(X))$.
+\newpage
+Let now $\phi \in L^2(X)$ be arbitrary and let $\langle \cdot ,  \cdot \rangle$ denote the inner product on $L^2(X)$. Then consider the equation 
+\begin{align*}
+\langle cf -g_f, \phi \rangle = \langle -u , \phi \rangle  \tag{*}
+\end{align*}
+This can be rewritten as
+\begin{align*}
+- \int_X u(x) \phi (x) dx  =  \int_X \left( cf(x) -g_f(x)\right) \phi(x) dx 
+\end{align*}
+or equivalently
+\begin{align*}
+ \int_X (cf(x)-g_f(x) + u(x)) \phi(x) dx = 0 
+\end{align*}
+Since $\phi \in L^2(X)$ is chosen to be arbitrary, this is equivalent to 
+\begin{align*}
+&cf(x) +u(x) - g_f(x) = 0 \text{ for almost all } x \in X \\ \iff & cf(x)+u(x) = \int_X L(x,y)f(y)dy \text{ for almost all } x \in X 
+\end{align*}
+This shows that considering the equation given by $(^*)$ is equivalent to study our original integral equation as proposed in the problem. \\
+\\
+We now define $a: L^2(X) \times L^2(X) \to \mathbb{K}$ by 
+\begin{align*}
+a(f, \phi) := \langle cf - g_f, \phi \rangle 
+\end{align*}
+\end{proof}
+\newpage
 \section{Theorem of Baire}
 A subset $A$ of a metric space $M$ is called \textbf{nowhere dense} if $\overset{\circ}{\overline{A}}=(\overline{A})^\circ = \emptyset$. The subset $A$ is called \textbf{meagre}, if there exists a sequence of nowhere dense sets $A_i$, such that $A= \bigcup_{i=1}^\infty A_i$. 
 \\\\
