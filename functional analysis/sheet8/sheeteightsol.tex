@@ -71,7 +71,7 @@ This is well-defined, because we assume $f \in L^1(X, \mu)$. Clearly we also hav
 Thus $\Psi$ is bounded and therefore continuous, so indeed we have $\Psi \in (L^1(X, \mu))^*$. Let us now suppose for contradiction that there is some $g \in L^\infty (X, \mu)$ such that \begin{align*}
 \Psi(f) = \int fg d \mu = \sum_{x \in X} f(x)g(x) \overset{!}= \sum_{x \in E} f(x)
 \end{align*}
-This inequality can only hold if $g= \mathcal{X}_E$, but clearly $g \notin L^\infty(X, \mu)$ because by assumption we have that $E$ is not a measurable set. 
+This equality can only hold if $g= \mathcal{X}_E$, but clearly $g \notin L^\infty(X, \mu)$ because by assumption we have that $E$ is not a measurable set. 
 \end{proof}
 \newpage
 \section{Integral equation}
@@ -103,7 +103,7 @@ We claim that this is an $L^2(X)$ function. Indeed we have
 \begin{align*}
 \int_X |g_f(x)|^2 dx &= \int_X \left( \left| \int_X L(x,y)f(y)dy \right| \right)^2 dx \\
 & \overset{\text{Hölder}}\leq \int_X \left( \int_X L(x,y)^2dy \int_X f(y)^2 dy \right) dx  \\
-&\overset{\text{Fubini}}= \|f\|_2 \int_{X \times X} L(x,y)^2 dx dy \\ &  = \|f\|_{L^2(X)} \|L\|_{L^2(X \times X)}  < \infty 
+&\overset{\text{Fubini}}= \|f\|_2 \int_{X \times X} L(x,y)^2 dx dy \\ &  = \|f\|_{L^2(X)}^2 \|L\|_{L^2(X \times X)}^2   < \infty 
 \end{align*}
 Thus $g_f \in L^2(X)$ as claimed. This calculations also shows that if we interpret $g$ as a function from $L^2(X)$ to $L^2(X)$ that it is indeed linear and bounded and thus $g \in \mathcal{L}(L^2(X))$.
 \newpage
@@ -111,24 +111,49 @@ Let now $\phi \in L^2(X)$ be arbitrary and let $\langle \cdot ,  \cdot \rangle$ 
 \begin{align*}
 \langle cf -g_f, \phi \rangle = \langle -u , \phi \rangle  \tag{*}
 \end{align*}
-This can be rewritten as
+Invoking Riesz's Representation Theorem this can be rewritten as
 \begin{align*}
-- \int_X u(x) \phi (x) dx  =  \int_X \left( cf(x) -g_f(x)\right) \phi(x) dx 
+R_{L^2(X)}(cf-g_f)( \phi) = R_{L^2(X)}(-u) (\varphi)
 \end{align*}
-or equivalently
+Where $R_H : H \to H^*$ for a Hilbert Space $H$ and $(R_H(u))(v)=(u,v)$ for a scalar product on $H$, stating that this is an anti-linear isometric isomorphism (see Theorem 4.4.1). Thus we conclude that
 \begin{align*}
- \int_X (cf(x)-g_f(x) + u(x)) \phi(x) dx = 0 
+cf-g_f=-u \iff cf(x) + u(x) = \int_X L(x,y)f(y)dy 
 \end{align*}
-Since $\phi \in L^2(X)$ is chosen to be arbitrary, this is equivalent to 
-\begin{align*}
-&cf(x) +u(x) - g_f(x) = 0 \text{ for almost all } x \in X \\ \iff & cf(x)+u(x) = \int_X L(x,y)f(y)dy \text{ for almost all } x \in X 
-\end{align*}
-This shows that considering the equation given by $(^*)$ is equivalent to study our original integral equation as proposed in the problem. \\
+This shows that considering the equation given by $(^*)$ is equivalent to study our original integral equation as proposed in the problem. The idea is now to study the sesquilinear map defined by the inner product above and apply Lax-Milgram Theorem to obtain the desired result. \\
 \\
-We now define $a: L^2(X) \times L^2(X) \to \mathbb{K}$ by 
+Towards this goal we define $a: L^2(X) \times L^2(X) \to \mathbb{K}$ by 
 \begin{align*}
 a(f, \phi) := \langle cf - g_f, \phi \rangle 
 \end{align*}
+Then $H=L^2(X)$ is indeed a Hilbert Space and $a$ is sesquilinear by definition of the inner product on $L^2(X)$ and the easy fact that $g_{f + \lambda h} = g_f + \lambda g_h$ for all $\lambda \in \mathbb{C}, f,h \in L^2(X)$.
+\\\\
+Let now $\varphi \in L^2(X)$ be arbitrary,  then the Cauchy-Schwarz inequality together with $L^2(X)$ bound for $g_f$ yields and the assumptions that $\|L\|_{L^2(X \times X)}<c$ leads to
+\begin{align*}
+|a(f, \varphi)| &= | \langle cf - g_f, \varphi \rangle | \\
+& \leq \| cf-g_f \|_{L^2(X)} \| \varphi \|_{L^2(X)}  \\
+& \leq ( c \| f \| _{L^2(X)} + \| g_f \|_{L^2(X)}) \| \varphi \|_{L^2(X)} \\
+& \leq (c \|f \|_{L^2(X)} + \|f \|_{L^2(X)} \|L\|_{L^2( X \times X)} ) \| \varphi \|_{L^2(X)}  \\
+& \leq 2c \|f\|_{L^2(X)} \| \varphi\|_{L^2(X)}
+\end{align*}
+\newpage
+Fix now $0 < c_0$ a positive constant such that $\|L\|_{L^2(X \times X)}<c_0 <c$. Then analogously as above we estimate for $f \in L^2(X)$ that
+\begin{align*}
+\text{Re} a(f,f)& = \text{Re} \langle cf-g_f,f \rangle \\
+& = \text{Re }c \langle f, f \rangle - \text{Re} \langle g_f,f \rangle \\ 
+&\geq  c \|f\|_{L^2(X)}^2 - | \langle g_f,f \rangle |  \\
+& \geq c \|f\|_{L^2(X)}^2 - \|g_f \|_{L^2(X)} \|f \|_{L^2(X)} \\
+& \geq c \| f \|_{L^2(X)}^2 - \|f\|_{L^2(X)}^2 \|L\|_{L^2(X \times X)} \\ 
+& \geq (c-c_0) \| f\|_{L^2(X)}^2 
+\end{align*}
+Moreover we have that $0<c-c_0 \leq c \leq 2c$. Thus by the Theorem of Lax-Miligram we are guaranteed the existence of an \textbf{invertible} linear operator $A \in \mathcal{L}(L^2(X))$ such that 
+\begin{align*}
+a(f, \varphi) = \langle Af, \varphi \rangle \text{ for all } f, \varphi \in L^2(X)
+\end{align*} 
+Furthermore, since $A \in \mathcal{L}(L^2(X))$ is invertible we have that there exists an unique $f_0 \in L^2(X)$ such that $Af_0=-u$. Choosing said unique $f_0$ we obtain that 
+\begin{align*}
+\langle cf_0-g_{f_0}, \varphi \rangle =a(f_0, \varphi) = \langle Af_0 , \varphi \rangle = \langle -u , \varphi \rangle 
+\end{align*}
+For which we have already established the equivalence to our original integral equation. Thus the claim follows. 
 \end{proof}
 \newpage
 \section{Theorem of Baire}
