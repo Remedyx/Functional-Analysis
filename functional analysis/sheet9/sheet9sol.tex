@@ -1,0 +1,192 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\author{Marco Bertenghi}
+
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}[section]
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{rem}{Remark}[section]
+
+\newcommand{\wto}{\rightharpoonup}
+
+%http://tikzcd.yichuanshen.de/#eyJub2RlcyI6W3sicG9zaXRpb24iOlsxLDBdLCJ2YWx1ZSI6IlgifSx7InBvc2l0aW9uIjpbNCwwXSwidmFsdWUiOiJZIn0seyJwb3NpdGlvbiI6WzQsMl0sInZhbHVlIjoiWV57Kip9In0seyJwb3NpdGlvbiI6WzEsMl0sInZhbHVlIjoiWF57Kip9In0seyJwb3NpdGlvbiI6WzAsMF0sInZhbHVlIjoiWV4qIn0seyJwb3NpdGlvbiI6WzUsMl0sInZhbHVlIjoiWF4qIn0seyJwb3NpdGlvbiI6WzAsMl0sInZhbHVlIjoiWV57KioqfSJ9XSwiZWRnZXMiOlt7ImZyb20iOjAsInRvIjoxLCJ2YWx1ZSI6ImcifSx7ImZyb20iOjEsInRvIjoyLCJsYWJlbFBvc2l0aW9uIjoibGVmdCIsInZhbHVlIjoiSl9ZIiwidGFpbCI6Imhvb2thbHQifSx7ImZyb20iOjMsInRvIjoyLCJsYWJlbFBvc2l0aW9uIjoibGVmdCIsInZhbHVlIjoiZ157Kip9In0seyJmcm9tIjowLCJ0byI6MywidmFsdWUiOiJKX1giLCJsYWJlbFBvc2l0aW9uIjoicmlnaHQiLCJ0YWlsIjoiaG9va2FsdCIsImhlYWQiOiJ0d29oZWFkcyJ9LHsiZnJvbSI6MCwidG8iOjQsInZhbHVlIjoiZiIsImxhYmVsUG9zaXRpb24iOiJyaWdodCIsInRhaWwiOiJob29rIn0seyJmcm9tIjoyLCJ0byI6NSwibGFiZWxQb3NpdGlvbiI6ImxlZnQiLCJ2YWx1ZSI6ImZeKiIsInRhaWwiOiJob29rYWx0In0seyJmcm9tIjozLCJ0byI6NiwiaGVhZCI6bnVsbCwibGFiZWxQb3NpdGlvbiI6InJpZ2h0IiwidmFsdWUiOiJmXnsqKn0ifSx7ImZyb20iOjQsInRvIjo2LCJ0YWlsIjoiaG9va2FsdCIsInZhbHVlIjoiSl97WV4qfSIsImxhYmVsUG9zaXRpb24iOiJyaWdodCJ9XX0=
+
+\begin{document}
+\section{Weak convergence without norm convergence}
+Let $f \in C_c^\infty( \mathbb{R})$ and $1 \leq p < \infty$. We define the following sequences $g_n(x):= f(x-n), h_n(x):= n^{-1/p}f(x/n)$ and $k_n(x):= f(x) e^{inx}$. for $n \in \mathbb{N}$ and $x \in \mathbb{R}$.
+\\\\
+Show that for $1 <p < \infty, g_n, h_n$ and $k_n$ converge weakly in $L^p( \mathbb{R})$ to zero, but they do not converge with respect to the norm. Investigate what happens for $p=1$ as well.
+\begin{proof}
+Recall the characterization of weak convergence:
+\begin{lem}[Characterization of weak convergence] Let $X$ be a normed space, $x \in X$ and $(x_n)_{n \in \mathbb{N}}$ a sequence in $X$. Then we have $x_n \wto x$ in $X$ if and only if $f(x_n) \to f(x)$ for all $f \in X^*$. 
+\end{lem}
+\noindent From the Lemma we immediately recover the fact, that strong convergence (i.e. convergence with respect to the norm $\|x_n-x\|_X \to 0$ as $n \to \infty$) implies weak convergence. Moreover we recall that $X^* = \mathcal{L}(X, \mathbb{K})$ are continuous linear functionals from $X$ to $\mathbb{K}$. 
+ \\
+\\
+In our case $X= L^p( \mathbb{R})$ (for some $p \in (1, \infty)$) is indeed a normed space, moreover we have $C_c( \mathbb{R}) \subset L^p( \mathbb{R})$ for all $1 \leq p < \infty$ (in fact it is a dense subset), thus our sequences are also well defined in $L^p( \mathbb{R})$. It is our goal to show that although the sequences do not convergence with respect to the norm on $L^p(\mathbb{R})$ they do nevertheless converge weakly (towards 0). 
+\\\\
+Furthermore we must recall another important result which discusses the duality of the $L^p$ spaces:
+\begin{thm} Let $1 \leq p < \infty, \ 1 < q \leq \infty$ with $1/p + 1/q =1 $ and let $( \Omega, \mathcal{A}, \mu)$ be a measure space. If $p=1$, we assume additionally the measure space $(\Omega, \mathcal{A}, \mu)$ to be $\sigma$-finite. Then the map 
+\begin{align*}
+\phi : \begin{cases} L^q( \Omega, \mathcal{A}, \mu) & \longrightarrow (L^p( \Omega, \mathcal{A}, \mu))^* \\ f & \longmapsto \phi_f: \begin{cases}L^p & \longrightarrow \mathbb{K} \\ g & \longmapsto \phi_f(g):= \displaystyle \int_\Omega \overline{f(x)} g(x) d \mu(x)  \end{cases} \end{cases}
+\end{align*}
+is an (anti-linear) isometric isomorphism, in other words $L^p( \Omega, \mathcal{A}, \mu)^* \cong L^q( \Omega, \mathcal{A}, \mu)$ 
+\end{thm}
+The Theorem tells us how we can identify the elements of $(L^p)^*$. More explicitly, every continuous linear functional from $L^p(\Omega, \mathcal{A}, \mu)$ to $\mathbb{K}$ for $1 \leq p < \infty$ can be written as 
+\begin{align*}
+L(f) = \int_\Omega g(x)f(x) d \mu(x)
+\end{align*}
+for a $g \in L^q( \Omega,  \mathcal{A}, \mu)$ where $p,q$ are conjugate. 
+\\\\
+Let us now fix $p \in (1, \infty)$ and $q$ conjugate to $p$. Then we know that all $\phi \in (L^p)^*$ can be written in the form above for some $g \in L^q$. We thus obtain:
+\begin{align*}
+\phi(g_n) = \int_\mathbb{R} g(x) g_n(x)dx = \int_\mathbb{R}g(x) f(x-n) dx 
+\end{align*}
+We have that $\lim_{n \to \infty} g_n(x) = \lim_{n \to \infty} f(x-n)= f(- \infty)=0$ because $f$ is compactly supported. Since we know that $\phi$ is continuous we obtain that
+\begin{align*}
+\lim_{n \to \infty} \phi (g_n)= \phi( \lim_{n \to \infty} g_n) = \int_{\mathbb{R}} g(x) \lim_{n \to \infty} f(x-n) dx = 0 = \phi(0)
+\end{align*}
+This shows that $g_n \wto 0$ by the Lemma. 
+\\\\
+Similarly we have 
+\begin{align*}
+\phi(h_n)= \int_\mathbb{R} g(x) h_n(x)dx = \int_\mathbb{R} g(x) n^{-1/p} f(x/n)dx  \\
+\implies \lim_{n \to \infty} \phi (h_n)= \phi(\lim_{n \to \infty} h_n) = \int_\mathbb{R}g(x) \lim_{n \to \infty} \frac{1}{n^p} f(x/n)dx = 0 = \phi(0)
+\end{align*}
+Which entails that $h_n \wto 0$. 
+\\\\
+Finally, we obtain in the same fashion
+\begin{align*}
+\phi(k_n)= \int_\mathbb{R} g(x) f(x)e^{inx} dx
+\end{align*}
+HERE THERE IS NOTHING WE CAN DO, maybe Theorem misstated? Conjugation elsewhere? According to Alt it's correct.
+\newpage
+
+We now turn out attention towards the convergence in the $L^p$-norm. Let us first consider the case of $p=1$, we then have
+\begin{align*}
+\|g_n -f \| = \int_{\mathbb{R}} | g_n(x)-f(x)|dx  =  \int_\mathbb{R} | f(x-n)-f(x)| dx  \\
+= \int_\mathbb{R} |f(x)-f(x) | dx = 0 
+\end{align*}
+That is $g_n \to f$ in $L^1(\mathbb{R})$ as $n \to \infty$. 
+\\\\
+Moreover we have
+\begin{align*}
+\|h_n-f\|_1 &= \int_\mathbb{R} |h_n(x)-f(x)|dx = \int_\mathbb{R} |n^{-1} f(x/n)-f(x)|dx \\ &= \int_\mathbb{R} |f(x)-f(x)|dx = 0 
+\end{align*}
+thus, $h_n \to f$ in $L^1( \mathbb{R})$ as $n \to \infty$.
+\\\\
+Let us now consider the case for $p \in (1, \infty)$. We want to show that the sequences $g_n, h_n$ and $k_n$ do not converge with respect to the $L^p$-norm. The most elegant approach would be to show that these sequences are not Cauchy, in particular they cannot converge (recall that convergent sequences are always Cauchy). 
+\\\\
+To this goal let $m,n \in \mathbb{N}$ be such that $m >n$. 
+\begin{align*}
+\|g_m-g_n\|_p^p = \int_\mathbb{R}|g_m(x)-g_n(x)|^p dx = \int_\mathbb{R} |f(x-m)-f(x-n)|^p dx 
+\end{align*}
+\end{proof} 
+\newpage
+\section{Criteria for weak and norm convergence}
+\textbf{a)} Let $1 < p < \infty$, $\mathbb{K}$ be $\mathbb{C}$ or $\mathbb{R}$, and let $(x^{(n)})_{n \in \mathbb{N}}$ be a sequence in $\ell^p( \mathbb{K})$. Let $x \in \ell^p(\mathbb{K})$. Show that $(x^{(n)})_{n \in \mathbb{N}}$ converges weakly to $x$ if and only if $(x^{(n)})_{n \in \mathbb{N}}$ is bounded and $x_i^{(n)} \to x_i$ as $n \to \infty$ for all $i \in \mathbb{N}$ 
+\begin{proof}
+Let us assume that $(x^{(n)})_{n \in \mathbb{N}}$ converges weakly to $x$. Then we know already that the sequence must be bounded by \textbf{Proposition 6.2.2.}
+\\
+\\
+Moreover we know that weak converges holds if and only if $f(x^{(n)}) \to f(x)$ as $n \to \infty$ for all $f \in \ell^p( \mathbb{K})^*$. In particular it must hold true for the projections $p_i : \ell^p( \mathbb{K}) \to \mathbb{K}$ defined by $x= (x^{(n)})_{n \in \mathbb{N}} \mapsto x_i^{(n)}$, for which we already know that they are linear and continuous. 
+\\
+\\
+Thus it follows easily that $x_i^{(n)} \to x_i$ as $n \to \infty$ for all $i \in \mathbb{N}$. 
+\\\\
+Conversely suppose that $(x^{(n)})_{n \in \mathbb{N}}$ is a bounded sequence and the coordinates $x_i^{(n)}$ converges to $x_i$ as $n \to \infty$ for all $i \in \mathbb{N}$. 
+\\\\
+Recall from the previous Exercise Sheet 8 Exercise 5, where we have shown the following criteria for weak convergence:
+\\\\
+\textbf{Sheet 8 Exercise 5:} Let $X$ be a normed space and $Y \subset X^*$ a dense subset. Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in $X$. Then $x_n$ converges weakly to $x \in X$ if and only if $\sup_{n \in \mathbb{N}} \|x_n \| < \infty$ and $f(x_n) \to f(x)$ as $n \to \infty$ for all $f \in Y^*$. 
+\\\\
+We will apply this exercise to the set $S:= \lbrace f_i \in (\ell^p)^*: i \in \mathbb{N} \rbrace$ where $p \in (1, \infty)$ and $f_i : \ell^p \to \mathbb{K}$ are the canonical projections $t \mapsto t_i$. Indeed we have that $S \subset (\ell^p)^*$, moreover we consider its span $Y:=\text{span}(S) \subset (\ell^p)^*$ and we claim that $Y$ is dense in $(\ell^p)^*$.
+\\\\
+Since $1 < p < \infty$ we have that $(\ell^p)^*\cong \ell^q$ for some $q$ that satisfies the relation $p^{-1} + q^{-1}=1$. It is therefore enough to show that $S$ is dense in said $L^q$. To this extend let $t \in \ell^q$ be arbitrary, by definition we can find for $\epsilon >0$ always an $N \in \mathbb{N}$ such that
+\begin{align*}
+\sum_{j=N+1}^\infty |t_j|^q < \epsilon^q 
+\end{align*}
+Let us now choose $y \in Y$ such that $y_j = t_j$ for all $j=1, \dots , N$ and $y_j= 0$ otherwise, then trivially we have $\|t-y\|_q < \epsilon$ which shows the density. 
+\end{proof}
+\newpage
+\textbf{b)} Let $H$ be a Hilbert space, let $x \in H$ and let $(x_n)_{n \in \mathbb{N}}$ be a sequence in $H$. Show that if $x_n$ converges weakly to $x$ and $\lim_{n \to \infty} \|x_n\| = \|x \|$, then $x_n$ converges to $x$ in norm. 
+\begin{proof}
+Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in the Hilbert space $H$ that converges weakly to some $x$ in $H$. We know that this is the case if and only if $f(x_n) \to f(x)$ as $n \to \infty$ for all $f \in H^*$. 
+\\\\
+Since this convergence must be satisfied for all $f \in H^*$ it must in particular be the case for \begin{align*}
+f_x:= \begin{cases}H & \longrightarrow \mathbb{K} \\
+y & \longmapsto \langle x, y \rangle  \end{cases}
+\end{align*}
+Where we fixed $x \in H$ for the weakly convergent sequence $x_n \wto x$. Indeed $f_x$ is by definition linear (the inner product is linear in its second argument and anti-linear in its first argument). Moreover $f_x$ is a bounded linear operator from $H$ to $\mathbb{K}$ by the Cauchy-Schwarz inequality. 
+\\\\
+Henceforth $f_x$ is a continuous linear function from $H$ to $\mathbb{K}$, i.e.$ f_x \in H^*$. Consider now:
+\begin{align*}
+\|x_n-x\|^2 = \langle x_n-x , x_n -x \rangle &= \| x_n \|^2 +\| x\|^2 - \langle x , x_n \rangle  -\langle x_n, x \rangle \\
+& = \|x_n\|^2 + \|x\|^2 - \langle x, x_n \rangle - \overline{\langle x, x_n \rangle}  \\
+& = \|x_n\|^2 + \|x\|^2 - f_x(x_n) - \overline{f_x(x_n)}
+\end{align*}
+Since $x_n \wto x$ we have by our efforts above that $\langle x, x_n \rangle = f_x(x_n) \to f(x) = \langle x, x \rangle  = \| x\|^2$ and by assumption we have $\|x_n\| \to \|x\|$ as $n \to \infty$. Thus taking the limit in our derived expression above we conclude that
+\begin{align*}
+\|x_n- x \|^2 \to 0 \text{ as } n \to \infty 
+\end{align*}
+That is $x_n$ converges to $x$ in norm. 
+\end{proof}
+\newpage
+\section{Norm for weak-* convergence}
+Let $(X, \| \cdot \|)$ be a separable normed vector space. We will also denote by $\| \cdot \|$ the norm on $X^*$. Let $\sigma = (x_n)_{n \in \mathbb{N}}$ be a sequence in the unit ball $S_X:= \lbrace x \in X : \| x \| =1 \rbrace$ such that $\overline{\text{span}(\sigma)}=X$. For $x^* \in X^*$ we define
+\begin{align*}
+\|x^*\|_\sigma := \sum_{k=1}^\infty 2^{-k} |x^*(x_n)|
+\end{align*}
+\textbf{a)} Show that $\| \cdot \|_\sigma$ is a norm on $X^*$ and that it satisfies the inequality $\|x^*\|_\sigma \leq \|x^*\|$. 
+\begin{proof}
+By the fact that $\sigma=(x_n)_{n \in \mathbb{N}}$ is a sequence in the unit ball and the geometric series we obtain that
+\begin{align*}
+\|x^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} |x^*(x_k)| \leq \sum_{k=1}^\infty 2^{-k} \|x^*\| \|x_k\| = \|x^*\|\sum_{k=1}^\infty 2^{-k} = \|x^*\| 
+\end{align*}
+Which shows that $\| \cdot \|_\sigma$ is well defined and already gives the claimed inequality. Next we establish that $\| \cdot \|_\sigma$ is indeed a norm.
+\\\\
+Evidently we have $\| \lambda x^* \|_{ \sigma} = | \lambda | \|x^* \|_\sigma$ for all $\lambda \in \mathbb{K}$ and $x^* \in X^*$. Moreover the triangle inequality follows by the triangle inequality of the norm $| \cdot |$ on $\mathbb{K}$. \\
+\\
+Finally, we claim that $\|x^*\| = 0 \iff x^* =0$. Indeed the necessary condition is as always trivial, for the sufficient condition we consider 
+\begin{align*}
+\|x^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} |x^*(x_k)| = 0 \implies |x^*(x_k)|=0 \text{ for all }k \in \mathbb{N}
+\end{align*}
+Since $(x_k)_{k \in \mathbb{N}}$ is an arbitrary sequence in the unit ball we obtain that
+\begin{align*}
+\sup_{\sigma \in S_X} | x^*(x_k)|=\|x^*\|=0 \implies x^*=0
+\end{align*}
+Because $\| \cdot \|_{X^*}$ is a norm on $X^*$. 
+\end{proof}
+\newpage
+\section{Sequential compactness}
+For $\epsilon >0$ and $f \in L^\infty((0,1))$ let 
+\begin{align*}
+I_\epsilon (f):= \epsilon^{-1} \int_0^\epsilon f(x)dx
+\end{align*}
+\textbf{a)} Show that $I_\epsilon \in L^\infty((0,1))^*$ with $\|I_\epsilon \|=1$ for every $\epsilon >0$.
+\begin{proof}
+By the linearity of the integral it is clear that $I_\epsilon$ is a linear functional from $L^\infty(0,1)$ to $\mathbb{K}$. Assume now that $\epsilon \in (0,1)$ is fixed, then we have for all $f \in L^\infty (0,1)$ that
+\begin{align*}
+\|I_\epsilon (f) \| = \left| \frac{1}{\epsilon} \int_0^\epsilon f(x) dx \right|  \leq \frac{1}{\epsilon} \int_0^\epsilon |f(x)| dx  \leq \frac{1}{\epsilon} \int_0^\epsilon \|f\|_{L^\infty(0,1)} dx \\
+= \|f \|_{L^\infty (0,1)}
+\end{align*}
+Thus $I_\epsilon$ is bounded and therefore as an linear operator also continuous. 
+\\\\
+Moreover we have
+\begin{align*}
+\|I_\epsilon\|= \sup_{ \|f \|_\infty = 1} \| I_\epsilon (f) \| = \sup_{ \|f \|_\infty = 1} \left| \frac{1}{\epsilon} \int_0^\epsilon f(x) dx \right| \leq \sup_{ \| f \|_\infty = 1} \frac{1}{\epsilon} \int_0^\epsilon |f(x)| dx  \\
+\leq \sup_{ \|f\|_\infty = 1} \frac{1}{\epsilon} \int_0^\epsilon \|f\|_\infty dx  = 1 
+\end{align*}
+Thus we have $\|I_\epsilon \| \leq 1$. NO CLUE ABOUT THE OTHER INEQUALITY. 
+\end{proof}
+\end{document}
