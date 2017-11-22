@@ -1,3 +1,4 @@
+
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
@@ -23,7 +24,7 @@
 
 \begin{document}
 \section{Weak convergence without norm convergence}
-Let $f \in C_c^\infty( \mathbb{R})$ and $1 \leq p < \infty$. We define the following sequences $g_n(x):= f(x-n), h_n(x):= n^{-1/p}f(x/n)$ and $k_n(x):= f(x) e^{inx}$. for $n \in \mathbb{N}$ and $x \in \mathbb{R}$.
+Let $f \in C_c^\infty( \mathbb{R})$, $f \neq 0$ and $1 \leq p < \infty$. We define the following sequences $g_n(x):= f(x-n), h_n(x):= n^{-1/p}f(x/n)$ and $k_n(x):= f(x) e^{inx}$. for $n \in \mathbb{N}$ and $x \in \mathbb{R}$.
 \\\\
 Show that for $1 <p < \infty, g_n, h_n$ and $k_n$ converge weakly in $L^p( \mathbb{R})$ to zero, but they do not converge with respect to the norm. Investigate what happens for $p=1$ as well.
 \begin{proof}
@@ -52,26 +53,33 @@ Let us now fix $p \in (1, \infty)$ and $q$ conjugate to $p$. Then we know that a
 \begin{align*}
 \phi(g_n) = \int_\mathbb{R} g(x) g_n(x)dx = \int_\mathbb{R}g(x) f(x-n) dx 
 \end{align*}
-We have that $\lim_{n \to \infty} g_n(x) = \lim_{n \to \infty} f(x-n)= f(- \infty)=0$ because $f$ is compactly supported. Since we know that $\phi$ is continuous we obtain that
+We know that $f$ is compactly supported, in particular we have supp($f) \subset [-a,a]$ for some positive $a \in \mathbb{R}$. In particular we have that the support of $f(\cdot -n)$ is contained in $[-a +n, a+n]$. Using this observation and Hölder's inequality we obtain that
 \begin{align*}
-\lim_{n \to \infty} \phi (g_n)= \phi( \lim_{n \to \infty} g_n) = \int_{\mathbb{R}} g(x) \lim_{n \to \infty} f(x-n) dx = 0 = \phi(0)
+|\phi (g_n)| &\leq \int_\mathbb{R}|g(x)f(x-n)|dx = \int_\mathbb{R} g(x) f(x-n)\mathcal{X}_{\text{supp}(f)} dx \\
+&= \int_\mathbb{R} |g(x)f(x-n)|\mathcal{X}_{[-a+n,a+n]} dx \\
+& \leq \| g \mathcal{X}_{[-a+n, a +n]} \|_q \|f(x-n)\|_p = \|g \mathcal{X}_{[-a+n, a+n]} \|_q \|f\|_p
 \end{align*}
-This shows that $g_n \wto 0$ by the Lemma. 
+For the first term at the end of the inequality we notice that $g(x)^q\mathcal{X}_{[-a+n, a+n]}$ is of course dominated by $g(x)^q$ which is by assumption integrable, further we have as $n$ tends to infinity that $g(x)^q\mathcal{X}_{[-a+n, a+n]} \to 0$ because the indicator function will vanish. Bringing these results together we have
+\begin{align*}
+|\phi(g_n)| \leq \|g \mathcal{X}_{[-a+n, a+n]} \|_q \|f\|_p \to 0 \text{ as } n \to \infty
+\end{align*}
+Which translates to $\lim_{n \to \infty} \phi(g_n) = 0 = \phi(0)$ and by the Lemma we obtain that $g_n \wto 0$. 
 \\\\
-Similarly we have 
+Considering now the sequence $(h_n)_{n \in \mathbb{N}}$, then we observe that the support of $h_n$ is contained in $[-a/n, a/n]$ for some positive $a \in \mathbb{R}$. In the exact same fashion as above (but giving much less detail now) we obtain that 
 \begin{align*}
-\phi(h_n)= \int_\mathbb{R} g(x) h_n(x)dx = \int_\mathbb{R} g(x) n^{-1/p} f(x/n)dx  \\
-\implies \lim_{n \to \infty} \phi (h_n)= \phi(\lim_{n \to \infty} h_n) = \int_\mathbb{R}g(x) \lim_{n \to \infty} \frac{1}{n^p} f(x/n)dx = 0 = \phi(0)
+|\phi(h_n)| \leq \|g \mathcal{X}_{[-a/n,a/n]}\|_q \|f\|_p \to 0 \text{ as } n \to \infty
 \end{align*}
-Which entails that $h_n \wto 0$. 
+Because the indicator function will only contain of one point, namely, $\lbrace 0 \rbrace$ and the Lebesgue integral vanishes. This entails that $h_n \wto 0$. 
 \\\\
 Finally, we obtain in the same fashion
 \begin{align*}
 \phi(k_n)= \int_\mathbb{R} g(x) f(x)e^{inx} dx
 \end{align*}
-HERE THERE IS NOTHING WE CAN DO, maybe Theorem misstated? Conjugation elsewhere? According to Alt it's correct.
-\newpage
-
+We recall the Riemann Lebesgue-Lemma which states that for $f \in L^1(\mathbb{R})$ and $\hat{f}$ its Fourier Transform we have that $\hat{f}(z) \to 0$ as $|z| \to \infty$. In our case we have by Hölder's inequality that $f \cdot g \in L^1(\mathbb{R})$ and its Fourier Transform agrees with our expression above, i.e. we have \begin{align*}
+\widehat{f\cdot g}(-n) = \phi(k_n) \to 0 \text{ as } |-n| = n \to \infty
+\end{align*}
+which yields that $k_n \wto 0$. 
+\\\\
 We now turn out attention towards the convergence in the $L^p$-norm. Let us first consider the case of $p=1$, we then have
 \begin{align*}
 \|g_n -f \| = \int_{\mathbb{R}} | g_n(x)-f(x)|dx  =  \int_\mathbb{R} | f(x-n)-f(x)| dx  \\
@@ -85,12 +93,18 @@ Moreover we have
 \end{align*}
 thus, $h_n \to f$ in $L^1( \mathbb{R})$ as $n \to \infty$.
 \\\\
-Let us now consider the case for $p \in (1, \infty)$. We want to show that the sequences $g_n, h_n$ and $k_n$ do not converge with respect to the $L^p$-norm. The most elegant approach would be to show that these sequences are not Cauchy, in particular they cannot converge (recall that convergent sequences are always Cauchy). 
+Let us now consider the case for $p \in (1, \infty)$. 
 \\\\
-To this goal let $m,n \in \mathbb{N}$ be such that $m >n$. 
+We already know that strong convergence (i.e. convergence with respect to the norm) implies weak convergence and that in either cases the limits, if they exists, are unique and agree with one another. Since we have already established that the sequences convergence weakly towards $0$, the only possibility for said sequences to converge with respect to the $L^p$-norm is if they would converge to $0$. 
+\newpage
+However, we easily see that 
 \begin{align*}
-\|g_m-g_n\|_p^p = \int_\mathbb{R}|g_m(x)-g_n(x)|^p dx = \int_\mathbb{R} |f(x-m)-f(x-n)|^p dx 
+\|g_n\|_p^p &= \int_\mathbb{R}|f(x-n)|^pdx = \int_\mathbb{R} |f(x)|^p dx = \|f\|_p^p \\
+\|h_n\|_p^p & = \int_\mathbb{R}n^{-1} |f(x/n)|^pdx = \int_\mathbb{R} |f(x)|^p dx = \|f\|_p^p \\
+\|k_n\|_p^p & = \int_\mathbb{R}\underbrace{|e^{inpx}|}_{=1}|f(x)|^p = \int_\mathbb{R} |f(x)|^p dx = \|f\|_p^p
 \end{align*}
+Where we used the obvious substitutions in the first two lines (proof Exercise :-D). \\\\
+By assumption we have $f \neq 0$ thus none of the above sequences converges in norm to $0$, thus they don't converge in norm at all. 
 \end{proof} 
 \newpage
 \section{Criteria for weak and norm convergence}
@@ -112,7 +126,7 @@ Recall from the previous Exercise Sheet 8 Exercise 5, where we have shown the fo
 \\\\
 We will apply this exercise to the set $S:= \lbrace f_i \in (\ell^p)^*: i \in \mathbb{N} \rbrace$ where $p \in (1, \infty)$ and $f_i : \ell^p \to \mathbb{K}$ are the canonical projections $t \mapsto t_i$. Indeed we have that $S \subset (\ell^p)^*$, moreover we consider its span $Y:=\text{span}(S) \subset (\ell^p)^*$ and we claim that $Y$ is dense in $(\ell^p)^*$.
 \\\\
-Since $1 < p < \infty$ we have that $(\ell^p)^*\cong \ell^q$ for some $q$ that satisfies the relation $p^{-1} + q^{-1}=1$. It is therefore enough to show that $S$ is dense in said $L^q$. To this extend let $t \in \ell^q$ be arbitrary, by definition we can find for $\epsilon >0$ always an $N \in \mathbb{N}$ such that
+Since $1 < p < \infty$ we have that $(\ell^p)^*\cong \ell^q$ for some $q$ that satisfies the relation $p^{-1} + q^{-1}=1$. It is therefore enough to show that $S$ is dense in said $\ell^q$. To this extend let $t \in \ell^q$ be arbitrary, by definition we can find for $\epsilon >0$ always an $N \in \mathbb{N}$ such that
 \begin{align*}
 \sum_{j=N+1}^\infty |t_j|^q < \epsilon^q 
 \end{align*}
@@ -145,7 +159,7 @@ That is $x_n$ converges to $x$ in norm.
 \section{Norm for weak-* convergence}
 Let $(X, \| \cdot \|)$ be a separable normed vector space. We will also denote by $\| \cdot \|$ the norm on $X^*$. Let $\sigma = (x_n)_{n \in \mathbb{N}}$ be a sequence in the unit ball $S_X:= \lbrace x \in X : \| x \| =1 \rbrace$ such that $\overline{\text{span}(\sigma)}=X$. For $x^* \in X^*$ we define
 \begin{align*}
-\|x^*\|_\sigma := \sum_{k=1}^\infty 2^{-k} |x^*(x_n)|
+\|x^*\|_\sigma := \sum_{k=1}^\infty 2^{-k} |x^*(x_k)|
 \end{align*}
 \textbf{a)} Show that $\| \cdot \|_\sigma$ is a norm on $X^*$ and that it satisfies the inequality $\|x^*\|_\sigma \leq \|x^*\|$. 
 \begin{proof}
@@ -161,11 +175,17 @@ Finally, we claim that $\|x^*\| = 0 \iff x^* =0$. Indeed the necessary condition
 \begin{align*}
 \|x^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} |x^*(x_k)| = 0 \implies |x^*(x_k)|=0 \text{ for all }k \in \mathbb{N}
 \end{align*}
-Since $(x_k)_{k \in \mathbb{N}}$ is an arbitrary sequence in the unit ball we obtain that
+Thus we have $x^*(x_k)=0$ for all $k \in \mathbb{N}$. Further, we are given that the span of $\sigma$ is dense in $X$. Thus for an arbitrary $y \in X$ we can always approximate said $y$ with a sequence $(y_n)_{n \in \mathbb{N}}$ in the span of $\sigma$ such that $y_n \to y$ as $n \to \infty$ in the norm of $X$. 
+\\\\
+Moreover we have by the definition of the span that
 \begin{align*}
-\sup_{\sigma \in S_X} | x^*(x_k)|=\|x^*\|=0 \implies x^*=0
+y_n = \sum_{k=1}^K \lambda_k^{(n)} x_k \text{ for all } n \in \mathbb{N} \text{ and some finite } K \in \mathbb{N}
 \end{align*}
-Because $\| \cdot \|_{X^*}$ is a norm on $X^*$. 
+where $\lambda_k^{(n)} \in \mathbb{K}$ and $x_k \in X$. By the continuity and linearity of  $x^* \in X^*$ we get that
+\begin{align*}
+x^*(y) = \lim_{n \to \infty} x^*(y_n) = \lim_{n \to \infty} \sum_{k=1}^K \lambda_k^{(n)} \underbrace{x^*(x_k)}_{=0} =0
+\end{align*}
+Since $y \in X$ was chosen to be arbitrary we conclude that $x^*=0$ as claimed, thus $\| \cdot \|_\sigma$ is indeed a norm on $X^*$. 
 \end{proof}
 \newpage
 \section{Sequential compactness}
@@ -187,6 +207,15 @@ Moreover we have
 \|I_\epsilon\|= \sup_{ \|f \|_\infty = 1} \| I_\epsilon (f) \| = \sup_{ \|f \|_\infty = 1} \left| \frac{1}{\epsilon} \int_0^\epsilon f(x) dx \right| \leq \sup_{ \| f \|_\infty = 1} \frac{1}{\epsilon} \int_0^\epsilon |f(x)| dx  \\
 \leq \sup_{ \|f\|_\infty = 1} \frac{1}{\epsilon} \int_0^\epsilon \|f\|_\infty dx  = 1 
 \end{align*}
-Thus we have $\|I_\epsilon \| \leq 1$. NO CLUE ABOUT THE OTHER INEQUALITY. 
+Thus we have $\|I_\epsilon \| \leq 1$. 
+\\\\
+To establish the other inequality we fix $f\equiv 1 \in L^\infty((0,1))$ and notice that \begin{align*}
+I_\epsilon(f) = \frac{1}{\epsilon} \int_0^\epsilon 1 dx = 1
+\end{align*}
+and trivially $\| f \|_\infty = 1$. We obtain that
+\begin{align*}
+\|I_\epsilon\| = \sup_{ \|g\|_\infty = 1} |I_\epsilon (g)| \geq |I_\epsilon (f) | = 1
+\end{align*}
+Thus we conclude that $\|I_\epsilon \| = 1$ 
 \end{proof}
 \end{document}
