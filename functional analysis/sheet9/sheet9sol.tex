@@ -179,13 +179,33 @@ Thus we have $x^*(x_k)=0$ for all $k \in \mathbb{N}$. Further, we are given that
 \\\\
 Moreover we have by the definition of the span that
 \begin{align*}
-y_n = \sum_{k=1}^K \lambda_k^{(n)} x_k \text{ for all } n \in \mathbb{N} \text{ and some finite } K \in \mathbb{N}
+y_n = \sum_{k=1}^K \lambda_k^{(n)} x_k \text{ for all } n \in \mathbb{N} \text{ and some finite } K_n \in \mathbb{N}
 \end{align*}
 where $\lambda_k^{(n)} \in \mathbb{K}$ and $x_k \in X$. By the continuity and linearity of  $x^* \in X^*$ we get that
 \begin{align*}
-x^*(y) = \lim_{n \to \infty} x^*(y_n) = \lim_{n \to \infty} \sum_{k=1}^K \lambda_k^{(n)} \underbrace{x^*(x_k)}_{=0} =0
+x^*(y) = \lim_{n \to \infty} x^*(y_n) = \lim_{n \to \infty} \sum_{k=1}^{K_n} \lambda_k^{(n)} \underbrace{x^*(x_k)}_{=0} =0
 \end{align*}
 Since $y \in X$ was chosen to be arbitrary we conclude that $x^*=0$ as claimed, thus $\| \cdot \|_\sigma$ is indeed a norm on $X^*$. 
+\end{proof}
+\noindent \textbf{b)} Let $(x_j)_{j \in \mathbb{N}}$ be a sequence in $X^*$ which is bounded, i.e. there exists $M >0$ such that $\|x_j^*\| < M$ for all $j \in \mathbb{N}$. Prove that $x_j^*$ is weak-$*$ convergent to $x^* \in X^*$ if and only if $\| x_j^* -x^*\|_\sigma \to 0$ for $j \to \infty$
+\begin{proof}
+Recall from the remark after \textbf{Lemma 6.2.1.} that we have the following characterisation of weak-* convergence
+\begin{lem}A sequence $(f_i)_{i \in \mathbb{N}}$ in $X^*$ converges towards $f \in X^*$ w.r.t. $\tau_W^*$ if and only if $f_i(x) \to f(x)$ as $i \to \infty$ for all $x \in X$. 
+\end{lem}
+\noindent Assume now that $x_j^*$ is weak-$*$ convergent to $x^* \in X^*$ as $j \to \infty$. By the above we have that this is equivalent to saying that $x_j^*(x) \to x^*(x)$ for all $x \in X$, in particular for all sequences in the unit-ball $S_X \subset X$. Thus if we consider now
+\begin{align*}
+\|x_j^*-x^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} | x_j^*(x_k)-x^*(x_k)|
+\end{align*}
+By our observation above we have that $|x_j^*(x_k)-x^*(x_k)| \to 0$ as $j \to \infty$ for all $k \in \mathbb{K}$. Further we have since our sequence $(x_k)_{k \in \mathbb{N}}$ is in the unit ball and the boundedness of the sequence $(x_j^*)_{j \in \mathbb{N}}$ that 
+\begin{align*}
+|x_j^*(x_k)-x^*(x_k)| & \leq |x_j^*(x_k)| + |x^*(x_k)|  \\ 
+&\leq \|x_j^*\|_{X^*} \|x_k\| + \|x^*\|_{X^*} \| x_k\|  \\
+& \leq M  + \|x^*\|_{X^*}
+\end{align*}
+And this dominating bound is summable (it is just a constant). By the dominated convergence theorem we then obtain that
+\begin{align*}
+\|x_j^*-x^*\|_\sigma \to 0 \text{ as } j \to \infty 
+\end{align*}
 \end{proof}
 \newpage
 \section{Sequential compactness}
