@@ -65,12 +65,12 @@ For the first term at the end of the inequality we notice that $g(x)^q\mathcal{X
 \end{align*}
 Which translates to $\lim_{n \to \infty} \phi(g_n) = 0 = \phi(0)$ and by the Lemma we obtain that $g_n \wto 0$. 
 \\\\
-Considering now the sequence $(h_n)_{n \in \mathbb{N}}$, then we observe that the support of $h_n$ is contained in $[-a/n, a/n]$ for some positive $a \in \mathbb{R}$. In the exact same fashion as above (but giving much less detail now) we obtain that 
+Considering now the sequence $(h_n)_{n \in \mathbb{N}}$, since $C_c^\infty(\mathbb{R})$ is dense in $L^q(\mathbb{R})$ we can without loss of generality replace $g$ with a $\varphi \in C_c^\infty ( \mathbb{R})$. Then we obtain as above
 \begin{align*}
-|\phi(h_n)| \leq \|g \mathcal{X}_{[-a/n,a/n]}\|_q \|f\|_p \to 0 \text{ as } n \to \infty
+|\phi(h_n)|  \leq \int_\mathbb{R} n^{-1/p} |f(x/n)| | \varphi(x)| dx \leq C n^{-1/p} \int_\mathbb{R} | \varphi(x)| dx
 \end{align*}
-Because the indicator function will only contain of one point, namely, $\lbrace 0 \rbrace$ and the Lebesgue integral vanishes. This entails that $h_n \wto 0$. 
-\\\\
+Because $f$ is bounded and the right most integral is finite, letting $n \to \infty$ we obtain that $\phi(h_n) \to 0 = \phi(0)$, this entails that $h_n \wto 0$
+\newpage
 Finally, we obtain in the same fashion
 \begin{align*}
 \phi(k_n)= \int_\mathbb{R} g(x) f(x)e^{inx} dx
@@ -202,10 +202,71 @@ By our observation above we have that $|x_j^*(x_k)-x^*(x_k)| \to 0$ as $j \to \i
 &\leq \|x_j^*\|_{X^*} \|x_k\| + \|x^*\|_{X^*} \| x_k\|  \\
 & \leq M  + \|x^*\|_{X^*}
 \end{align*}
-And this dominating bound is summable (it is just a constant). By the dominated convergence theorem we then obtain that
+And this dominating bound is summable with respect to the sum above i.e. $\sum 2^{-k}$ (it is just a constant). By the dominated convergence theorem we then obtain that
 \begin{align*}
 \|x_j^*-x^*\|_\sigma \to 0 \text{ as } j \to \infty 
 \end{align*}
+\newpage
+Let us now suppose the converse, we then have
+\begin{align*}
+\|x_j^*-x^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} |x_j^*(x_k)-x^*(x_k)| \to 0 \text{ as } j \to \infty 
+\end{align*}
+This establishes that for arbitrary $\epsilon >0$ we can find $j\in \mathbb{N}$ large enough such that  
+\begin{align*}
+|x_j^*(x_k) - x^*(x_k)| < \epsilon \text{ for all } k \in \mathbb{N}
+\end{align*}
+Moreover since the span of $\sigma$ is dense in $X$ we can find for arbitrary $x \in X$ a sequence $(x_n)_{n \in \mathbb{N}}$ in span$(\sigma)$ such that $x_n \to x$ as $n \to \infty$ in $\| . \|_X$. We therefore establish that for all $x \in X$
+\begin{align*}
+|x_j^*(x)-x^*(x)| &= |x_j^*(x)-x_j^*(x_n) + x_j^*(x_n)-x^*(x_n) + x^*(x_n) - x^*(x)) \\
+& = |x_j^*(x-x_n) + x_j^*(x_n)-x^*(x_n) + x^*(x_n-x)| \\
+& \leq |x_j^*(x-x_n)| + |x_j^*(x_n)-x^*(x_n)| + |x^*(x_n-x)| \\
+& \leq \| x_j^*\| \|x-x_n\| + |x_j^*(x_n)-x^*(x_n)|  + \|x^*\| \|x_n-x\| \\
+& \leq (M+\|x^*\|) \|x_n -x \| + |x_j^*(x_n) - x^*(x_n)|
+\end{align*}
+Choosing $j \in \mathbb{N}$ apropriately as mentioned above and taking the limit as $n \to \infty$ shows that $x_j^*(x) \to x^*(x)$ for all $x \in X$ and thus by the lemma that $x_j^*$ is weak-$*$ convergent to $x^*$. 
+\end{proof}
+\noindent \textbf{c)} Give an example which shows that, in general, $\|y_j^*\|_\sigma \to 0$ does not imply that $(y_j^*)_{j \in \mathbb{N}}$ is bounded in $(X^*, \| \cdot \|_{X^*})$. 
+\begin{proof}
+Let us consider $X=c_0( \mathbb{K})$, the space of $\mathbb{K}$-valued sequences convergent to zero, equipped with the supremum norm $\| \cdot \|_\infty$. Inside this space, consider $\sigma = \lbrace e_n \rbrace_{n \in \mathbb{N}}$ where $e_n = (0, \dots , 0, 1, 0, \dots )$ as usual (1 is the $n$-th entry in this vector). \\\\
+Naturally we have that $\sigma$ is a sequence in the unit ball $S_X$ and that span$(\sigma)$ is dense in $X$. Further, let us consider for $x=(x_k)_{k \in \mathbb{N}} \in X$ functionals $y_j^*$ defined by
+\begin{align*}
+y_j^*(x)= \frac{1}{j} \sum_{k=1}^{j^2} x_k \text{ for all } j \in \mathbb{N}
+\end{align*} 
+Clearly the $y_j^*$ are linear, they are also continuous for all $j \in \mathbb{N}$ because
+\begin{align*}
+|y_j^*(x)| \leq \frac{1}{j} \sum_{k=1}^{j^2} |x_k| \leq j \| x\|_\infty 
+\end{align*}
+\newpage
+Moreover, the $y_j^*$ are unbounded with respect to the $\| \cdot \|_{X^*}$ norm. Indeed,
+\begin{align*}
+\| y_j^* \|_{X^*} = \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}} | y_j^*(x)| \leq \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}} \frac{1}{j} \sum_{k=1}^{j^2}|x_k| \leq \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}}  j \|x\|_\infty = j 
+\end{align*}
+Thus for large enough $j$, this shows that the functionals $y_j^*$ cannot be bounded by a constant $M>0$, i.e. they are unbounded on $(X^*, \| \cdot \|_{X^*})$. \\\\
+Nevertheless we can show that $y_j^*$ converges to $0$ with respect to the norm $\| \cdot \|_\sigma$ on $X^*$. To see this consider 
+\begin{align*}
+\| y_j^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} |y_j^*(x_k)| 
+\end{align*}
+But since $\sigma = \lbrace e_n \rbrace_{n \in \mathbb{N}}$ the above sum reduces to 
+\begin{align*}
+\|y_j^*\|_\sigma = \sum_{k=1}^\infty 2^{-k} | y_j^*(x_k)| = \sum_{k=1}^\infty 2^{-k} \left| \frac{1}{j} \sum_{\ell = 1}^{j^2} (e_k)_{\ell} \right| = \frac{1}{j} \sum_{k=1}^\infty 2^{-k} = \frac{1}{j} \to 0 
+\end{align*}
+\end{proof}
+\newpage
+\noindent \textbf{d)} Let $B_{(X^*, \|. \|)} = \lbrace x^* \in X^* : \| x^* \| \leq 1 \rbrace$ be the unit ball in $X^*$ with respect to the norm $\|.\|_{X^*}$. Show that $B_{(X^*, \|. \|)}$ is compact in $(X^*, \|. \|_\sigma)$.
+\begin{proof}
+Recall the following results from class (Theorem 3.1.2 and Theorem 6.3.6)
+\begin{thm} Let $(X,d)$ be a metric space. For $A \subset X$, the following statements are equivalent:
+\begin{enumerate}
+\item $A$ is compact
+\item $A$ is sequentially compact, i.e. every sequence in $A$ has a convergent subsequence.
+\item $(A,d)$ is complete and $A$ is pre-compact. 
+\end{enumerate}
+\end{thm}
+\begin{thm} Let $X$ be a separable normed space. Then the closed unit ball $k_{X^*}= \lbrace x^* \in X^* : \|x^*\| \leq 1 \rbrace$ in $X^*$ is sequentially compact with respect to the $\tau_W^*$ topology. 
+\end{thm}
+\noindent Naturally, every normed space is a metric space. Furthermore we have that $X$ is by assumption a separable normed space. By the above Theorem we know $B_{(X^*, \|. \|)}$ is sequentially compact (and thus compact) with respect to the $\tau_W^*$ topology. 
+\\\\
+Moreover in \textbf{a)} we have shown that $\|x^*\|_\sigma \leq \|x^*\|_{X^*}$ for all $x^* \in X^*$, we conclude that the compactness holds in $(X^*, \|. \|_\sigma)$. 
 \end{proof}
 \newpage
 \section{Sequential compactness}
