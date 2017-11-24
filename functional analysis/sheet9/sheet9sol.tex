@@ -237,9 +237,9 @@ Clearly the $y_j^*$ are linear, they are also continuous for all $j \in \mathbb{
 |y_j^*(x)| \leq \frac{1}{j} \sum_{k=1}^{j^2} |x_k| \leq j \| x\|_\infty 
 \end{align*}
 \newpage
-Moreover, the $y_j^*$ are unbounded with respect to the $\| \cdot \|_{X^*}$ norm. Indeed,
+Moreover, the $y_j^*$ are unbounded with respect to the $\| \cdot \|_{X^*}$ norm. Indeed, consider the vector $z=(1,1, \dots , 1,  0 , \dots)$ saturated with $1$'s from position 1 until $j^2$ and zeroes else. Certainly this vector has sup norm equal to $1$ but $|y_j^*(z)|=j$ in particular, by the definition of the sup we have 
 \begin{align*}
-\| y_j^* \|_{X^*} = \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}} | y_j^*(x)| \leq \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}} \frac{1}{j} \sum_{k=1}^{j^2}|x_k| \leq \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}}  j \|x\|_\infty = j 
+\| y_j^* \|_{X^*} = \sup_{\substack{x \in C_0(\mathbb{K})\\ \|x\|_\infty \leq 1}} | y_j^*(x)| \geq j \to  \infty \text{ as } j \to \infty
 \end{align*}
 Thus for large enough $j$, this shows that the functionals $y_j^*$ cannot be bounded by a constant $M>0$, i.e. they are unbounded on $(X^*, \| \cdot \|_{X^*})$. \\\\
 Nevertheless we can show that $y_j^*$ converges to $0$ with respect to the norm $\| \cdot \|_\sigma$ on $X^*$. To see this consider 
