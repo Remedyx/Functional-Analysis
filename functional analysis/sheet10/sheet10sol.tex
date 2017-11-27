@@ -1,0 +1,141 @@
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\author{Marco Bertenghi}
+
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}[section]
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{rem}{Remark}[section]
+
+\newcommand{\wto}{\rightharpoonup}
+
+\begin{document}
+\section{Quotient spaces}
+Let $X$ be a Banach space and $M \subset X$ a closer linear subspace. Let $\sim$ be the equivalence relation defined through $x \sim y$ if and only if $x-y \in M$ and let $X/M$ be the quotient space with respect to $\sim.$
+\\\\
+\textbf{a)} For $[x] \in X/M$ let 
+\begin{align*}
+\|[x]\|_{X/M}:= \inf_{y \in [x]} \| y \|_X = \inf_{y \in M} \|x-y\|_X
+\end{align*}
+Show that $\| \cdot \|_{X/M}$ is a norm on $X/M$. 
+\begin{proof}
+Indeed we have that $\| \cdot \|_{X/M}$ is well-defined, it is in particular finite because $\| \cdot \|_X$ is a norm on $X$. Moreover we have
+\begin{align*}
+\| [x]\|_{X/M} = \inf_{y \in[x]} \|y\| = 0 
+\end{align*}
+Since $\| \cdot \|$ is a norm on $X$ we must have that $y=0$ i.e. $0=y \in [x]$ which is the case if and only if $[x]=[0]$.
+\\\\
+Next we have
+\begin{align*}
+\| [x] + [y]\|_{X/M} &= \| [x+y]\|_{X/M} = \inf_{v \in M} \| x+y-v\| \\
+&= \inf_{v \in M} \| x-v + y-v + v\| \\ 
+& \leq \inf_{v \in M} \| x-v\| + \inf_{v \in M} \|y-v\| + \inf_{v \in M} \|v\| \\
+& = \inf_{v \in M} \|x-v\| + \inf_{v \in M} \|y-v\|   \\
+& 
+= \| [x]\|_{X/M} + \|[y]\|_{X/M} 
+\end{align*}
+Finally we have for all $\lambda \in \mathbb{K}$
+\begin{align*}
+\| \lambda [x]\|_{X/M} &=  \|[ \lambda x] \|_{X/M} = \inf_{y \in M} \| \lambda x -y\|  \\
+& = \inf_{ \lambda y  \in M} \| \lambda x - \lambda y\| \\
+&= \inf_{u \in M} \| \lambda x - \lambda u\| \tag{*} \\
+ & = \inf_{u \in M} | \lambda | \|x-u\| = | \lambda | \| [x] \|_{X/M} 
+\end{align*}
+ Where we used in (*) that $\varphi_\lambda : M \to M$ given by $ \varphi_\lambda(x)= \lambda x$ is a bijection for all $\lambda \in \mathbb{K}$. Thus we have shown that $\| \cdot \|_{X/M}$ is a norm on $X/M$. 
+\end{proof}
+\newpage
+\noindent \textbf{b)} Show that the projection $\pi : X \to X/M, \ x \mapsto [x]$ is continuous. 
+\begin{proof}
+Evidently, the function $\pi$ is linear because we have by definition that
+\begin{align*}
+[x+y]&=[x]+[y] \\
+\lambda [x] &= [\lambda x]  
+\end{align*}
+For all $x,y \in X, \lambda \in \mathbb{K}$. Moreover we have 
+\begin{align*}
+\| \pi(x) \|_{X/M} = \| [x] \|_{X/M} = \inf_{y \in M} \| x-y\| \leq \inf_{y \in M} \| x\| + \underbrace{\inf_{y \in M} \| y \|}_{=0} = \|x\|_X 
+\end{align*}
+That is $\pi$ is a bounded linear operator and thus continuous. 
+\end{proof}
+\noindent \textbf{c)} Show that $X/M$ is complete.
+\begin{proof}
+Recall from Exercise Sheet 1 Exercise 4: Normed spaces and Banach spaces where we have shown
+\\\\
+\textbf{Theorem:} Let $(X, \| \cdot \|)$ be a normed space. $(X, \| \cdot \|)$ is a Banach space if and only if, all absolutely convergent series are also convergent, i.e. if 
+\begin{align*}
+\sum_{n=0}^\infty \|x_n\| < \infty \implies \sum_{n=0}^\infty x_n < \infty 
+\end{align*}
+Thanks to the above theorem in order to prove that $X/M$ is a Banach space it is enough to show that every series in $X/M$ that converges absolutely also converges in $X/M$. 
+\\\\
+To this extent let us take an arbitrary sequence $([x_n])_{n \in \mathbb{N}}$ in $X/M$ such that its series is absolutely convergent, i.e. we have 
+\begin{align*}
+\sum_{n=0}^\infty \|[x_n]\|_{X/M} < \infty 
+\end{align*}
+By definition of the quotient norm (via the inf) we have for all $n \in \mathbb{N}$ the existence of some $y_n \in M$ such that $\|x_n-y_n \| \leq \|[x_n]\|_{X/M} + 1/2^n$. Since we've already established the convergence of the right hand side, the convergence of the left hand side is immediate by domination. But $X$ is a Banach space, thus it follows from the Theorem above that
+\begin{align*}
+\sum_{n=0}^\infty (x_n-y_n)=x < \infty 
+\end{align*}
+We now claim that the series over the sequence $([x_n])_{n \in \mathbb{N}}$ in $X/M$ converges to $[x] \in X/M$. 
+\newpage
+Indeed, let us consider for $N \in \mathbb{N}$ 
+\begin{align*}
+\left\| [x]- \sum_{n=0}^N [x_n] \right\|_{X/M} = \left\| [x - \sum_{n=0}^N x_n] \right\|_{X/M}  \leq \left\| x- \sum_{n=0}^N x_n \right\|_X \to 0 
+\end{align*}
+as $N \to \infty$. Where the last inequality just follows by the very definition of the quotient norm. 
+\end{proof} 
+\noindent \textbf{d)} Let $X$ and $Y$ be Banach spaces and $T \in \mathcal{L}(X,Y)$. \\ We define the kernel of $T, \ker T := \lbrace x \in X : Tx = 0 \rbrace$ and the range of $T$, ran$(T):= \lbrace Tx: x \in X \rbrace \subset Y$. Let $\iota : \text{ran}T \to Y , x \mapsto x$ be the inclusion map. Show that then there exists a bijective operator $\hat{T} \in \mathcal{L}(X/ \ker T, \text{ran}T)$ with $T = \iota \hat{T} \pi$ and $\| \hat{T} \| = \|T \|$. 
+\begin{proof}
+We have indeed that $\ker T \subset X$ is a closed linear subspace. Now we define 
+\begin{align*}
+\hat{T}: X/\ker T \to \text{ran}T, \  [x] \mapsto T(x)
+\end{align*}
+We notice that that $\hat{T}$ is well-defined. Indeed, let $[x], [y] \in X/ \ker T$ be such that $[x]=[y]$, this is the case if and only if $x \sim y$ i.e. $x-y \in \ker T$, or equivalently $x \in y + \ker T$. This entails that we can write $x= y + t$ for some $t \in \ker T$. Thus we get
+\begin{align*}
+\hat{T}([x])=T(x)= T(y+t)=T(y)+\underbrace{T(t)}_{=0} = T(y)=T([y])
+\end{align*}
+Which shows that $\hat{T}$ is well-defined. Moreover, $\hat{T}$ is by definition (defined through $T$) surjective onto the range of $T$. Furthermore $\hat{T}$ is injective, let $[x],[y] \in X/\ker T$ be such that 
+\begin{align*}
+\hat{T}([x])=\hat{T}([y]) \iff T(x)=T(y)& \implies T(x-y)=0 \\
+ &\iff x-y \in \ker T \\
+ & \iff x \sim y \\
+ & \iff [x]=[y]
+\end{align*} 
+The linearity of $\hat{T}$ follows immediatly by the linearty of $\pi$ and the linearty of $T$. Finally, we have that $\pi$ is continuous, and by assumption $T$ is continuous too. 
+
+\newpage
+We have seen that $\|[x]\|_{X/\ker T} \leq \|x\|_X$ and by the continuity of $T$ we obtain for some $C>0$ that
+\begin{align*}
+\| \hat{T}([x])\|_Y = \| T(x)\|_Y \leq C \|x\|_X
+\end{align*}
+let us now set $\tilde{C}:= \max (1, C)$. This yields that
+\begin{align*}
+\| \hat{T}([x])\|_Y \leq C\|x\|_X \leq \tilde{C}\|x\|_X = \tilde{C} \|x-0\|_X
+\end{align*}
+Since $0 \in \ker T$ we conclude that
+\begin{align*}
+\| \hat{T}([x]) \|_Y \leq \inf_{t \in \ker T} \| x-t\| = \|x\|_{X/\ker T}
+\end{align*}
+showing that indeed $\hat{T} \in \mathcal{L}(X/ \ker T, \text{ran}T)$. \\
+\\
+Further, by the very definition of $ \hat{T}$ we have that $T= \iota \hat{T} \pi$. 
+\\\\
+Lastly, we observe that since $0 \in \ker T$ we have that if $\|x\|_X \leq 1$ for an arbitrary $x \in X$, then $\|x-0\|_X=\|x\|_X \leq 1$ and thus by definition of the infimum as the greatest lower bound we must also have $\inf_{y \in \ker T} \|x-y\| \leq 1$.
+\\\\
+Conversely, if $\inf_{y \in \ker T} \|x-y \| \leq 1$. Then again by definition of the greatest upper bound we must also have that $\|x-0\|=\|x\| \leq 1$. This shows that
+\begin{align*}
+\| \hat{T}\| &= \sup_{ \substack{ [x] \in X/ \ker T \\ \| [x]\|_{X / \ker T} \leq 1}} \| \hat{T}([x])\|_Y = \sup_{ \substack{ [x] \in X/ \ker T \\ \| [x]\|_{X / \ker T} \leq 1}} \| T(x)\|_Y \\
+& = \sup_{\substack{ x \in X \\ \|x\|_X \leq 1 }} \| T(x)\|_Y = \|T\|
+\end{align*}
+\end{proof}
+\end{document}
