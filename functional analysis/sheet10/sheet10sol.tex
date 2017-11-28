@@ -19,6 +19,7 @@
 \newtheorem{rem}{Remark}[section]
 
 \newcommand{\wto}{\rightharpoonup}
+\newcommand{\wstarto}{\overset{*}\rightharpoonup}
 
 \begin{document}
 \section{Quotient spaces}
@@ -32,9 +33,9 @@ Show that $\| \cdot \|_{X/M}$ is a norm on $X/M$.
 \begin{proof}
 Indeed we have that $\| \cdot \|_{X/M}$ is well-defined, it is in particular finite because $\| \cdot \|_X$ is a norm on $X$. Moreover we have
 \begin{align*}
-\| [x]\|_{X/M} = \inf_{y \in[x]} \|y\| = 0 
+\| [x]\|_{X/M} = \inf_{y \in M} \|x-y\| = 0
 \end{align*}
-Since $\| \cdot \|$ is a norm on $X$ we must have that $y=0$ i.e. $0=y \in [x]$ which is the case if and only if $[x]=[0]$.
+Thus we can construct a sequence $y_n$ in  $M$ such that $\|x-y_n\| \to 0 $ as $n \to \infty$. But since $M \subset X$ is closed we have that $y_n \to x \in M$, henceforth $[x]=0$. 
 \\\\
 Next we have
 \begin{align*}
@@ -137,5 +138,33 @@ Conversely, if $\inf_{y \in \ker T} \|x-y \| \leq 1$. Then again by definition o
 \| \hat{T}\| &= \sup_{ \substack{ [x] \in X/ \ker T \\ \| [x]\|_{X / \ker T} \leq 1}} \| \hat{T}([x])\|_Y = \sup_{ \substack{ [x] \in X/ \ker T \\ \| [x]\|_{X / \ker T} \leq 1}} \| T(x)\|_Y \\
 & = \sup_{\substack{ x \in X \\ \|x\|_X \leq 1 }} \| T(x)\|_Y = \|T\|
 \end{align*}
+\end{proof}
+\newpage
+\section{Reflexivity and weak convergence}
+\textbf{a)} Let $X$ be a normed space and $X^*$ its dual. Let $(L_n)_{n \in \mathbb{N}}$ be a sequence in $X^*$ and $(x_n)_{n \in \mathbb{N}}$ a sequence in $X$. Let $L_n \overset{*}\wto L$ in $X^*$ with respect to the weak-$*$ topology and $x_n \to x$ with respect to the norm in $X$. Show that if $X$ is reflexive, then $L_n(x_n) \to L(x)$ as $n \to \infty$. 
+\begin{proof}
+We recall that the space $X^{**}$ is always a Banach space, since by assumption $X$ is reflexive we have $X \cong X^{**}$, i.e. $X$ is a Banach space as well. Thus we know that the reflexivity of $X$ is equivalent to saying that $X^*$ is reflexive.
+\\\\
+\textbf{Claim:} Let $X$ be a reflexive Banach space, then weak-$*$ convergence of a sequence $(f_n)_{n \in \mathbb{N}}$ in $X^*$ implies weak convergence. 
+\\\\
+\textbf{Proof of Claim:} Let $(f_n)_{n \in \mathbb{N}}$ be a sequence in $X^*$ that converges towards $f \in X^*$ w.r.t. $\tau_W^*$, this is the case if and only if $f_n (x) \to f(x)$ for all $x \in X$ as $n \to \infty$. 
+\\\\
+We want to show that $f_n \wto f$ in $X^*$, that is by \textbf{Lemma 6.2.1.} equivalent to showing that $\lambda (f_n) \to \lambda (f)$ as $n \to \infty$ for all $\lambda \in X^{**}$.
+\\\\
+Since $X$ is reflexive, the canonical inclusion $J_X: X \to X^{**}$ is surjective, that is to say that for every $\lambda \in X^{**}$ we find an $x \in X$ such that $J_X(x)= \lambda$. But then by the definition of the canonical inclusion we have
+\begin{align*}
+\lambda (f_n)= J_X(x)(f_n) = f_n(x) \to f(x) = J_X(x)(f)= \lambda (f) 
+\end{align*}
+which gives the weak convergence. $\hfill \Box$
+\\\\
+Next we recall that weakly convergent sequences are always bounded. By our efforts above we now have for the sequence $(L_n)_{n \in \mathbb{N}}$ in $X^*$ that $L_n \wstarto L$ in $X^*$ implies that $L_n \wto L$ in $X^*$ and the sequence $(L_n)_{n \in \mathbb{N}}$ is bounded. Let $M >0$ be a constant such that $\|L_n\|_{X^*} \leq M$ for all $n \in \mathbb{N}$, then 
+\begin{align*}
+|L_n(x_n)-L(x)| &= |L_n(x_n)-L_n(x) + L_n(x)-L(x)| 
+\\
+& \leq | L_n (x_n-x)| + |L_n(x)-L(x)|  \\
+& \leq \|L_n\|_{X^*} \|x_n-x\|_X + |L_n(x)-L(x)| \\
+& \leq M \|x_n-x\|_X + |L_n(x) - L(x)|
+\end{align*}
+Letting $n \to \infty$ the right hand side converges to zero since $x_n \to x$ with respect to the norm in $X$ and $L_n$ converges in the sense of weak-$*$ converges towards $L$ \textit{(see characterization at begin of proof of claim)}. 
 \end{proof}
 \end{document}
