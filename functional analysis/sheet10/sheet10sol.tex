@@ -167,4 +167,76 @@ Next we recall that weakly convergent sequences are always bounded. By our effor
 \end{align*}
 Letting $n \to \infty$ the right hand side converges to zero since $x_n \to x$ with respect to the norm in $X$ and $L_n$ converges in the sense of weak-$*$ converges towards $L$ \textit{(see characterization at begin of proof of claim)}. 
 \end{proof}
+\newpage
+\noindent \textbf{b)} Let $X$ and $Y$ be normed vector spaces and let $T: X \to Y$ be linear. Furthermore let $T$ be such that \begin{align*}
+x_n \wto 0 \text{ in } X \implies Tx_n \wto 0 \text{ in } Y
+\end{align*}
+Let $X$ be reflexive, show that then $T$ is bounded. 
+\begin{proof}
+For the sake of contradiction, assume that $T$ is not bounded, this means that for every $n \in \mathbb{N}$ there exists $x_n \in X$ such that  $\|Tx_n \| \geq n^3 \| x_n\|$. We can easily choose $x_n$ to be normed to $1$. Next we define $\tilde{x_n} := x_n/n$ and notice that since $x_n$ is normed that $\| \tilde{x_n} \|_X \to 0$ as $n \to \infty$. 
+\\\\
+Moreover we have
+\begin{align*}
+\| T \tilde{x_n} \| = \frac{1}{n} \| T (x_n)\| \geq \frac{1}{n} \cdot n^3 \|x_n \| = n^2
+\end{align*}
+Thus we have shown that we can easily constract a sequence $(x_n)_{n \in \mathbb{N}}$ in $X$ that converges in norm to $0$ but for which we have 
+\begin{align*}
+\| T x_n \| \geq n^2 \text{ for all } n \in \mathbb{N}
+\end{align*}
+Let us therefore take such a sequence $(x_n)_{n \in \mathbb{N}}$ as above. We then have that $x_n \to 0$ in the strong (i.e. norm) sense and thus in particular $x_n \wto 0$. By our initial assumption this gives that $T(x_n) \wto T(0)=0$ in $Y$. This means that for all $f \in Y^*$ we have that 
+\begin{align*}
+f(T(x_n)) \to f(0)=0 
+\end{align*}
+Furthermore we can view $T(x_n)$ as an element $\Psi_n$ of $Y^{**}$ by using the canonical embedding $J_Y : Y \to Y^{**}$, setting $\Psi_n:= J_Y(T(x_n)) \in Y^{**}$. By definition of the canonical embedding we then have
+\begin{align*}
+\Psi_n(f) := J_Y(T(x_n))(f)=f(T(x_n))  \to 0 \text{ for all } f \in Y^*
+\end{align*}
+This yields that we have
+\begin{align*}
+\sup_{n \in \mathbb{N}} | \Psi_n(f)| \leq c_f
+\end{align*}
+Applying the Banach-Steinhaus Theorem to $Y^{**}$ we further get that there exists a constant $c \geq 0$ such that  
+\begin{align*}
+\sup_{n \in \mathbb{N}} \| \Psi_n\|_{Y^{**}} \leq c
+\end{align*}
+\newpage
+But we recall that the canonical embedding $J_Y$ is an isometry between $Y$ and $Y^{**}$. Thus our derived bound yields
+\begin{align*}
+\sup_{n \in \mathbb{N}} \|\Psi_n\|_{Y^{**}}= \sup_{n \in \mathbb{N}} \| J_Y(T(x_n))\|_{Y^{**}} =\sup_{n \in \mathbb{N}} \| T(x_n)\|_Y \leq c
+\end{align*}
+Which is absurd because we have constructed our sequence to satisfy \begin{align*}
+\|T (x_n)\|_Y \geq n^2 \to \infty \text{ as } n \to \infty
+\end{align*}
+arriving at a contradiction, we conclude that $T$ must be indeed bounded. 
+\end{proof}
+\begin{rem} We did not make use of the fact that $X$ is reflexive, maybe it is possible to show the above in a more elegant way when tightening the conditions for $X$ to be reflexive. 
+\end{rem}
+\newpage
+\section{Eigenvalues of the Laplace operator}
+Let $\Omega \subset \mathbb{R}^n$ be open, bounded and non-empty. We call $\lambda \in \mathbb{C}$ an eigenvalue of $- \Delta$ with zero boundary values, if there exists $u \in H_0^{1,2}(\Omega)$ such that $\|u\|_{L^2( \Omega)} =1$ and $- \Delta u = \lambda u$ in a weak sense, i.e. such that
+\begin{align*}
+\int_\Omega \nabla u \nabla \varphi dx = \lambda \int_\Omega u \varphi dx \text{ for all } \varphi \in H_0^{1,2}( \Omega)
+\end{align*}
+Then we call $u$ an eigenfunction to the eigenvalue $\lambda$. 
+\\\\
+\textbf{a)} Let $\lambda_1$ and $\lambda_2$ be eigenvalues of $- \Delta$ with eigenfunctions $u_1$ and $u_2$. Show that if $\lambda_1 \neq \lambda_2$, then $u_1$ and $u_2$ are orthogonal in $L^2$, i.e. $\langle u_1, u_2 \rangle_{L^2( \Omega)} = 0$ 
+\begin{proof}
+We have
+\begin{align*}
+\langle u_1, u_2 \rangle_{L^2} = \int_\Omega u_1(x) u_2(x) dx 
+\end{align*}
+Since $u_1, u_2$ are both eigenvalues of $- \Delta$ with eigenvalues $\lambda_1$ respectively $\lambda_2$ we can say that 
+\begin{align*}
+\lambda_1 \int_\Omega u_1(x) u_2(x)dx = \lambda_1 \langle u_1, u_2 \rangle_{L^2}
+\end{align*}
+using $\varphi=u_2 \in H_0^{1,2}( \Omega)$ as a test function in the above, similarly we have 
+\begin{align*}
+\lambda_2 \int_\Omega u_1(x) u_2(x)dx = \lambda_2 \langle u_1, u_2 \rangle_{L^2} 
+\end{align*}
+using $\varphi = u_1 \in H_0^{1,2}(\Omega)$ as a test function in the above definition. We thus obtain that
+\begin{align*}
+\underbrace{( \lambda_1 - \lambda_2)}_{ \neq 0} \langle u_1, u_2 \rangle_{L^2} = 0  \implies \langle u_1, u_2 \rangle_{L^2} =0 
+\end{align*}
+since by assumption $\lambda_1 \neq \lambda_2$. 
+\end{proof}
 \end{document}
