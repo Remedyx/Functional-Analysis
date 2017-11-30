@@ -31,7 +31,11 @@ Let $X$ be a Banach space and $M \subset X$ a closer linear subspace. Let $\sim$
 \end{align*}
 Show that $\| \cdot \|_{X/M}$ is a norm on $X/M$. 
 \begin{proof}
-Indeed we have that $\| \cdot \|_{X/M}$ is well-defined, it is in particular finite because $\| \cdot \|_X$ is a norm on $X$. Moreover we have
+Indeed we have that $\| \cdot \|_{X/M}$ is well-defined, to see this let $[x],[y] \in X/M$ be such that $[x]=[y]$, i.e. $x \sim y$ which means that we find $m_0 \in M$ such that $x-y=m_0$, thus
+\begin{align*}
+\|[x]\|_{X/M} = \inf_{m \in M} \|x -m \|_X &= \inf_{m \in M} \| y-(m-m_0)\| \\ & = \inf_{\tilde{m} \in M} \| y- \tilde{m}\| = \|[y]\|_{X/M}
+\end{align*}
+since we know that $M$ is a subspace. Also since $\| \cdot \|$ is a norm on $X$ we know that the for all $[x] \in X/M$ we have that $\|[x]\|_{X/M} < \infty$. Moreover
 \begin{align*}
 \| [x]\|_{X/M} = \inf_{y \in M} \|x-y\| = 0
 \end{align*}
@@ -55,7 +59,6 @@ Finally we have for all $\lambda \in \mathbb{K}$
 \end{align*}
  Where we used in (*) that $\varphi_\lambda : M \to M$ given by $ \varphi_\lambda(x)= \lambda x$ is a bijection for all $\lambda \in \mathbb{K}$. Thus we have shown that $\| \cdot \|_{X/M}$ is a norm on $X/M$. 
 \end{proof}
-\newpage
 \noindent \textbf{b)} Show that the projection $\pi : X \to X/M, \ x \mapsto [x]$ is continuous. 
 \begin{proof}
 Evidently, the function $\pi$ is linear because we have by definition that
@@ -69,6 +72,7 @@ For all $x,y \in X, \lambda \in \mathbb{K}$. Moreover we have
 \end{align*}
 That is $\pi$ is a bounded linear operator and thus continuous. 
 \end{proof}
+\newpage
 \noindent \textbf{c)} Show that $X/M$ is complete.
 \begin{proof}
 Recall from Exercise Sheet 1 Exercise 4: Normed spaces and Banach spaces where we have shown
@@ -88,13 +92,14 @@ By definition of the quotient norm (via the inf) we have for all $n \in \mathbb{
 \sum_{n=0}^\infty (x_n-y_n)=x < \infty 
 \end{align*}
 We now claim that the series over the sequence $([x_n])_{n \in \mathbb{N}}$ in $X/M$ converges to $[x] \in X/M$. 
-\newpage
+\\\\
 Indeed, let us consider for $N \in \mathbb{N}$ 
 \begin{align*}
 \left\| [x]- \sum_{n=0}^N [x_n] \right\|_{X/M} = \left\| [x - \sum_{n=0}^N x_n] \right\|_{X/M}  \leq \left\| x- \sum_{n=0}^N x_n \right\|_X \to 0 
 \end{align*}
 as $N \to \infty$. Where the last inequality just follows by the very definition of the quotient norm. 
 \end{proof} 
+\newpage
 \noindent \textbf{d)} Let $X$ and $Y$ be Banach spaces and $T \in \mathcal{L}(X,Y)$. \\ We define the kernel of $T, \ker T := \lbrace x \in X : Tx = 0 \rbrace$ and the range of $T$, ran$(T):= \lbrace Tx: x \in X \rbrace \subset Y$. Let $\iota : \text{ran}T \to Y , x \mapsto x$ be the inclusion map. Show that then there exists a bijective operator $\hat{T} \in \mathcal{L}(X/ \ker T, \text{ran}T)$ with $T = \iota \hat{T} \pi$ and $\| \hat{T} \| = \|T \|$. 
 \begin{proof}
 We have indeed that $\ker T \subset X$ is a closed linear subspace. Now we define 
