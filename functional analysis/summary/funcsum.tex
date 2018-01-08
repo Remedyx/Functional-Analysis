@@ -1,0 +1,133 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\title{Functional Analysis - The irreducible Minimum}
+\date{}
+
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}[section]
+
+\newtheorem{defn}{Definition}[section]
+\newtheorem{exmp}{Example}[section]
+\theoremstyle{definition}
+\newtheorem{rem}{Remark}[section]
+
+\begin{document}
+\maketitle
+\section{Structures}
+\subsection{Topological spaces}
+We will deal with various structures, in a sense, they build a certain hierachy. Topological spaces as a framework, then metric spaces, normed spaces, Banach spaces and conclusively Hilbert Spaces. 
+
+\begin{defn} A topological space is a pair $(X, \tau)$, consisting of a set $X$ and a family $\tau \subset 2^X$ that we call a topology on $X$, such that 
+\begin{enumerate}
+\item $\emptyset, X \in \tau$.
+\item Stable under countable intersection of open sets.
+\item Stable under arbitrary union of open sets.
+\end{enumerate}
+
+\end{defn}
+\begin{rem} Thanks to the laws of De Morgan we easily conclude from the definition that arbitrary intersections and finite unions of closed sets are again closed. 
+\end{rem}
+\begin{defn}
+Let $(X, \tau)$ be a topological space and $A \subset X$ a subset. The closure $\overline{A}$ of $A$ is defined by 
+\begin{align*}
+\overline{A}= \bigcap \lbrace B \subset X : B \text{ is closed and } A \subset B \rbrace
+\end{align*}
+by definition, it is the smallest closed set that contains $A$. The set $A$ is called dense in $X$ if $\overline{A}=X$. The space $X$ is called separable, if it contains a countable dense set. Moreover, the interior of $A$ is defined through
+\begin{align*}
+A^\circ = \bigcup \lbrace B \subset A : B \text{ is open} \rbrace
+\end{align*}
+in other words, $A^\circ$ is the largest open set contained in $A$. Finally, the boundary of $A$ is defined as $\partial A = \overline{A} \setminus A^\circ$. 
+\end{defn}
+\begin{rem} Evidently, the closure and interior of a set depend on the choice of the topology. 
+\end{rem}
+\begin{defn} Let $(X, \tau)$ be a topological space, $x \in X$. A set $U \subset X$ is called an open neighbourhood of $x$ if $U \in \tau$ (i.e. $U$ is open) and $x \in U$. 
+\end{defn}
+\newpage
+\begin{defn} Let $(X, \tau)$ be a topological space and let $(x_n)_{n \in \mathbb{N}}$ be a sequence in $X$. We say that $x_n$ converges to $x \in X$ as $n \to \infty$, written $x_n \to X$, if \begin{align*}
+\text{For every open neighbourhood $U$ of $x$, there exists $n_0 \in \mathbb{N}: x_n \in U \ \forall n \geq n_0.$}
+\end{align*}
+\end{defn}
+\begin{defn} Let $(X, \tau), (Y , \mathcal{S})$ be two topological spaces. A function $f: X \to Y$ is called continuous if 
+\begin{align*}
+f^{-1}(V) \in \tau, \ \forall V \in \mathcal{S}.
+\end{align*}
+I.e., if the pre-image of every open set in $Y$ is an open set in $X$. 
+\end{defn}
+\begin{rem} In metric spaces, the notion of convergence completely characterizes the topology. This is however not necessarily true in topological spaces.
+\end{rem}
+\begin{defn} A topological space $(X, \tau)$ is called Hausdorff if  
+\begin{align*}
+\forall x,y \in X, x \neq y \implies \exists U_x, U_y \in \tau \text{ with } x \in U_x, y \in U_y \text{ and } U_x \cap U_y = \emptyset
+\end{align*}
+\end{defn}
+\begin{defn} A topological space $(X, \tau)$ is called compact if it is Hausdorff and if for every \begin{align*}
+(U_\lambda)_{\lambda \in \Lambda} \text{ family in } \tau \text{ with } \bigcup_{ \lambda \in \Lambda} U_\lambda = X \\ \implies \exists n \in \mathbb{N} \text{ and  } \lambda_1, \dots , \lambda_n \in \Lambda : \bigcup_{j=1}^n U_{\lambda_j}=X 
+\end{align*}
+i.e. if for every open covering of $X$ there exists a finite sub-covering. 
+\end{defn}
+\begin{thm} Let $(X, \tau)$ be a compact space and $(x_n)_{n \in \mathbb{N}}$ be a sequence in $X$. Then there exists at least one accumulation point of $x_n$ on $X$. 
+\end{thm}
+\begin{thm}[Lemma von Urysohn] Let $(X, \tau)$ be a compact space and $A,B \subset X$ disjoint, non-empty, closed subsets of $X$. Then there exists a continuous function $g: X \to [0,1]$ with $g(A)=0$ and $g(B)=1$. 
+\end{thm}
+\begin{rem} The Lemma of Urysohn is important because it helps us avoid some of the pathological situations (like only constant functions being continuous). In particular, the theorem implies that on compact spaces the topology is large enough for us to do some meaningful analysis on. 
+\end{rem}
+\newpage
+\begin{defn} Let $K$ be a compact space. We define
+\begin{align*}
+C_\mathbb{K}(K):= \lbrace f: K \to \mathbb{K} \text{ cotninuous}\rbrace
+\end{align*}
+\end{defn}
+\noindent As a consequence of Urysohn's Lemma we can show that $C_\mathbb{K}(K)$ separates the points of $K$. 
+\begin{cor} Let $K$ be a compact space. Then $C_\mathbb{K}(K)$ separates the points of $K$. In other words, for every $x,y \in K$ with $x \neq y$, there exists $f \in C_\mathbb{K}(K)$ such that $f(x) \neq f(y)$.
+\end{cor}
+\begin{proof}
+Since $K$ is Hausdorff, for every $x \neq y$ we can find two open neighbourhoods $U_x, U_y$ of $x$ and $y$ respectively with $U_x \cap U_y = \emptyset$. We can further find closed sets $A,B$ with $A \subset U_x, B \subset U_y$ with $x \in A$ and $y \in B$. In particular we have $A \cap B = \emptyset$. Urysohn's Lemma then gives that there exists $f \in C_\mathbb{K}(K)$ with $f(x)=0$ and $f(y)=1$. 
+\end{proof}
+\subsection{Metric Spaces}
+\begin{defn} A metric space is a pair $(X,d)$ with $X$ being an arbitrary set and a map $d: X \times X \to [0, \infty)$ called a metric on $X$, with the following properties
+\begin{enumerate}
+\item $d(x,y)=0$ if and only if $x=y$.
+\item $d(x,y)=d(y,x)$.
+\item ($\Delta$-inequality) $d(x,y) \leq d(x,z) + d(z,y)$ for all $x,y,z \in X$. 
+\end{enumerate}
+\end{defn}
+\begin{rem} \
+\begin{enumerate}
+\item Every metric space $(X,d)$ is a topological space $(X, \tau_d)$ with topology $\tau_d$ inducedby the metric. The topology $\tau_d$ is defined by the condition that $A \in \tau_d$ if and only if for all $x \in A$, there exists $\epsilon >0$ with $B_\epsilon(x)= \lbrace y \in X : d(x,y) < \epsilon \rbrace \subset A$. 
+\item In contrast with general topological spaces, on metric spaces the notion of convergence characterizes the topology. That is we have the convenient characterizations
+\begin{enumerate}
+\item A set $A\subset X$ is closed if and only if for every sequence $x_n$ in $A$ with $x_n \to x$ in $X$, we have that $x \in A$. 
+\item $\overline{A}= \lbrace x \in X : \exists (x_n)_{n \in \mathbb{N}} \text{ sequence in $A$ with } x_n \to x \rbrace $. 
+\item $A \subset X$ is dense if and only if $\forall x \in X, \exists (x_n)_{n \in \mathbb{N}}$ sequence in $A$ with $x_n \to x$. 
+\item The function $f: X \to Y$ between the two metric spaces $(X,d_1), (Y,d_2)$ is continuous at the point $x \in X$ if and only if for every sequence $(x_n)_{n \in \mathbb{N}}$ in $X$ with $x_n \to x$ we have $f(x_n) \to f(x)$. 
+\end{enumerate}
+\end{enumerate}
+\end{rem}
+\newpage
+\begin{defn} Let $(X,d)$ be a metric space. A sequence $(x_n)_{n \in \mathbb{N}}$ in $X$ is called a Cauchy sequence (or is said to have the Cauchy property) if $d(x_n,x_m) \to 0$ as $n,m \to \infty$. Every convergent sequence is indeed Cauchy. The metric space $(X,d)$ is called complete, if every Cauchy sequence is convergent. 
+\end{defn}
+\subsection{Normed spaces}
+\begin{defn} A normed space is a pair $(X, \| \cdot \|)$, consisting of a vector space $V$ over a field $\mathbb{K}$ ($\mathbb{R}$ or $\mathbb{C}$) and a map $\| \cdot  \|: V \to [0, \infty)$ called a norm on $V$ with the following properties
+\begin{enumerate}
+\item $\|x\|=0$ if and only if $x=0$.
+\item (Homogenity) $\| \lambda x \| = | \lambda | \|x \|$ for all $\lambda \in \mathbb{K}, x \in V$.
+\item ($\Delta$-inequality) $\|x + y\| \leq \|x\|  + \|y\|$ for all $x,y \in V$. 
+\end{enumerate}
+\end{defn}
+\begin{rem} Every norm induces the metric $d(x,y)= \|x-y\|$, hence every normed space is also a metric space and therefore also a topological space. 
+\end{rem}
+\begin{defn} A normed space $(X, \| \cdot \|)$ is called complete, if $X$, equipped with the induced metric $d(x,y)= \|x-y\|$, is a complete metric space. A complete normed space is called a Banach space. 
+\end{defn}
+\noindent Completeness is very important for analysis. It is not a coincidence that we always do analysis on $\mathbb{R}$ instead of $\mathbb{Q}$. For this reason, it is useful to have a general recipe to complete normed spaces. 
+\begin{defn} Let $(X, \| \cdot \|)$ be a normed space. A completion of $(X, \| \cdot \|)$ is a $3$-tuple $(Y, \| \cdot \|_Y , \phi)$ consisting of a Banach space $(Y, \| \cdot \|_Y)$ and an isometric linear map $\phi :X \to Y$, with $\overline{\phi(X)}=Y$.
+\end{defn}
+\begin{thm} Every normed space $(X, \| \cdot \|)$ has a completion, which is unique, up to linear isometric isomorphisms. 
+\end{thm}
+\end{document}
