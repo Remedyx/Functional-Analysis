@@ -130,4 +130,33 @@ Since $K$ is Hausdorff, for every $x \neq y$ we can find two open neighbourhoods
 \end{defn}
 \begin{thm} Every normed space $(X, \| \cdot \|)$ has a completion, which is unique, up to linear isometric isomorphisms. 
 \end{thm}
+\begin{proof}
+The proof is constructive, we give a sketch.  Let $\mathcal{C}_X$ denote the set of all Cauchy sequence on $X$. We can easily give this space the structure of a vector space over $\mathbb{K}$. Next we define the linear subspace $\mathcal{N}_X \subset \mathcal{C}_X$ consisting of all null-sequence on $X$, i.e.
+\begin{align*}
+\mathcal{N}_X := \lbrace x = (x_n)_{n \in \mathbb{N}} \in \mathcal{C}_X : x_n \to 0 \rbrace
+\end{align*}
+Moreover we define $Y:= \mathcal{C}_X/ \mathcal{N}_X$ as the quotient space of $\mathcal{C}_X$ w.r.t. the equivalence relation defined by $x \sim y : \iff x-y \in \mathcal{N}_X$. In other words, in $Y$, we identify Cauchy sequences whose difference converges to zero. $Y$ is also a vector space over $\mathbb{K}$. 
+\newpage
+Next we want to introduce a norm on $Y$. To this end, we define the function $p: \mathcal{C}_X \to [0, \infty)$ through 
+\begin{align*}
+p(x)= \lim_{n \to \infty} \| x_n \|
+\end{align*}
+Thanks to the reverse triangle inequality we've got
+\begin{align*}
+| \|x_k\| - \|x_l\| | \leq \|x_k - x_l\| \to 0 \text{ as } k,l \to \infty
+\end{align*}
+which shows that $(\|x_n\|)_{n \in \mathbb{N}}$ is a Cauchy sequence in $\mathbb{R}$ whenever $(x_n)_{n \in \mathbb{N}}$ is a sequence in $\mathcal{C}_X$. Thus the limit above is well-defined and finite. We now set 
+\begin{align*}
+\|[x]\|_Y := p(x)= \lim_{n \to \infty} \|x_n\|
+\end{align*}
+We then can verify that $\| \cdot \|_Y$ is indeed a norm on $Y$. \\
+\\
+Next we define the map $\phi : X \to Y$ by $\phi (z)=[(z,z, \dots )]$, i.e. $\phi(z)$ denotes the equivalence class of all sequences on $X$ that converge to $z$ in the limit. This map is clearly linear and since 
+\begin{align*}
+\| \phi(z)\|_Y= \|z\|_X
+\end{align*}
+it defines an isometry. We now claim that $(Y, \| \cdot \|_Y, \phi)$ is a completion of $(X, \| \cdot \|_X)$. In order to show that we can show that $( Y, \| \cdot \|_Y)$ is always complete and that $\phi(X)$ is dense in $Y$. That is we want to show that for all $[x] \in Y$, we can find $\tilde{x} \in X$ with $\| \phi(\tilde{x}) - [x]\|_Y < \epsilon$. We start with the density and then use this to show that the space is complete. 
+\\\\
+Finally we can show that the uniqueness of the completion is up to isometric isomorphisms. 
+\end{proof}
 \end{document}
