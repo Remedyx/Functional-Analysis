@@ -267,4 +267,108 @@ In particular for $x \in M$, we find that $x = \sum_{ \alpha \in A} (x_\alpha, x
 \end{align*}
 for all $x,y \in H$. In particular the isomorphism is isometric. 
 \end{thm}
+\newpage
+\section{Function Spaces}
+\subsection{Continuous Functions on Compact Spaces}
+\begin{lem} Let $f \in C_\mathbb{K}(K)$ where $K$ is compact. Then $f$ is bounded and its supremum and infimum are attained. 
+\end{lem}
+\noindent This allows us to define the sup/max norm of $f$ on the space $C_\mathbb{K}(K)$.
+\begin{defn} For $f \in C_\mathbb{K}(K)$ let 
+\begin{align*}
+\|f\|:= \sup_{x \in K} | f(x)| = \max_{x \in K} | f(x)|
+\end{align*}
+\end{defn}
+\noindent It is then simple to check that $\| \cdot \|$ defines a norm on $C_\mathbb{K}(K)$ (well-defined because of the above Lemma). Hence, the pair $(C_\mathbb{K}(K), \| \cdot \|)$ is a normed space. 
+\begin{thm} $(C_\mathbb{K}(K), \| \cdot \|)$ is a Banach space. 
+\end{thm}
+\begin{proof}
+Let $f_n$ be a Cauchy sequence in $C_\mathbb{K}(K)$. Then, trivially we have for any $x \in K$ that 
+\begin{align*}
+|f_n(x) - f_m(x)| \leq \|f_n -f_m \| \to 0 \text{ as } n,m \to \infty
+\end{align*}
+It follows that $(f_n(x))_{n \in \mathbb{N}}$ is a Cauchy Sequence in $\mathbb{K}$, but since $\mathbb{K}$ is complete we conclude that $f_n(x)$ converges. Let $f(x):= \lim f_n(x)$ denote its limit. We easily note that
+\begin{align*}
+|f(x)| \leq \limsup_{n \to \infty} |f_n(x)| \leq \limsup_{n \to \infty} \|f_n\|.
+\end{align*}
+Moreover, since for every $x \in K$, we have 
+\begin{align*}
+|f(x)-f_n(x)| = \lim_{m \to \infty} | f_m(x)-f_n(x)| \leq \limsup_{m \to \infty} \| f_n-f_m\|
+\end{align*}
+we conclude that
+\begin{align*}
+\sup_{x \in K} |f(x)-f_n(x)| \leq \limsup_{m \to \infty} \|f_m-f_n\| \to 0 \text{ as } n \to \infty.
+\end{align*}
+since this convergences in uniform over all $x \in K$, we conclude that $f$ is indeed continuous, thus our Cauchy sequence $f_n$ converges to $f \in C_\mathbb{K}(K)$ and our space is complete. 
+\end{proof}
+\newpage
+\begin{defn} $\mathbb{A} \subset C_\mathbb{K}(K)$ is called a subalgebra if $\mathbb{A}$ is a linear subspace of $C_\mathbb{K}(K)$ and if, for every $f,g \in \mathbb{A}$, we also have $f \cdot g \in \mathbb{A}$. We say that the subalgebra $\mathbb{A}$ separates the points of $K$, if 
+\begin{align*}
+\forall x,y \in K \text{ with } x \neq y, \exists f \in \mathbb{A} : f(x) \neq f(y). 
+\end{align*}
+\end{defn}
+\begin{rem} We already know that if $\mathbb{A}= C_\mathbb{K}(K)$ then indeed $C_\mathbb{K}(K)$ is a subalgebra separating the points of $K$. 
+\end{rem}
+\begin{thm}[Stone-Weierstrass Theorem, $\mathbb{K}= \mathbb{R}$] Let $\mathbb{A}$ be a subalgebra of $C_\mathbb{K}(K)$ separating the points of $K$. Then we have either $\overline{\mathbb{A}}= C_\mathbb{K}(K)$ or there exists a unique point $x_0 \in K$ such that $\overline{\mathbb{A}}= \lbrace f \in C_\mathbb{K}(K) : f(x_0)=0 \rbrace$. 
+\end{thm}
+\begin{rem} The Stone-Weierstrass Theorem allows us for example to approximate continuous functions on compact subsets of $\mathbb{R}^n$ through series of polynomials, see next example.
+\end{rem}
+\begin{exmp} Let $K \subset \mathbb{R}^n$ be compact and $\mathbb{A}$ be the set of all polynomials in the variables $x_1, \dots , x_n$, i.e. 
+\begin{align*}
+\mathbb{A}= \left\{ p(x) = \sum_{ \alpha : | \alpha| \leq n } b_\alpha x^\alpha, \ m \in \mathbb{N}, \ b_\alpha \in \mathbb{R} \right\} 
+\end{align*}
+It is then easy to check that $\mathbb{A}$ is a subalgebra of $C_\mathbb{K}(K)$, separating the points of $K$, moreover that $\lbrace f \in C_\mathbb{K}(K) : f(x_0)=0 \rbrace$ cannot hold true, because evidently we have $1 \in \mathbb{A}$ and if we were in the second case, then there would exists $x_0 \in K$ such that $0=1(x_0)=1$ which is a contradiction. Thus by Stone-Weierstrass we concludethat $\overline{\mathbb{A}} = C_\mathbb{K}(K)$. 
+\end{exmp}
+\begin{thm}[Stone-Weierstrass, $\mathbb{K}= \mathbb{C}$] Let $\mathbb{A}$ be a subalgebra of $C_\mathbb{C}(K)$, separating the points of $K$ and such that for all $f \in \mathbb{B}$ we have $\overline{f} \in \mathbb{A}$. Then we either have $\overline{\mathbb{A}}= C_\mathbb{C}(K)$ or 
+\begin{align*}
+\exists ! x_0 \in K \text{ with } \overline{\mathbb{A}}= \lbrace f \in C_\mathbb{C}(K) : f(x_0)=0 \rbrace. 
+\end{align*}
+\end{thm}
+\subsection{Lebesgue Spaces}
+This should already be known, we will only repeat the most relevant results without much explanation in this section. We work on some measure space $(\Omega, \Sigma, \mu)$ and consider the space 
+\begin{align*}
+\tilde{L}^p( \Omega, d \mu)= \lbrace f: \Omega \to \mathbb{R} : f \text{ measurable}, \int_\Omega |f|^p d \mu < \infty \rbrace 
+\end{align*}
+\begin{thm}[Hölder's inequality] Let $1 \leq p,q \leq \infty$ such that $\frac{1}{p} + \frac{1}{q}=1$. Let $( \Omega, \Sigma, \mu)$ be a measure space and $f \in L^p( \Omega), g \in L^q( \Omega)$, then $fg \in L^1(\Omega)$ and 
+\begin{align*}
+\left| \int_\Omega fg d \mu \right| \leq \int_\Omega |f| |g| d \mu \leq \|f\|_p \cdot \|g|_q
+\end{align*}
+\end{thm}
+\newpage
+\begin{thm}[Fischer-Riesz] Let $( \Omega, \Sigma, \mu)$ be a measure space and $1 \leq p \leq \infty$. Then $L^p( \Omega, \Sigma, \mu)$ is complete. 
+\end{thm}
+\begin{rem} For $p=2$ the Lebesgue space $L^2$ is even a Hilbert space with scalar product on $L^2( \Omega, \Sigma, \mu)$ given by 
+\begin{align*}
+(f,g)_{L^2} = \int \overline{f(x)} g(x) d\mu(x) 
+\end{align*}
+an exercise from class entails that this is on the only Lebesgue Space that is a Hilbert Space, i.e. only for the case $p=2$. 
+\end{rem}
+\begin{defn} Let $(X, \| \cdot \|)$ be a normed space over $\mathbb{K}$. We define the dual space $X^*$ of $X$ as the space of all continuous linear functionals on $X$, i.e. 
+\begin{align*}
+X^*:= \lbrace f: X \to \mathbb{K} \mid f \text{ is linear and continuous} \rbrace
+\end{align*}
+We will discuss this space in much more detail later on, for now we note that $X^*$ is always a Banach space w.r.t. the norm 
+\begin{align*}
+\|f\|_{X^*} := \sup_{x \in X: \|x\| = 1 } |f(x)| 
+\end{align*}
+\end{defn}
+\begin{thm}[Duality of $L^p$ spaces] Let $1 \leq p < \infty, 1 < q \leq \infty$ be such that $\frac{1}{p} + \frac{1}{q}=1$ and let $( \Omega, \mathcal{A}, \mu)$ be a measure space. If $p=1$, we assume additionally that the measure space $( \Omega, \mathcal{A}, \mu)$ is $\sigma$-finite.  Then the map
+\begin{align*}
+\phi : \begin{cases} L^q(\Omega, \mathcal{A}, \mu) & \longrightarrow(L^p (\Omega, \mathcal{A}, \mu))^* \\
+f & \longmapsto \phi_f \end{cases}
+\end{align*}
+with 
+\begin{align*}
+\phi_f(g) = \int_\Omega \overline{f(x)}g(x) d \mu(x)
+\end{align*}
+for all $g \in L^p(\Omega, \mathcal{A}, \mu)$ is an anti-linear isometric isomorphism. In other words, we have
+\begin{align*}
+L^p(\Omega, \mathcal{A}, \mu)^* \cong L^q(\Omega, \mathcal{A}, \mu)
+\end{align*}
+\end{thm}
+\begin{rem} The theorem determines the dual space of $L^p(\Omega, \mathcal{A}, \mu)$, it shows that every continuous linear functional $L$ on $L^p(\Omega, \mathcal{A}, \mu)$ for $1 \leq p < \infty$ has the form 
+\begin{align*}
+L(f)= \int_\Omega \overline{g(x)} f(x) d \mu(x)
+\end{align*}
+for a $g \in L^q(\Omega, \mathcal{A}, \mu)$ with $\frac{1}{p} + \frac{1}{q}=1$. 
+\end{rem}
 \end{document}
