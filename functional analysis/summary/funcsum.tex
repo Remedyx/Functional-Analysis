@@ -159,4 +159,112 @@ it defines an isometry. We now claim that $(Y, \| \cdot \|_Y, \phi)$ is a comple
 \\\\
 Finally we can show that the uniqueness of the completion is up to isometric isomorphisms. 
 \end{proof}
+\begin{rem} The completion of $\mathbb{Q}$ is $\mathbb{R}$. For $\Omega \subset \mathbb{R}^n$, the completion of the space $C( \overline{\Omega})$ of continuous functions on $\overline{\Omega}$ is $L^p(\Omega)$.
+\end{rem}
+\subsection{Hilbert Spaces}
+\begin{defn} Let $H$ be a vector space over the field $\mathbb{K}$. A scalar product (or an inner product) on $H$ is a map $(\cdot, \cdot) : H \times H \to \mathbb{K}$ with the properties 
+\begin{enumerate}
+\item $(z,x+ \lambda y)= (z,x) + \lambda(z,y)$ for all $x,y,z \in H, \lambda \in \mathbb{K}$.
+\item $(x,y)= \overline{(y,x)}$.
+\item $(x,x)>0$ for all $x \neq 0$.
+\end{enumerate}
+A pair $(H, ( \cdot, \cdot))$ consisting of a vector space $H$ over $\mathbb{K}$ and a scalar product $( \cdot, \cdot)$ is called a pre-Hilbert space. 
+\end{defn}
+\begin{rem} We defiend the scalar product to be linear in its second argument and anti-linear in its first argument. 
+\end{rem}
+\newpage
+\begin{lem}[Cauchy Schwarz Inequality] Let $(H,( \cdot, \cdot))$ be a pre-Hilbert space. Then 
+\begin{align*}
+|(x,y)|^2 \leq (x,x) (y,y). 
+\end{align*}
+\end{lem}
+\begin{rem} The Cauchy-Schwarz inequality allows us to use the scalar product to define a norm on every pre-Hilbert space. 
+\end{rem}
+\begin{cor} Let $(H, ( \cdot, \cdot))$ be a pre-Hilbert space. Then 
+\begin{align*}
+\|x\|:= \sqrt{(x,x)}
+\end{align*}
+defines a norm on $H$. 
+\end{cor}
+\begin{rem} The triangle inequality follows from the Cauchy-Schwarz inequality. The remaining properties follow from the properties of scalar products. 
+\end{rem}
+\begin{defn} A pre-Hilbert space is called a Hilbert space if $H$, equipped with the norm $\|x \| = \sqrt{(x,x)}$ induced by the scalar product, is a Banach space (i.e. if $H$ is complete). 
+\end{defn}
+\begin{rem} \
+\begin{enumerate} 
+\item Every pre-Hilbert space can be completed into a Hilbert space. 
+\item Every Hilbert space is a metric space and therefore a topological space. However, clearly, not every Banach space is a Hilbert space, simply because not all norms on a vector space can be induced by a scalar product. 
+\end{enumerate}
+\end{rem}
+\begin{thm} Let $(H, ( \cdot, \cdot))$ be a Hilbert space, $K \subset H$ a closed convex set in $H$ and $x_0 \in H$. Then there exists a unique $y \in K$ such that 
+\begin{align*}
+\| x_0-y\| = \text{dist}(x_0,K):= \inf_{x \in K} \| x_0-x\|
+\end{align*}
+\end{thm}
+\noindent As an application of this theorem, we show that every Hilbert space $H$  can be decomposed in the direct sum of an arbitrary closed subspace and of its orthogonal complement. 
+\begin{thm} Let $(H, ( \cdot , \cdot))$ be a Hilbert space and $M \subset H$ a closed linear subspace. Then the orthogonal complement $M^\perp$ of $M$, defined through
+\begin{align*}
+M^\perp := \lbrace x \in H : (x,m)=0, \text{ for all } m \in M \rbrace 
+\end{align*}
+is also a linear closed subspace of $H$ and $H= M \oplus M^\perp$, meaning that $H=M+M^\perp$ and $M \cap M^\perp = \lbrace 0 \rbrace$. 
+\end{thm}
+\newpage
+\begin{proof}
+Clearly $M^\perp$ is linear. In order to see that it is closed take $x_n$ to be a sequence in $M^\perp$ such that $x_n \to x$ in $H$. Then we have 
+\begin{align*}
+(x,m)= \lim_{n \to \infty} (x_n,m)=0
+\end{align*}
+because thanks to the Cauchy-Schwarz inequality we have 
+\begin{align*}
+|(x-x_n, m)| \leq \|x-x_n\| \|m\| \to 0 \text{ as } n \to \infty 
+\end{align*}
+in particular $|(x-x_n,m)|=|(x,m)-(x_n,m)| \to 0$ and it follows that $x \in M^\perp$, i.e. $M^\perp$ is closed. 
+\\\\
+Moreover, the fact that $M \cap M^\perp = \lbrace 0 \rbrace$ follows, because $(x,x)=0$ implies that $x=0$. Thus it only rmeains to show that $M+M^\perp = H$. To this end, we fix $x \in H$. Since $M \subset H$ is a closed linear subspace (and therefore in particular convex) we can apply the previous theorem to find $z \in M$ such that dist$(x,M)=\|x-z\|$.
+\\\\
+We now claim that $x-z  \in M^\perp$, which gives that $x = z + (x-z)$ is the desired decomposition of $H$ into $M$ and $M^\perp$. Lets assume for contradiction that $(x-z) \notin M^\perp$. Then there exists $\alpha \in M$ with $(x-z, \alpha )>0$. For $t \in [-1,1]$ let $z_t = z + t \alpha$. Then we have $z_t \in M$ for all $t$ and
+\begin{align*}
+\|x-z_t\|^2 = \|x-z\|^2 + t^2\| \alpha\|^2 -2t(x-z, \alpha) < \|x-z\|^2 = \text{dist}(x,M)
+\end{align*}
+for $t >0$ small enough. But this condradicts the definition of dist$(x,M)$. 
+\end{proof}
+\begin{defn} An orthonormal system in $(H, ( \cdot, \cdot))$ is a family $(x_\alpha)_{\alpha \in A} \subset H$ for an arbitrary index-set $A$ with $(x_\alpha, x_\beta)= \delta_{\alpha, \beta}$. In the case when $A = \mathbb{N}$, we also call the orthonormal system an orthonormal sequence. 
+\end{defn}
+\begin{lem} Let $H$ be a Hilbert space, $(x_n)_{n \in \mathbb{N}}$ an orthonormal system (orthonormal sequence) and $(\alpha_n)_{n \in \mathbb{N}}$ a sequence in $\mathbb{K}$. Then we have
+\begin{enumerate}
+\item $\sum_{k=1}^\infty \alpha_k x_k$ converges if and only if $\sum_{k=1}^\infty | \alpha_k|^2$ converges. 
+\item $\| \sum_{k=1}^n \alpha_k x_k\|^2 = \sum_{k=1}^n |\alpha_k|^2$.
+\item If $\sum_{k=1}^\infty \alpha_k x_k$ converges, then the limit is independent of the order of the terms. 
+\end{enumerate}
+\end{lem}
+\begin{lem} Let $(H, ( \cdot , \cdot))$ be a Hilbert space, $A$ an arbitrary set an $(x_\alpha)_{\alpha \in A}$ an orthonormal system in $H$. Then $\sum_{ \alpha \in A} ( x_\alpha ,x) x_\alpha$ converges for every $x \in H$. Moreover, the linear map $\phi : H \to H$ defined through $\phi(x) = \sum_{ \alpha \in A} (x_\alpha, x) x_\alpha$ is the continuous projection onto
+\begin{align*}
+M:= \overline{\text{span}\lbrace x_\alpha : \alpha \in A \rbrace } \text{ along its orthogonal complement } M^\perp
+\end{align*}
+In particular for $x \in M$, we find that $x = \sum_{ \alpha \in A} (x_\alpha, x) x_\alpha$. 
+\end{lem}
+\newpage
+\begin{rem} In particular, if $M = \text{span} \lbrace x_\alpha :  \alpha \in A \rbrace$ is dense in $H$, i.e. if $\overline{M}=H$, then gives us the previous Lemma a representation for every vector $x \in H$. In this case, we say that $(x_\alpha)_{ \alpha \in A}$ is a Hilbert space basis. 
+\end{rem}
+\begin{defn} Let $H$ be a Hilbert space. A Hilbert space basis is an orthonormal system $(x_\alpha)_{ \alpha \in A}$ with \begin{align*}
+\overline{\text{span} \lbrace x_\alpha : \alpha \in A \rbrace }=H
+\end{align*}
+\end{defn}
+\begin{thm}[Characterizations of Hilbert space bases] Let $H$ be a Hilbert space, and $(x_\alpha)_{ \alpha \in A}$ an orthonormal system. Then the following statements are equivalent:
+\begin{enumerate}
+\item $(x_\alpha)_{ \alpha \in A}$ is a Hilbert space basis.
+\item $x= \sum_{ \alpha \in A} (x_\alpha, x) x_\alpha$, for all $x \in H$.
+\item $\|x\|^2 = \sum_{ \alpha} |(x_\alpha, x)|^2$ for all $x \in H$. 
+\item $(x_\alpha, x)=0$ for all $\alpha \in A$ implies that $x=0$.
+\item $(x_\alpha)_{\alpha \in A}$ is a maximal orthonormal system in the sense of inclusions. 
+\end{enumerate}
+\end{thm}
+\begin{rem} Using the maximality property, i.e. point 5 in the theorem above, it follows easily from the Lemma of Zorn that every pre-Hilbert space has a Hilbert space basis. In particular, it follows that every separable Hilbert space admits a countable orthonormal basis. The observation that separable Hilbert spaces have countable orthonormal bases can be used to identify separable Hilbert spaces with the sequence space $\ell^2( \mathbb{K})$. 
+\end{rem}
+\begin{thm} Let $H$ be an infinite dimensional separable Hilbert space over $\mathbb{K}$. Then there exists a linear Isomorphism $\phi: H \to \ell^2( \mathbb{K})$ with 
+\begin{align*}
+( \phi(x), \phi(y))_{ \ell^2} =(x,y)_H
+\end{align*}
+for all $x,y \in H$. In particular the isomorphism is isometric. 
+\end{thm}
 \end{document}
