@@ -371,4 +371,13 @@ L(f)= \int_\Omega \overline{g(x)} f(x) d \mu(x)
 \end{align*}
 for a $g \in L^q(\Omega, \mathcal{A}, \mu)$ with $\frac{1}{p} + \frac{1}{q}=1$. 
 \end{rem}
+\newpage
+Our last goal in this section is to show that smooth functions are dense in $L^p$, for all $1 \leq p < \infty$. For simplicity we work on $\mathbb{R}^n$, then the next theorem shows how to approximate $L^p$-functions with sequences of $C^\infty$-functions.
+\begin{thm} Let $j \in L^1 ( \mathbb{R}^n)$ with $\int j d \lambda_n(x) =1$. For $\epsilon >0$ we let $j_\epsilon(x) = \epsilon^{-1} j(x/ \epsilon)$ so that $\int j_\epsilon d\lambda_n =1$ for all $\epsilon >0$. Let now $f \in L^p( \mathbb{R}^n)$ for a $1 \leq p < \infty$ and set $f_ \epsilon = f * j_\epsilon$. Then $f_\epsilon \in L^p( \mathbb{R}^n)$ with $\|f_\epsilon \|_p \leq \|j\|_1 \|f\|_p$ and $f_\epsilon\to f $ in $L^p( \mathbb{R}^n)$ as $\epsilon \to 0$. If $j \in C_c^\infty ( \mathbb{R}^n)$, then we have $f_\epsilon \in C^\infty ( \mathbb{R}^n)$ and $D^\alpha f_\epsilon = (D^\alpha j_\epsilon) * f$ for all multi-indices $\alpha= ( \alpha_1, \dots, \alpha_n) \in \mathbb{N}^n$. 
+\end{thm}
+\begin{lem} Let $\Omega \subset \mathbb{R}^n$ open, $K \subset \Omega$ compact. Then there exists $J_K \in C_c^\infty( \Omega)$ with $0 \leq J_K(x) \leq 1$ for all $x \in \Omega, \ J_K(x)=1$ for all $x \in K$. Therefore, there exists a sequence $(g_j)_{j \in \mathbb{N}}$ in $C_C^\infty( \Omega)$ with $0 \leq g_j(x) \leq 1$ for all $j \in \mathbb{N}$ and $\lim g_j(x) = 1$ for all $x \in \Omega$. Hence if $(f_j)_{j \in \mathbb{N}}$ is a sequence in $C^\infty( \Omega)$ with $f_j \to f$ in $L^p( \Omega)$ for $1 \leq p < \infty$, then $g_jf_j \in C_c^\infty( \Omega)$ and $g_jf_j \to f$ in $L^p( \Omega)$. The Theorem above implies therefore that $C_c^\infty(\Omega)$ is dense in $L^p( \Omega)$ for all $1 \leq p < \infty$.
+\end{lem}
+As an application of the density of $C_c^\infty( \mathbb{R}^n) $ in $L^p( \mathbb{R}^n)$ we have the following theorem.
+\begin{thm} For every measurable $\Omega \subset \mathbb{R}^n$ and $1 \leq p < \infty$, the Banach space $L^p( \Omega)$ is seperable. 
+\end{thm}
 \end{document}
