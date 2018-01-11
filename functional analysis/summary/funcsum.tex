@@ -380,4 +380,54 @@ Our last goal in this section is to show that smooth functions are dense in $L^p
 As an application of the density of $C_c^\infty( \mathbb{R}^n) $ in $L^p( \mathbb{R}^n)$ we have the following theorem.
 \begin{thm} For every measurable $\Omega \subset \mathbb{R}^n$ and $1 \leq p < \infty$, the Banach space $L^p( \Omega)$ is seperable. 
 \end{thm}
+\subsection{Sobolev Spaces}
+Functions in $L^p$-spaces are characterized by their integrability properties. In analysis, however, it is often important to consider derivatives. The notion of derivative does not combine very well with $L^p$ spaces, functions in $L^p$ spaces are typically not differentiable. For this reason, we are going to introduce a weaker notion of derivative, Sobolev spaces consists then of $L^p$-functions, whose weak derivative is again an $L^p$-function. 
+\\\\
+We work with $\Omega \subset \mathbb{R}^n$ open and let $ \Sigma \subset 2^\Omega$ be the Borel $\sigma$-algebra over $\Omega$, moreover let $dx$ denotes Lebesgue mass. We define the normed space 
+\begin{align*}
+X = \lbrace f \in C^\infty( \Omega): \|f\|_X < \infty \rbrace, \text{ with } \|f\|_X = \sum_{ | \alpha| \leq m } \| D^\alpha f \|_{L^p(\Omega)}
+\end{align*}
+where the sum above runs over all $\alpha = ( \alpha_1, \dots , \alpha_n) \in \mathbb{N}^n$ with $|\alpha| = \sum_{i=1}^n \alpha_i$ and $D^\alpha f = \partial_1^{\alpha_1} \cdots \partial_n^{\alpha_n} f$. It is easy to check that $(X, \| \cdot \|_X)$ is indeed a normed space but that it is not complete. We define $\tilde{X}$ as the completion of this normed space and we want to find a good cahracterization of $\tilde{X}$.
+\\\\
+To this end, let $[(f_j)_{j \in \mathbb{N}}] \in \tilde{X}$, i.e. let $(f_j)_{j \in \mathbb{N}}$ be a Cauchy sequence in $X$.  Then by the definition of the norm on $X$, $(D^\alpha f_j)_{j \in \mathbb{N}}$ defines a Cauchy sequence on $L^p( \Omega)$ because we have for all $\alpha \in \mathbb{N}^n$ with $| \alpha| \leq m$
+\begin{align*}
+\| D^\alpha f_j - D^\alpha f_l \|_{L^p} \leq \| D^\alpha f_j - D^\alpha f_l\|_X \to 0 \text{ as } j,l \to \infty. 
+\end{align*}
+Since $L^p( \Omega)$ is a complete space, there exiss $f^{(\alpha)} \in L^p( \Omega)$ such that $D^\alpha f_j \to f^{(\alpha)}$ in $L^p$ as $j \to \infty$. For any $\xi \in C_c^\infty( \Omega)$ we obtain by the above convergence, integration by parts and the fact that $\xi$ is compactly supported that 
+\begin{align*}
+\int_\Omega D^\alpha \xi f^{(0)} dx &= \lim_{j \to \infty} \int_\Omega D^\alpha \xi f_j dx  \\ &= (-1)^ {| \alpha|} \lim_{j \to \infty}  \int_\Omega \xi D^\alpha f_j dx = (-1)^{| \alpha|} \int_\Omega \xi f^{( \alpha)} dx
+\end{align*}
+This identity gives a relationship between $f^{( \alpha)}$ and $f^{(0)}=f$, for all $\alpha \in \mathbb{N}^n$ with $| \alpha | \leq m$. \\
+\\
+Motivated by this remark, we define the Sobolev space of order $m \in \mathbb{N}$ with exponent $1 \leq p \leq \infty$ as 
+\begin{align*}
+H^{m,p}( \Omega) = \lbrace f \in L^p( \Omega) : \forall \alpha \in \mathbb{N}^n \text{ with } 1 \leq | \alpha | \leq m, \exists f^{( \alpha)} \in L^p( \Omega) \text{ such that } \\ \int_\Omega D^\alpha \xi f dx = (-1)^{| \alpha|} \int_\Omega \xi f^{( \alpha)} dx \text{ for all } \xi \in C_c^\infty ( \Omega) \rbrace
+\end{align*}
+We equip $H^{m,p}( \Omega)$ with the norm
+\begin{align*}
+\|f\|_{H^{m,p}} := \sum_{| \alpha| \leq m } \|f^{( \alpha)} \|_{L^p}.
+\end{align*}
+It is then easy to check that $(H^{m,p}( \Omega), \| \cdot \|_{H^{m,p}})$ is a normed space. For $f \in H^{m,p}( \Omega)$ we call the functions $f^{( \alpha)}, 1 \leq | \alpha | \leq m$, the weak derivatives of $f$. We often use the notation $f^{( \alpha)} = \partial^\alpha f$. The following Lemma shows that the weak derivatives of a function are unique.
+\begin{lem} Let $\Omega \subset \mathbb{R}^n$ open and $f \in L^p( \Omega, dx)$, $1 \leq p \leq \infty$, with 
+\begin{align*}
+\int_\Omega \xi f dx =0, \text{ for all } \xi \in C_c^\infty( \Omega)
+\end{align*}
+then we have $f=0$. 
+\end{lem}
+\begin{rem} If $f \in L^p( \Omega) \cap C^m( \Omega)$, then the classical derivates $D^\alpha f$ coincide with the weak derivatives, this can be shown by using integration by parts. The advantage of the weak derivatives is of course the fact that they exist for a much larger class of functions.
+\end{rem}
+\noindent Next we show that the completeness of the $L^p$ spaces implies also the completeness of the Sobolev spaces. 
+\newpage 
+\begin{thm} For all $m \in \mathbb{N}, \ 1 \leq p \leq \infty, \ H^{m,p}( \Omega)$ is a Banach space. 
+\end{thm} 
+\begin{proof}
+Let $(f_j)_{j \in \mathbb{N}}$ be a Cauchy sequence in $H^{m,p}( \Omega)$, then clearly $f_j$ is also a Cauchy sequence in $L^p( \Omega)$, hence there exists $f \in L^p( \Omega)$ with $f_j \to j$ in $L^p(\Omega)$. Moreover, for every $\alpha \in \mathbb{N}^n$ with $| \alpha| \leq m$, we also have that $\partial^\alpha f$ is a Cauchy sequence in $L^p(\Omega)$. Hence there exists $g_\alpha \in L^p( \Omega)$ with $\partial^\alpha f_j \to g_\alpha$ in $L^p(\Omega)$. We claim that that in fact $f \in H^{m,p}(\Omega)$ and that $\partial^\alpha f = g_\alpha$. In fact, we observe that for arbitray $\xi \in C_c^\infty(\Omega)$ we have
+\begin{align*}
+\int_{\Omega} D^\alpha \xi f dx = \lim_{j \to \infty} \int_{\Omega} D^\alpha \xi f_j dx = (-1)^{| \alpha|} \lim_{j \to \infty} \int_\Omega \xi \partial^\alpha f_j dx = (-1)^{|\alpha|} \int_\Omega \xi g_\alpha dx
+\end{align*}
+\end{proof}
+\begin{thm}[Approximation Theorem] Let $f \in H^{m,p}(\Omega)$, $1 \leq p < \infty$, $m \in \mathbb{N}$. Then there exists a sequence in $H^{m,p}(\Omega) \cap C^\infty( \Omega)$ with $\| f_j-f\|_{H^{m,p}}$ as $j \to \infty$. Moreover, if $\Omega = \mathbb{R}^n$, then we can choose $f_k \in C_c^\infty( \mathbb{R}^n)$ with $\|f_k-f\|_{H^{m,p}} \to 0$ as $k \to \infty$.
+\end{thm}
+\begin{rem} The theorem shows that, for all $1 \leq p < \infty$, $H^{m,p}(\Omega)$ is the completion of $C^\infty(\Omega)$ with respect to the norm of $H^{m,p}$. 
+\end{rem}
 \end{document}
