@@ -430,4 +430,116 @@ Let $(f_j)_{j \in \mathbb{N}}$ be a Cauchy sequence in $H^{m,p}( \Omega)$, then 
 \end{thm}
 \begin{rem} The theorem shows that, for all $1 \leq p < \infty$, $H^{m,p}(\Omega)$ is the completion of $C^\infty(\Omega)$ with respect to the norm of $H^{m,p}$. 
 \end{rem}
+\section{Compactness}
+\subsection{Compact Sets in Metric Spaces}
+\begin{defn} Let $(X,d)$ be a metric space. A subset $A \subset X$ is called pre-compact if, for all $\epsilon >0$, $A$ has a finite covering with $\epsilon$-balls, i.e. if there are $x_1, \dots , x_n \in X$ with $\cup_{i=1}^n B_\epsilon(x_i) \supset A$. 
+\end{defn}
+\begin{rem} We have the following
+\begin{enumerate}
+\item Subsets of pre-compact sets are pre-compact.
+\item $A \subset X$ pre-compact implies that $A$ is bounded.
+\item $A \subset X$ pre-compact implies that $\overline{A}$ is closed and pre-compact. 
+\end{enumerate}
+\end{rem}
+\begin{thm} Let $(X,d)$ be a metric space. For $A \subset X$, the following statements are equivalent:
+\begin{enumerate}
+\item $A$ is compact.
+\item $A$ is sequentially compact, i.e. every sequence in $A$ has a convergent subsequence.
+\item $(A,d)$ is complete and $A$ is pre-compact. 
+\end{enumerate}
+\end{thm}
+\newpage
+\begin{rem} \ \begin{enumerate}
+\item We see that what's missing for a pre-compact set to be compact is completeness. 
+\item $A \subset X$ compact implies that $A$ is closed (since $A$ complete implies that $A$ is closed)
+\item If $X$ is complete, then $A \subset X$ is pre-compact if and only if $\overline{A}$ is compact (since closed subsets of complete spaces are complete). 
+\end{enumerate}
+\end{rem}
+\noindent On finite dimensional vector spaces (for example normed spaces with finite dimensional $V$ vector space) all norms are equivalent. 
+\begin{lem} Let $X$ be a finite dimensional vector space over $\mathbb{K}$. Then all norms on $X$ are equivalent. In other words, if $\| \cdot \|_1,  \| \cdot \|_2$ are two norms on $X$, then there exists $C>0$ such that 
+\begin{align*}
+\frac{1}{C} \|x\|_2 \leq \|x\|_1 \leq C \|x\|_2, \text{ for all } x \in X. 
+\end{align*}
+\end{lem}
+\begin{cor} Every finite dimensional subspace of a normed space is complete and therefore closed. 
+\end{cor}
+\begin{thm}[Heine-Borel] Let $(X, \| \cdot\|)$ be a finite dimensional vector space. Then $A \subset X$ is compact if and only if $A$ is bounded and closed.  
+\end{thm}
+\begin{proof}
+"$\implies$" Readily follows from the Theorem above, because $A$ is compact if and only if $(A,d)$ is complete and $A$ is pre-compact, which implies that $A$ is bounded and closed. 
+\\\\
+"$\Longleftarrow$" Assume that $A \subset X$ is bounded and closed. Since $X \subset X$ is a finite dimensional subspace, $X$ is complete and therefore closed. Thus it is enough to show that $A \subset X$ is pre-compact and we know that this is the case if and only if $\overline{A}=A$ is complete. 
+\\\\
+Let $\lbrace e_1, \dots , e_n \rbrace$ be a basis of $X$. Then we define the norm \begin{align*}
+\|x\|_\infty = \max_{j=1, \dots , n} | x_j|, \text{ for } x = \sum_{k=1}^n x_j e_j \in X
+\end{align*}
+on $X$. Since all norms are equivalent, it is enough to prove the claim w.r.t. to this norm $\| \cdot \|_\infty$. To this end, it is enough to show that for $R>0, \epsilon >0$ there exists $n(R, \epsilon) \in \mathbb{N}$ and $x^{(1)}, \dots , x^{(n(R, \epsilon))} \in X$ such that \begin{align*}
+B_R(0) \subset \bigcup_{j=1}^{n(R, \epsilon)} B_\epsilon (x^{(j)}) 
+\end{align*}
+\end{proof}
+\begin{prop} Let $X$ be a normed space. Then $\overline{B_1(0)}$ is compact if and only if $\dim X < \infty$
+\end{prop}
+
+\subsection{Compact Subsets of $C(K)$}
+For finite dimensional normed spaces we found a simple characterization of compactness, namely if $\dim X < \infty$ then $A \subset X$ is compact if and only if $A$ is closed and bounded. We try to find a similar simple characterization of compact subsets for the case of infinite dimensional spaces. We denote $C(K)=C_\mathbb{K}(K)$ where $\mathbb{K}= \mathbb{R}$ or $\mathbb{C}$. 
+\begin{defn} $S \subset C(K)$ is called equicontinuous at $x \in K$ if 
+\begin{align*}
+\forall \epsilon >0, \exists U_x \text{ open neighbourhood of $x$ in $K$} : |f(x)-f(y)| \leq \epsilon, \forall y \in U_x, \forall f \in S. 
+\end{align*}
+$S \subset C(K)$ is called equicontinuous, if $S$ is equicontinuous at $x$, for all $x \in K$. 
+\end{defn}
+\begin{rem} The open neighbourhood of $x$ $U_x$ may solely depend on $\epsilon$ and the point $x$, it mustn't depend on $f \in S$. 
+\end{rem}
+\begin{thm}[Arzelá-Ascoli] A subset $S \subset C(K)$ is pre-compact if and only if $S$ is bounded and equicontinuous. 
+\end{thm}
+\begin{rem} We know that $S \subset C(K)$ is pre-compact if and only if $\overline{S}$ is compact. Hence from Arzelá-Ascoli we obtain that $S \subset C(K)$ is compact if and only $S$ is closed, bounded and equicontinuous. In particular, in comparison with Heine-Borel Theorem we require to satisfy 1 additional conditional, namely the condition of equicontinuity. 
+\end{rem}
+\begin{proof}
+"$\implies$" Let $\epsilon >0$. Since $S$ is pre-compact, it has a finite covering with $\epsilon$-balls. In other words, there exists $f_1, \dots , f_n \in S$ with $S \subset \cup_{j=1}^n B_\epsilon(f_j)$. Hence, for all $f \in S$, there exists $j \in \lbrace 1, \dots , n \rbrace$ such that $f \in B_\epsilon ( f_j)$ and therefore for all $f \in S$ 
+\begin{align*}
+\| f\|\ \leq \| f_j\| + \epsilon
+\end{align*}
+This proves that 
+\begin{align*}
+\sup_{j \in S} \|f \| \leq \max_{j=1, \dots , n} \|f_j\| + \epsilon
+\end{align*}
+and also that $S$ is bounded. Now, fix $x \in K$. Since the $f_i$ are continuous, we have for $i=1, \dots , n$ there exists an open neighbourhood $U_i$ of $x$ in $K$ such that 
+\begin{align*}
+|f_i(x)-f_i(y)| \leq \epsilon, \ \forall y \in U_i
+\end{align*}
+Let now $U:= \cap_{i=1}^n U_i$. Then $U$ is an open neighbourhood of $x \in K$ for all $f \in S$ and for all $y \in U$ we have 
+\begin{align*}
+|f(x)-f(y)| & \leq |f(x)-f_i(x)| + |f_i(x)-f_i(y)| + |f_i(y)-f(y)|  \\
+& \leq 2 \|f-f_i\| + |f_i(x)-f_i(y)| \leq 3 \epsilon
+\end{align*}
+for an appropriate choice of $i \in \lbrace 1, \dots , n\rbrace$. This shows the equicontinuity of $S$. 
+\newpage
+For "$\Longleftarrow$", since $S$ is equicontinuous we can for $\epsilon >0$ and $x \in K$ always find $U_x$ open neighbourhood of $x$ such that 
+\begin{align*}
+|f(x)-f(y)| \leq \epsilon \ \forall f \in S, \forall y \in U_x.
+\end{align*}
+Then $\lbrace U_x\rbrace_{x \in K}$ is an open covering of $K$. I.e. there exists $x_1, \dots , x_n \in K$ with $K = \cup_{j=1}^n U_{x_j}$. Since moreover $S$ is bounded, we have that 
+\begin{align*}
+R= \lbrace (f(x_1), \dots , f(x_n)) : f \in S \rbrace
+\end{align*}
+is a bounded subset of $\mathbb{C}^n$, equipped with the max-norm. Therefore, $R$ is pre-compact in $\mathbb{C}^n$, i.e. there exists $f_1, \dots , f_m \in S$, with 
+\begin{align*}
+R \subset \bigcup_{i=1}^m B_\epsilon ( (f_i(x_1), \dots , f_i(x_n))
+\end{align*}
+we can than show that 
+\begin{align*}
+S \subset \bigcup_{i=1}^m B_{ 3 \epsilon} (f_i).
+\end{align*}
+which shows that $S$ is pre-compact. 
+\end{proof}
+\subsection{Compact Subsets of $L^p$-Spaces}
+\begin{thm}[Riesz's Theorem] Let $1 \leq p < \infty$, $A \subset L^p( \mathbb{R}^n)$. Then $A$ is pre-compact if and only if the following conditions are satisfied:
+\begin{enumerate}
+\item $A$ is bounded 
+\item $\displaystyle \sup_{f \in A} \|f( \cdot + h) -f \|_p \to 0$ as $h \to 0$
+\item $\displaystyle \sup_{f \in A} \|f\|_{L^p( \mathbb{R}^N \setminus B_r(0)) } \to 0$ as $R \to \infty$.
+\end{enumerate}
+\end{thm}
+\begin{rem} The theorem holds true for subsets of $L^p( \mathbb{R}^n)$. There are also extensions to subsets of $L^p( \Omega)$, for measurable $\Omega \subset \mathbb{R}^n$. 
+\end{rem}
 \end{document}
