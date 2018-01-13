@@ -542,4 +542,183 @@ which shows that $S$ is pre-compact.
 \end{thm}
 \begin{rem} The theorem holds true for subsets of $L^p( \mathbb{R}^n)$. There are also extensions to subsets of $L^p( \Omega)$, for measurable $\Omega \subset \mathbb{R}^n$. 
 \end{rem}
+\newpage
+\section{Linear Operators \& Functionals on Normed Spaces}
+\subsection{Continuous Operators}
+\begin{defn} Let $X,Y$ be two normed spaces. A (linear) operator $T: X \to Y$ is a linear map. A continuous operator $T:X \to Y$ is a continuous linear map. An operator $T: X \to Y$ is called bounded, if there exists a constant $C>0$ with 
+\begin{align*}
+\|Tx\|_Y \leq C \|x \|_X, \text{ for all } x \in X
+\end{align*}
+\end{defn}
+\begin{prop}[Characterization of continuous opetaros] Let $X,Y$ be normed spaces and $T: X \to Y$ a linear operator. The following statements are equivalent:
+\begin{enumerate}
+\item $T$ is continuous.
+\item $T$ is bounded.
+\item $T$ is continuous at $x=0$. 
+\end{enumerate}
+\end{prop}
+\begin{defn} Let $X,Y$ be normed spaces and $\mathbb{K}$ be $\mathbb{R}$ or $\mathbb{C}$. Then we denote by $\mathcal{L}(X,Y)$ the space of all continuous linear operators from $X$ to $Y$. $\mathcal{L}(X,Y)$ has the structure of a vector space over $\mathbb{K}$ when we consider the canonical operators for additions and multiplication with scalars. Moreover, for $T \in \mathcal{L}(X,Y)$ we define
+\begin{align*}
+\|T\| := \sup_{x \neq 0} \frac{\|Tx\|}{\|x\|}= \sup_{\|x \| \leq 1} \| Tx\| = \sup_{\|x\|=1} \|Tx\|
+\end{align*}
+in particular $(\mathcal{L}(X,Y), \| \cdot \|)$ is a normed space. We also denote $\mathcal{L}(X)=\mathcal{L}(X,X)$.
+\end{defn}
+\begin{prop} Let $X$ be a normed space and $Y$ be a Banach space. Then $\mathcal{L}(X,Y)$ is a Banach space. 
+\end{prop}
+\begin{proof}
+Let $(T_l)_{l \in \mathbb{N}}$ be a cauchy sequence on $\mathcal{L}(X,Y)$ and $x \in X$. Then we always have the inequality (!) 
+\begin{align*}
+\|T_lx - T_kx\| \leq \|T_l-T_k\| \|x\| \to 0 \text{ as } l,k \to \infty.
+\end{align*}
+Thus $(T_lx)_{l \in \mathbb{N}}$ is a Cauchy sequence in $Y$. Since $Y$ is by assumption complete, there exists \begin{align*}
+Tx:= \lim_{l \to \infty} T_lx
+\end{align*}
+The map $T: X \to Y$ given as above is clearly linear. Moreover, $T \in \mathcal{L}(X,Y)$ since 
+\begin{align*}
+\|Tx\| = \lim_{l \to \infty} \|T_lx \|  \leq \limsup_{l \to \infty} \|T_l\| \|x\|  \leq C \|x\|,
+\end{align*}
+since $(T_l)_{l \in \mathbb{N}}$ is a Cauchy sequence and therefore bounded. We finally get 
+\begin{align*}
+\|Tx-T_lx\| = \lim_{k \to \infty} \|T_kx -T_lx\| \leq \limsup_{k \to \infty} \|T_k-T_l\|\|x\| \to 0 \text{ as } l \to \infty
+\end{align*}
+because $(T_k)_{k \in \mathbb{N}}$ is a Cauchy sequence, this completes the proof. 
+\end{proof}
+\begin{defn} Let $X$ be a normed space over the field $\mathbb{K}$. We define the dual space $X^*$ of $X$ through $X^*:= \mathcal{L}(X, \mathbb{K})$. That is elements of $X^*$ are continuous  linear functionals (i.e. continuous linear operators on $X$ with values on $\mathbb{K}$). Since $\mathbb{K}$ is always complete, it follows that $X^*$ is always a banach space, independentely of the completeness of $X$. 
+\end{defn}
+\subsection{The Hahn-Banach Theorem and its Applications}
+Let us recall again the statement of the Lemma of Zorn. A partial order on a set $P$ is a relation $\preceq$ on $P$ with the following properties: 
+\begin{enumerate}
+\item $a \preceq a$ (Reflexivity)
+\item $a \preceq b$ and $b \preceq a$ implies that $a=b$ (Antisymmetry)
+\item If $a \preceq b$ and $b \preceq c$ then $a \preceq c$ (Transitivity)
+\end{enumerate}
+A subset $M \subset P$ of a partially ordered set $P$ is called totally ordered (or a chain) if for all $a,b \in M$ with $a \neq b$ we either have $a \preceq b$ or $b \preceq a$. Moreover, an element $b \in P$ is called an upper bound for $M \subset P$ if $a \preceq b$ for all $a \in M$. Naturally, we call $b \in P$ a maximal element in $P$, if there is no other upper bound $a \in P$ with $a \neq b$ and $b \leq a$ for said upper bound. 
+\begin{lem}[Lemma of Zorn] Let $P$ be a partially ordered set, so that every totally ordered subset of $P$ has an upper bound. Then $P$ contains at least one maximal element. 
+\end{lem}
+\begin{defn} Let $X$ be a vector space over $\mathbb{R}$. A map $p: X \to \mathbb{R}$ is called a sublinear functional if 
+\begin{enumerate}
+\item $p( \lambda x) = \lambda p(x)$ for all $x \in X$ and $ \lambda \geq 0$. 
+\item $p(x+y) \leq p(x) + p(y)$ for all $x,y \in X$. 
+\end{enumerate}
+\end{defn}
+\begin{lem} Let $X$ be a vector space over $\mathbb{R}$. $M \subset X$ a linear subspace, $p:X \to \mathbb{R}$ a sublinear functional, $f: M \to \mathbb{R}$ a linear functional, $x_0 \in X \setminus M$. Assume $f(x) \leq p(x)$ for all $x \in M$. Then there exists $F: \widetilde{M}:= M + \mathbb{R}x_0 \to \mathbb{R}$ linear,  with $F(x) \leq p(x)$ for all $x \in \widetilde{M}$ and $F_{ \mid M} = f.$
+\end{lem}
+\newpage
+\begin{thm}[Hahn-Banach, vector spaces over $\mathbb{R}$] Let $X$ be a vector space over $\mathbb{R}$, $M \subset X$ a linear subspace and $f: M \to \mathbb{R}$ linear. Let $p: X \to \mathbb{R}$ be a sublinear functional with $f(x) \leq p(x)$ for all $x \in M$. Then there exists $F: X \to \mathbb{R}$ linear with $F(x) \leq p(x)$ for all $x \in X$ and $F_{ \mid M} = f$. 
+\end{thm}
+\begin{proof}
+We consider the set
+\begin{align*}
+\mathcal{F}:= \lbrace ( \widetilde{M}, \tilde{f}) : \widetilde{M} \subset X \text{ linear with } \widetilde{M} \supset M, \tilde{f} \text{ a linear function on } \widetilde{M}, \\ \text{with } \tilde{f}_{ \mid M} = f \text{ and } \tilde{f}(x) \leq p(x) \text{ for all } x \in \widetilde{M} \rbrace 
+\end{align*}
+We have $\mathcal{F} \neq \emptyset$ since by assumption $(M,f) \in \mathcal{F}$. On $\mathcal{F}$ we define a partial order by setting $(\widetilde{M}, \tilde{f}) \preceq ( \widetilde{N}, \tilde{g})$ if $\widetilde{M} \subset \widetilde{N}$ and $\tilde{g}_{ \mid \widetilde{M}} = \tilde{f}$. We claim that every totally ordered subset of $\mathcal{F}$ has an upper bound. \\
+\\
+To this end let $\mathcal{G}= \lbrace ( M_i, g_i): i \in I \rbrace$ be a totally ordered subset of $\mathcal{F}$. Since $\mathcal{G}$ is totally ordered we can define the linear space
+\begin{align*}
+\widetilde{M} = \bigcup_{i \in I} M_i
+\end{align*}
+and $\tilde{g}: \widetilde{M} \to \mathbb{R}$, so that for $x \in M_i, \tilde{g}(x)= g_i(x)$. We claim that $\tilde{g}$ is linear. Indeed, since $\mathcal{G}$ is totally ordered we have for any given $x,y \in \widetilde{M}$ and $\lambda \in \mathbb{R}$ there exists $i \in I$ (since $\mathcal{G}$ is totally ordered) such that $x,y \lambda y \in M_i$, hence we have 
+\begin{align*}
+\tilde{g}(x + \lambda y ) = \tilde{g}(x) + \lambda \tilde{g}(y)
+\end{align*}
+since the $g_i$ are linear. Moreover we clearly have $\tilde{g}_{ \mid M} = f$ and $\tilde{g}(x) \leq p(x)$ for all $x \in \widetilde{M}$. \\
+\\
+Thus $(\widetilde{M}, \tilde{g}) \in \mathcal{F}$ is an upper bound for $\mathcal{G}$. The Lemma of Zorn implies that there exists a maximal element $(N,F) \in \mathcal{F}$. We want to establish that $N=X$. Assume that $N \neq X$ then $X \setminus N \neq \emptyset$ and we can choose $x_0 \in X \setminus N$, if we apply now the previous Lemma to said $x_0$ then there exists $G$ with $(N+ \mathbb{R}x_0, G) \in \mathcal{F}, G_{ \mid N} = F$. But we clearly have $(N,F) \preceq (N + \mathbb{R}x_0, G)$ and $(N,F) \neq (N + \mathbb{R}x_0, G)$. This is a contradiction to the maximilty of $(N,F)$ and thus $N=X$.  
+\end{proof}
+\noindent We want to extend the theorem to vector spaces over $\mathbb{C}$, we thus need to intrtoduce the notion of a seminorm. 
+\begin{defn} Let $X$ be a vector space over $\mathbb{K}$ and $q: X \to \mathbb{R}$ a map with the properties $q( \alpha x) = | \alpha | q(x)$ for all $\alpha \in \mathbb{K}, x \in X$ and with $q(x+y) \leq q(x) + q(y)$ for all $x,y \in X$. Then we call $q$ a seminorm. 
+\end{defn}
+\newpage
+\begin{thm}[Hahn-Banach, general version, for real and complex vector spaces] Let $X$ be a vector space over $\mathbb{K}= \mathbb{R}$ or $\mathbb{K}= \mathbb{C}$, $q :X \to \mathbb{R}$ a seminorm, $M \subset X$ a linear subspace and $f: M \to \mathbb{K}$ a linear functional with $|f(x)| \leq q(x)$ for all $x \in M$. Then there exists a linear functional $F: X \to \mathbb{K}$ with $F_{ \mid M} = f$ and $|F(x)| \leq q(x)$ for all $x \in X$. 
+\end{thm}
+\begin{proof}
+If $\mathbb{K}= \mathbb{R}$ we can apply Hahn-Banach Theorem (real version) to find $F: X \to \mathbb{R}$ linear with $F_{ \mid M} =f$ and with $F(x) \leq q(x)$ for all $x \in X$. Then we have
+\begin{align*}
+-F(x) = F(-x) \leq q(-x)=q(x) \implies F(x) \geq -q(x) \text{, thus } |F(x)| \leq q(x).
+\end{align*}
+So, let us now consider the case when $\mathbb{K}= \mathbb{C}$. We can consider $X$ and $M$ as vector spaces over $\mathbb{R}$. Notice that Re $f: M \to \mathbb{R}$ is $\mathbb{R}$-linear with $|\text{Re } f(x) | \leq |f(x)| \leq q(x)$. We apply Hahn-Banach for vector spaces over $\mathbb{R}$ and find $G: X \to \mathbb{R}$, $\mathbb{R}$-linear with $G_{ \mid M}$ = Re $f$ and with $|G(x)| \leq q(x)$ for all $x \in X$. 
+\\\\
+Let us now define $F(x) = G(x)-iG(ix)$. Then $F$ is clearly $\mathbb{R}$ liniear, however since we have \begin{align*}
+F(ix)&=G(ix)-iG(i^2x) = G(ix)-iG((-1)x)=G(ix)+iG(x) \\
+& = iG(x) +G(ix) = i(G(x)-iG(ix))=iF(x)
+\end{align*}
+we can also conclude that $F$ is $\mathbb{C}$-linear. Moreover we have for $x \in M$ 
+\begin{align*}
+\text{Re } F(x)&=G(x)=\text{Re } f(x) \\
+\text{Im } F(x)& = -G(ix)= - \text{Re } f(ix) = - \text{Re } if(x) = \text{Im } f(x)
+\end{align*}
+This shows that $F_{ \mid M } = f$. We still need to verify that $|F(x)| \leq q(x)$ for all $x \in X$. Let $x \in X$ be arbitraryand we write $F(x)=re^{i \theta}$. Then $e^{-i \theta} F(x)$ is real and therefore
+\begin{align*}
+|F(x)| = |e^{-i \theta} F(x)| = |F(e^{-i \theta} x) | \overset{\text{real}}= | G(e^{- i \theta} x)| \leq q(e^{- i \theta x}) = q(x). 
+\end{align*}
+\end{proof}
+\noindent The following corollaries are immediate consequences of the Hahn-Banach theorem. Of course, Hahn-Banach's Theorem is used to construct linear functionals. 
+\newpage
+\begin{cor} Let $(X, \| \cdot \|)$ be a normed space over $\mathbb{K}$, $M \subset X$, a linear subspace and $f \in M^*$. Then there exists $F \in X^*$ with $F_{ \mid M} = f$ and $\|F\|_{X^*} = \|f\|_{M^*}$. 
+\end{cor}
+\begin{proof}
+We define $q(x)= \|f\|_{M^*} \|x\|$. Then $q$ is clearly a seminorm and we have $|f(x)| \leq q(x)$ for all $x \in M$. By Hahn-Banach, there exists a linear functional $F: X \to \mathbb{K}$ with $F_{ \mid M} = f$ and $|F(x)| \leq q(x) = \|f\|_{M^*} \|x\|$ for all $x \in X$. This readily implies that $F \in X^*$. Moreover it shows that $\|F\|_{X^*} \leq \|f\|_{M^*}$. On the other hand we have 
+\begin{align*}
+\|f\|_{M^*} = \sup_{x \in M, \|x\| \leq 1} |f(x)| = \sup_{x \in M, \|x \| \leq 1} | F(x)| \leq \sup_{x \in X, \|x \| \leq 1 } |F(x)| = \|F\|_{X^*}
+\end{align*}
+Hence we established $\|F\|_{X^*} = \|f\|_{M^*}.$
+\end{proof}
+\begin{cor} Let $(X, \| \cdot \|)$ be a normed space over $\mathbb{K}$, $y \in X \setminus \lbrace 0 \rbrace$. Then there exists $f \in X^*$ with $\|f\|=1$ and $f(y)= \|y\|$. 
+\end{cor}
+\begin{proof} We define $g: \mathbb{K} \cdot y =: M \to  \mathbb{K}$ through $g(ty)= t \|y\|$. Then clearly $g \in M^*$ with $\|g\|_{M^*}=1$ and $g(y)= \|y\|$. From the above Corollarly, there exists $f \in X^*$ with $f_{ \mid M} = g$ and hence in particular $f(y)=\|y\|$ and moreover $\|f\|_{X^*}=\|g\|_{M^*}=1$.
+\end{proof} 
+\begin{cor} Let $(X, \| \cdot \|)$ be a normed space over $\mathbb{K}, Z \subset X$ a linear subspace and $y \in X \setminus Z$. Let $d= \text{dist}(y,Z)= \inf_{z \in Z} \| z-y\| >0$. Then there exists $F \in X^*$ with $\|F\|=1$, $F_{ \mid Z} =0$ and $F(y)=d$. 
+\end{cor}
+\begin{proof}
+Let $M= Z + \mathbb{K}y$ and define $f: M \to \mathbb{K}$ through $f(z + \alpha y) = \alpha d$, for all $\alpha \in \mathbb{K}$. Then $f$ is clearly linear. We claim that $\|f\|=1$. In fact, since for $\alpha \in \mathbb{K}$ and $z \in Z$ we have that $-z/ \alpha \in Z$ we can conclude that
+\begin{align*}
+|f(z+ \alpha y)|= | \alpha| d \leq | \alpha| \cdot \| y-(-z/ \alpha)\| = \| \alpha y + z \|
+\end{align*}
+In other words, we have $\|f\|_{M^*} \leq 1$. On the other hand, let $(z_n) \in Z$ be a sequence with $\| y -z_n\| \to d$. Then 
+\begin{align*}
+d = f(y-z_n) \leq \| f\|_{M^*} \| y -z_n \|
+\end{align*}
+As $n \to \infty$ we find that $\|f\|_{M^*} \geq 1$. We summarize, $f \in M^*$ with $f_{ \mid Z}=0$ and $\|f\|_{M^*}=1$. From Corollary 4.1. there exists $F \in X^*$ with $\|F\|_{X^*}=\|f\|_{M^*}=1$ and $F_{\mid M} = f$ which gives in particular that $F(y)=f(y)=d$ and $F_{ \mid Z}=0$.
+\end{proof}
+\begin{rem} Yet another consequence of Hahn-Banach Theorem is that if $X$ is a normed space, then $X^*$ seperates the points of $X$, i.e. for every $x_1,x_2 \in X$ with $x_1 \neq x_2$, there exists $f \in X^*$ with $f(x_1) \neq f(x_2)$. In fact, given $x_1,x_2 \in X$ with $x_1 \neq x_2$ we set $y=x_1-x_1 \neq 0$. Then from Corollary 4.2. there exists $f \in X^*$ with $f(y)= \|y\| \neq 0$ which implies that $f(x_1) \neq f(x_2)$. 
+\end{rem}
+\newpage
+\begin{defn} Let $X,Y$ be two normed spaces and $T:X \to Y$ a continuous linear operator. The adjoint operator to $T$, denoted by $T^*$, is a linear map $T^*: Y^* \to X^*$, defined by $T^*(f)=f \circ T$, for all $f  \in Y^*$. 
+\end{defn}
+\begin{rem} Notice that if $T \in \mathcal{L}(X,Y)$ and $S \in \mathcal{L}(X,Z)$, then we have $(ST)^*= T^*S^*$. 
+\end{rem}
+\begin{prop} Let $T \in \mathcal{L}(X,Y)$. Then $T^* \in \mathcal{L}(Y^*, X^*)$ with $\|T^*\|= \|T\|$. 
+\end{prop}
+\subsection{Reflexive normed spaces}
+Let $X$ be a normed space. Apart from the dual space $X^*$ also the bidual space $X^{**}$ plays an important role. We construct the canonical inclusion of $X$ in $X^{**}$ as follows: For $x \in X$ we define the linear function $\tilde{x}:X^* \to \mathbb{K}$ through 
+\begin{align*}
+\tilde{f}(x):=f(x)
+\end{align*}
+Then indeed $\tilde{x}$ is continuous since $f \in X^*$ is continuous, hence we have $\tilde{x} \in X^{**}$. We define $J_X: X \to X^{**}$ as $J_X(x)= \tilde{x}$ and call it the canonical inclusion of $X$ in $X^{**}$. 
+\begin{thm} Let $X$ be a normed vector space over $\mathbb{K}$. Then the canonical inclusion $J_X:X \to X^{**}$ is a linear isometry. 
+\end{thm} 
+\begin{defn} A normed space $(X, \| \cdot \|)$ is called reflexive, if the map $J_X$ is surjective (and therefore an isometric isomorphism, in particular $X \cong X^{**}$).
+\end{defn}
+\begin{rem} The space $X^{**}= \mathcal{L}(X^*, \mathbb{K})$ is always a Banach space, hence $X$ reflexive implies that $X$ is also a Banach space, i.e. $X$ is complete. 
+\end{rem}
+\begin{thm} Let $X$ be a reflexive Banach space and $M \subset X$ a closed linear subspace. Then $M$ is reflexive as well. 
+\end{thm}
+\begin{thm} Let $X$ be a Banach space. Then $X$ is reflexive if and only if $X^*$ is reflexive. 
+\end{thm}
+\subsection{Hilbert Space Methods}
+Hilbert spaces can be identified with their dual spaces, this is the subject of Riesz's Representation Theorem. 
+\begin{thm}[Riesz's Representation Theorem] Let $(H,( \cdot , \cdot))$ be an Hilbert space. Let $v \in H$ be arbitrary. The map $R_H^v : H \to H^*$ defined through $R_H^v(u)=(u,v)=\langle u,v\rangle_{H^*}$ is an anti-linear isometric isomorphism. 
+\end{thm}
+\begin{rem} The theorem states that every element of $H^*$ can be written uniquely in this form. We also use the notation $(R_H(u))(v)=(u,v)$. 
+\end{rem}
+\newpage
+\begin{cor} Every Hilbert space is reflexive.
+\end{cor}
+\begin{proof}
+We claim that $J_H = R_{H^*} \circ R_H$. Then $J_H$ is surjective, as the composition of two surjective maps. Let $u \in H$ and $f \in H^*$ be arbitrary. Then 
+\begin{align*}
+((R_{H^*} \circ R_H)(u))(f)&= (R_{H^*}(R_H(u))(f)= \langle R_H(u),f \rangle_{H^*} \\
+ & = \langle R_H^{-1}f, u \rangle_H = ( R_H(R_H^{-1} f))(u)=f(u)=(J_Hu)(f)
+\end{align*}
+\end{proof}
 \end{document}
