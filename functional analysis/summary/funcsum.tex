@@ -81,7 +81,7 @@ i.e. if for every open covering of $X$ there exists a finite sub-covering.
 \newpage
 \begin{defn} Let $K$ be a compact space. We define
 \begin{align*}
-C_\mathbb{K}(K):= \lbrace f: K \to \mathbb{K} \text{ cotninuous}\rbrace
+C_\mathbb{K}(K):= \lbrace f: K \to \mathbb{K} \text{ continuous}\rbrace
 \end{align*}
 \end{defn}
 \noindent As a consequence of Urysohn's Lemma we can show that $C_\mathbb{K}(K)$ separates the points of $K$. 
@@ -308,7 +308,7 @@ since this convergences in uniform over all $x \in K$, we conclude that $f$ is i
 \end{defn}
 \begin{rem} We already know that if $\mathbb{A}= C_\mathbb{K}(K)$ then indeed $C_\mathbb{K}(K)$ is a subalgebra separating the points of $K$. 
 \end{rem}
-\begin{thm}[Stone-Weierstrass Theorem, $\mathbb{K}= \mathbb{R}$] Let $\mathbb{A}$ be a subalgebra of $C_\mathbb{K}(K)$ separating the points of $K$. Then we have either $\overline{\mathbb{A}}= C_\mathbb{K}(K)$ or there exists a unique point $x_0 \in K$ such that $\overline{\mathbb{A}}= \lbrace f \in C_\mathbb{K}(K) : f(x_0)=0 \rbrace$. 
+\begin{thm}[Stone-Weierstrass Theorem, $\mathbb{K}= \mathbb{R}$] Let $\mathbb{A}$ be a subalgebra of $C_\mathbb{R}(K)$ separating the points of $K$. Then we have either $\overline{\mathbb{A}}= C_\mathbb{R}(K)$ or there exists a unique point $x_0 \in K$ such that $\overline{\mathbb{A}}= \lbrace f \in C_\mathbb{R}(K) : f(x_0)=0 \rbrace$. 
 \end{thm}
 \begin{rem} The Stone-Weierstrass Theorem allows us for example to approximate continuous functions on compact subsets of $\mathbb{R}^n$ through series of polynomials, see next example.
 \end{rem}
@@ -721,4 +721,144 @@ We claim that $J_H = R_{H^*} \circ R_H$. Then $J_H$ is surjective, as the compos
  & = \langle R_H^{-1}f, u \rangle_H = ( R_H(R_H^{-1} f))(u)=f(u)=(J_Hu)(f)
 \end{align*}
 \end{proof}
+\section{Baire Category Theorem and Consequences}
+\subsection{Theorems of Baire and of Banach-Steinhaus}
+\begin{lem} Let $(X, \tau)$ be a topological space The following statements are equivalent.
+\begin{enumerate}
+\item Let $(A_i)_{i \in \mathbb{N}}$ be a sequence of closed sets in $X$. If the interior of each $A_i$ is empty, then also the interior of $\cup_{j=1}^\infty A_i$ is empty. 
+\item Let $(B_i)_{i \in \mathbb{N}}$ be a sequence of open sets in $R$. If each $B_i$ is dense in $X$, then also $\cap_{j=1}^\infty B_j$ is dense in $X$. 
+\end{enumerate}
+\end{lem}
+\begin{proof}
+The equivalence follows from the remark that a set is dense if and only if its complement has an empty interior, then apply De Morgan. 
+\end{proof}
+\begin{defn} A topological space $(X, \tau)$ is called a Baire's space, if condition 1) or condition 2) (and thus both) are satisfied. 
+\end{defn}
+\begin{thm}[Baire] Every complete metric space is a Baire space. 
+\end{thm}
+\begin{proof}
+Let $(X,d)$ be a complete metric space with $X \neq \emptyset$. Let $(B_i)_{i \in \mathbb{N}}$ be a sequence of open dense sets in $X$. We have to show that $L:= \cap_{j=1}^\infty B_j$ is again dense in $X$. To this end, it is enough to show that for every non-empty open set $G \subset X$, we have $G \cap L \neq \emptyset$. 
+\\\\
+Since $B_1$ is open and dense, $G \cap B_1 \neq \emptyset$ and open. Hence, we can find $\epsilon_1 \in (0, 1 ]$ and $x_1 \in X$ such that 
+\begin{align*}
+\overline{B_{\epsilon_1}(x_1)} \subset B_1 \cap G.
+\end{align*}
+Since $B_2$ is open and dense, $B_{ \epsilon_1}(x_1) \cap B_2$ is also non-empty and open. Hence we can find $\epsilon_2 \in (0, 1/2]$ and $x_2 \in X$ with 
+\begin{align*}
+\overline{B_{\epsilon_2}(x_2)} \subset B_{ \epsilon_1} (x_1) \cap B_2.
+\end{align*}
+Iteratively, we find $\epsilon_n \in (0, 1/n]$ and $x_n \in X$ with 
+\begin{align*}
+\overline{B_{ \epsilon_n}(x_n)} \subset B_{ \epsilon_{n-1}}(x_{n-1}) \cap B_n.
+\end{align*}
+The sequence $(x_n)_{n \in \mathbb{N}}$ is then a Cauchy sequence in $X$. In fact, by construction we have for every $m \geq n$ that $B_{ \epsilon_m}(x_m) \subset B_{ \epsilon_n}(x_n)$ and therefore $d(x_n,x_m) \leq \epsilon_n \leq 1/n \to 0$ as $n,m \to \infty$. Since $X$ is complete, the limit $x= \lim x_n$ exists. 
+\\\\
+From $x_k \in \overline{B_{ \epsilon_n}(x_n)}$ for all $k \geq n$, we deduce that $x \in \overline{B_{ \epsilon_n}(x_n)}$ for all $n \in \mathbb{N}$. Hence 
+\begin{align*}
+x \in G \cap \bigcap_{j=1}^\infty B_j = G \cap L \implies G \cap L \neq \emptyset. 
+\end{align*}
+\end{proof}
+\noindent As a first application of Baire's Theorem, we prove the Theorem of Banach-Steinhaus. 
+\begin{thm}[Banach-Steinhaus] Let $X$ be a Banach space, $Y$ be a normed space and $\mathcal{F} \subset \mathcal{L}(X,Y)$. Assume that for all $x \in X$, there exists $c_x \geq 0$ with 
+\begin{align*}
+\sup_{T \in \mathcal{F}} \| Tx\| \leq c_x.
+\end{align*}
+Then there exists $c \geq 0$ with 
+\begin{align*}
+\sup_{T \in \mathcal{F}} \| T \|  \leq c. 
+\end{align*}
+\end{thm}
+\begin{proof}
+For $k \in \mathbb{N}$ we consider the set 
+\begin{align*}
+A_k := \lbrace x \in X : \| Tx \| \leq k \text{ for all } T \in \mathcal{F} \rbrace.
+\end{align*}
+Then $A_k$ is closed for all $k \in \mathbb{N}$. In fact, if $(x_j)_{j \in \mathbb{N}}$ denotes a sequence in $A_k$ with $x_j \to x$ in $X$, then we have for every $T \in \mathcal{F}$,
+\begin{align*}
+\|Tx\| \overset{\Delta} \leq \| Tx_j\| + \|T(x-x_j)\| \leq k + \|T\| \|x-x_j\|   \\
+\implies \|Tx\| \leq k \text{ for $j \in \mathbb{N}$ sufficiently large}
+\end{align*}
+Since this holds for all $T \in \mathcal{F}$, we conclude that 
+\begin{align*}
+\sup_{T \in \mathcal{F}} \|Tx \| \leq k, \text{ i.e. } x \in A_k \text{ and thus } A_k \text{ is closed}. 
+\end{align*}
+We have that 
+\begin{align*}
+\bigcup_{k=1}^\infty A_k = X.
+\end{align*}
+From Baire's Category Theorem (see condition 1, contraposition of that) we obtain that there exists $k_0 \in \mathbb{N}$ with $A_{k_0}^\circ \neq emptyset$.
+\newpage We find therefore $x_0 \in X$ and $\epsilon_0 >$ with $\overline{B_{ \epsilon_0}(x_0)} \subset A_{k_0}^\circ$. Hence for any $y \in X$ with $\| y \| \leq \epsilon_0$ we get 
+\begin{align*}
+\|Ty\| \leq \| T(y+x_0)\| + \|Tx_0\| \leq k_0 + c_{x_0}, \text{ for all } T \in \mathcal{F}.
+\end{align*}
+Consequently we have for all $y \in X$ with $y \neq 0$ and for all $T \in \mathcal{F}$,
+\begin{align*}
+\|Ty \| = \left\| T \left( \frac{y}{\|y\|} \epsilon_0 \frac{\|y \|}{\epsilon_0} \right) \right\| = \frac{\|y\|}{\epsilon_0} \left\| T \left( \frac{y}{\|y\|} 	\epsilon_0 \right) \right\| \leq \frac{k_0 + c_{x_0}}{\epsilon_0} \|y\|.
+\end{align*}
+We conclude that
+\begin{align*}
+\|T\| = \sup_{\|y\| \leq 1} \|Ty\| \leq \frac{k_0+c_{x_0}}{\epsilon_0}=:c
+\end{align*}
+\end{proof}
+\subsection{The open map and the closed graph theorems}
+\begin{thm}[Open map theorem] Let $X,Y$ be Banach spaces and let $T \in \mathcal{L}(X,Y)$ be surjective (i.e. $T(X)=Y)$. Then $T(U)$ is open in $Y$ for all open sets $U \subset X$. 
+\end{thm}
+\noindent An equivalent formulation of the open map theorem is given by the following inverse map theorem.
+\begin{thm}[Inverse Map Theorem] Let $X,Y$ be Banach spaces, $T:X \to Y$ a continuous linear bijection. Then $T^{-1} \in \mathcal{L}(X,Y)$ i.e. is also linear and continuous, which implies that there exists $c>0$ with 
+\begin{align*}
+\frac{1}{c}\|x\| \leq \|Tx\| \leq c\|x\|, \text{ for all } x \in X. 
+\end{align*}
+\end{thm}
+\begin{proof}
+Clearly, $T^{-1}$ is well-defined and linear. From the inverse mapping theorem we know that there exists $r>0$ such that $T(B_1^X(0)) \supset B_r^Y(0)$, i.e. $T^{-1}(B_r^Y(0)) \subset B_1^X(0)$. This implies that for arbitrary $y \in Y$ we have 
+\begin{align*}
+\|T^{-1} y \| = \frac{2\|y\|}{r} \left\| T^{-1} \frac{ry}{2\|y\|} \right\| \leq \frac{2}{r} \|y\|. 
+\end{align*}
+Hence $T^{-1}$ is bounded and therefore continuous. 
+\end{proof}
+\noindent A consequence of the inverse map theorem is the following closed graph theorem. 
+\begin{thm}[Closed Graph Theorem] Let $X,Y$ be Banach spaces, $T: X \to Y$ linear. Then are the following statements equivalent: 
+\begin{enumerate}
+\item graph$(T)=\lbrace (x,TX) \in X \times Y : x \in X \rbrace$ is closed in $X \times Y$ w.r.t. the norm $\|(x,y)\|_{X \times Y} := \|x\|_X + \|y\|_Y$.
+\item $T$ is continuous.
+\end{enumerate}
+\end{thm}
+\newpage
+\begin{proof}
+"2) $\implies$ 1)". Let $(x,y) \in \overline{\text{graph}(T)}$. Then there exists a sequence $(x_k)_{k \in \mathbb{N}}$ in $X$ with $(x_k, T_{x_k}) \to (x,y)$. Hence $x_k \to x$ in $X$ and $T_{x_k} \to y$ in $Y$. Since $T$ is continuous, we have that $y=Tx$ and thus $(x,y) \in \text{graph}(T)$. Thus graph$(T)$ is closed. 
+\\\\
+"1) $\implies$ 2)" Define $\phi : X \to X \times Y$ through $\phi(x)= (x,Tx)$. The image of $\phi$ is then given by 
+\begin{align*}
+R(\phi):= \lbrace \phi(x) : x \in X \rbrace = \text{graph}(T)
+\end{align*}
+and therefore, by assumption, is a closed subset of $X \times Y$. Hence $R( \phi)$ is a Banach space w.r.t. the norm $\|(x,y)\|= \|x\|_X + \|y\|_Y$ and the map $\phi: X \to R(\phi)$ is a linear bijection between Banach spaces. We want to show that $\phi$ is continuous, to this end we discuss it's inverse. The inverse map $\phi^{-1} : R( \phi) \to X$ is given by $\phi^{-1}(x,Tx)=x$ is also a linear bijection. Moreover, since
+\begin{align*}
+\|\phi^{-1}(x,Tx)\|_X = \|x\|_X \leq \|(x,Tx)\|_{X \times Y}
+\end{align*}
+we have that $\phi^{-1}$ is a continuous linear bijection. The inverse map theorem implies that also $(\phi^{-1})^{-1}=\phi$ is continuous. Since the projection $p: X \times Y \to X$, defined as $p(x,y)=y$ is clearly continuous, we conclude that $T = p \circ \phi$ is continuous as well. 
+\end{proof}
+\begin{defn} Let $X$ be a Banch space. A continuous map $P: X \to X$ with $P^2=P \circ P = P$ is called a projection on $X$. It is easy to see that if $P$ is a projection, then also $1-P$ is a projection. 
+\end{defn}
+\begin{thm} Let $X$ be a Banach space and $P \in \mathcal{L}(X)$ a projection. Then $X=P(X) \oplus (1-P)(X)$. 
+\end{thm}
+\begin{proof}
+Let us define $A= \text{Ran } P = \lbrace Px: x \in X\rbrace$ and $B= \text{Ran } (1-P)= \lbrace (1-P)x: x \in X \rbrace$. Then we have:
+\\
+$\bullet$ $A$ is closed. In fact, if $(y_k)_{k \in \mathbb{N}}$ is a sequence in $A$ with $y_k \to y$ in $X$, then by definition $y_k = P{x_k}$ for appropriate $x_k \in X$. Hence
+\begin{align*}
+Py_k = P(P{x_k})=P^2x_k = Px_k = y_k \text{ for all } k \in \mathbb{N}.
+\end{align*}
+if we now let $k \to \infty$ we find, since $P \in \mathcal{L}(X)$ is continuous, that $Py=y$ and thus $y \in A$ i.e. $A$ is closed. 
+\\
+$\bullet$ $B$ is also closed, using the same argument as above with $P$ replaced by $1-P$. 
+\\\\
+$\bullet$ $X=A+B$ is clear, since $x=Px + x -Px = Px + (1-P)x$.
+\\\\
+$\bullet$ $A \cap B = \lbrace 0 \rbrace$. If $x \in A$ then we have $x=Px$ (because if $x=Py$ then $Px=P^2y=Py=x$) and if $x \in B$ we have $x=(1-P)x$, thus $x=Px=P(1-P)x=0$. 
+\end{proof}
+\newpage
+It follows from the last theorem that finite dimensional subspaces always have a topological complement.
+\begin{thm} Let $X$ be a Banach space, $A \subset X$ a finite dimensional linear subspace. Then there exists a closed subspace $B \subset X$ with $X = A \oplus B$. 
+\end{thm}
+\section{Weak Topologies on normed spaces}
 \end{document}
