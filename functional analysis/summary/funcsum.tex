@@ -18,6 +18,8 @@
 \theoremstyle{definition}
 \newtheorem{rem}{Remark}[section]
 
+\newcommand{\wto}{\rightharpoonup}
+
 \begin{document}
 \maketitle
 \section{Structures}
@@ -477,7 +479,7 @@ on $X$. Since all norms are equivalent, it is enough to prove the claim w.r.t. t
 B_R(0) \subset \bigcup_{j=1}^{n(R, \epsilon)} B_\epsilon (x^{(j)}) 
 \end{align*}
 \end{proof}
-\begin{prop} Let $X$ be a normed space. Then $\overline{B_1(0)}$ is compact if and only if $\dim X < \infty$
+\begin{prop} \label{compactunitball} Let $X$ be a normed space. Then $\overline{B_1(0)}$ is compact if and only if $\dim X < \infty$
 \end{prop}
 
 \subsection{Compact Subsets of $C(K)$}
@@ -861,4 +863,90 @@ It follows from the last theorem that finite dimensional subspaces always have a
 \begin{thm} Let $X$ be a Banach space, $A \subset X$ a finite dimensional linear subspace. Then there exists a closed subspace $B \subset X$ with $X = A \oplus B$. 
 \end{thm}
 \section{Weak Topologies on normed spaces}
+\subsection{The weak and the weak-* topologies}
+Let $X$ be a set and let $\mathcal{F}$ denote a family of maps $f: X \to Y_f$, where $Y_f$ is a topological space. On $X$, we introduce the topology $\tau_\mathcal{F}$, defined as the smallest topology on $X$ so that all functions in $\mathcal{F}$ are continuous. We know that the arbitrary union of a family of topologies on $X$ is again a topology on $X$, thus for 
+\begin{align*}
+\mathcal{S}:= \lbrace f^{-1}(V): V \subset Y_f \text{ open}, f \in \mathcal{F} \rbrace
+\end{align*}
+we define
+\begin{align*}
+\tau_\mathcal{F} = \bigcap \lbrace \tau : \tau \text{ is a topology on $X$ and $\mathcal{S} \subset \tau$} \rbrace 
+\end{align*}
+Then $\tau_\mathcal{F}$ is the smallest topology on $X$, with the property that all maps in $\mathcal{F}$ are continuous. As always, we care about the Hausdorff property. 
+\begin{prop} Let $X$ be a set and $\mathcal{F}$ a family of maps $f: X \to Y_f,$ with $Y_f$ Hausdorff for every $f \in \mathcal{F}$. Then $\mathcal{F}$ separates the points of $X$ and $(X, \tau_\mathcal{F})$ is again a Hausdorff space. 
+\end{prop}
+\noindent We now specialize our construction to the case of normed spaces.
+\begin{defn} Let $X$ be a normed space, $X^*$ its dual space and $X^{**}$ the bidual space. The smallest topology on $X$, with the property that all $f \in X^*$ are continuous is called the weak topology on $X$, it is denoted by $\tau_W$. \\
+Since $X^*$ is again a normed space, we can introduce also on $X^*$ the weak topology, defined as the smallest topology with the property that all $f \in X^{**}$ are continuous. Moreover we define on $X^*$ the weak-* topology, denoted by $T_W^*$, it is defined as the smallest topology such that all $f \in J_X(X) \subset X^{**}$ are continuous where $J_X:X \to X^{**}$ is the canonical inclusion. 
+\end{defn}
+\begin{rem} \
+\begin{enumerate}
+\item On $X$ we have $\tau_W \subset T_{ \| \cdot \|}$, i.e. convergence (w.r.t. the norm on $X$) always implies weak convergence. This follow because by definition $f \in X^*$ is always continuous w.r.t. $\tau_{\| \cdot\|}$ and because $T_W$ is the smallest topology on $X$ such that $f \in X^*$ is continuous. 
+\item On $X^*$ we have $\tau_W^* \subset \tau_W \subset \tau_{\| \cdot \|}$, because $J_X(X) \subset X^{**}$. 
+\item If $X$ is reflexive, then $J_X(X) = X^{**}$ and $\tau_W= \tau_W^*$ as topologies on $X^*$. 
+\end{enumerate}
+\end{rem}
+\newpage
+\noindent On infinite dimensional vector spaces, norm- and weak topologies are never the same (i.e. not equivalent), as the next Lemma entails
+\begin{lem} Let $X$ be a normed space. Then $\tau_W = \tau_{\| \cdot \|}$ if and only if $\dim X < \infty$. If $\dim X = \infty$, then every $\tau_W$-open neighbourhood of $0$ contains an infinitely dimensional linear subspace of $X$. 
+\end{lem}
+\subsection{The notion of weak convergence}
+Let $X$ be a normed space. As every topology, the weak topology $\tau_W$ induces a notion of convergence of sequences in $X$. In this context, we say that a sequence $x_k$ in $X$ converges weakly towards $x \in X$ and we write $x_k \rightharpoonup x.$, if the sequence converges w.r.t. $\tau_W$. 
+\begin{rem} \
+\begin{enumerate}
+\item Since $(X, \tau_W)$ and $(X^*, \tau_W^*)$ are both Hausdorff, weak and weak-* limits are always unique if they exist. 
+\item Since $\tau_W \subset \tau_{\| \cdot \|}, \ x_k \to x$ w.r.t. $\tau_{\| \cdot \|}$ always implies $x_k \wto x$. Analogously, since $\tau_W^* \subset \tau_W \subset \tau_{\| \cdot \|}$ both, norm and weak convergence, imply weak-* convergence on $X^*$. 
+\end{enumerate}
+\end{rem}
+\begin{lem}[Characterisation of weak convergence] Let $X$ be a normed space. Let $(x_k)_{k \in \mathbb{N}}$ be a sequence in $X$, then we have $x_k \wto x$ if and only if $f(x_k) \to f(x)$ for all $f \in X^*$.
+\end{lem}
+\noindent The Lemma above says that we can identify weak convergence with convergence w.r.t. the norm on $\mathbb{K}$. 
+\begin{lem}[Characterisation of weak-* convergence] Let $(f_i)_{i \in \mathbb{N}}$ be a sequence in $X^*$. Then $f_i$ convergence towards $f \in X^*$ w.r.t. to $\tau_W^*$ if and only if $f_i(x) \to f(x)$ for all $x \in X$.
+\end{lem}
+\noindent Despite the fact, that in general weak convergent sequences do not converge w.r.t. the norm topology, they are always bounded. This is a consequence of the Banach-Steinhaus theorem and subject of the next Proposition. 
+\begin{prop} Let $X$ be a normed space, $(x_k)_{k \in \mathbb{N}}$ be a sequence in $X$ with $x_k \wto x$. then $(x_k)_{k \in \mathbb{N}}$ is bounded and moreover we have 
+\begin{align*}
+\| x \| \leq \liminf_{k \to \infty} \|x_k\|
+\end{align*}
+\end{prop}
+\newpage
+\subsection{Weak-* topology and compactness}
+For finite dimensional normed spaces, it is very easy to characterize compact sets thanks to the Heine Borel Theorem, a set $M$ is compact if and only if $M$ is bounded and closed. For infinite dimensional normed spaces, this is no longer true. We have also seen in Proposition \ref{compactunitball} that the closed unit ball $\overline{B_1(0)}$ is compact if and only if $\dim X < \infty$, in particular in the infinite dimensional case $\overline{B_1(0)}$ is neither covering nor sequentially compact. 
+\\\\
+Weak topologies are important because often they allow us to "restore" the compactness of the closed ball. The statement that the closed unit ball in $X^*$ is compact w.r.t. $\tau_W^*$ is known as the Banach-Alaoglu Theorem. 
+\begin{thm}[Tychonov Theorem] Let $(X_\lambda)_{ \lambda \in \Lambda}$ be a family of compact sets. Then the product $X= \prod_{\lambda \in \Lambda}  X_\lambda$ is compact, w.r.t. the product topology defined on $X$. 
+\end{thm}
+\begin{rem} The product topology on $X$ is generated by product sets having the form 
+\begin{align*}
+\prod_{ \lambda \in \Lambda} U_\lambda = \lbrace (x_\lambda)_{ \lambda \in \Lambda} :  x_\lambda \in U_\lambda \rbrace, \text{ where } U_\lambda \subset X_\lambda \text{ are open for all } \lambda \in \Lambda. 
+\end{align*}
+Equivalently, the product topology is the smallest topology on $X$, so that all projections $p_\lambda : X \to  X_\lambda$, defined through $p((x_\lambda)_{ \lambda \in \Lambda}) = x_\lambda$, are continuous. 
+\end{rem}
+\begin{thm}[Banach-Alaoglu] Let $X$ be a normed space and $X^*$ its dual space. Then the closed unit ball $k_{X^*} = \lbrace f \in X^* : \| f \| \leq 1 \rbrace$ in $X^*$ is compact w.r.t the weak-* topology $\tau_W^*$. 
+\end{thm}
+\noindent Since in general the weak-* topology is not metrizable, the notion of sequentially compactness is not equivalent to the notion of (covering) compactness. In fact, in general the unit ball in $X^*$ is not sequentially compact w.r.t $\tau_W^*$. The next theorem shows, however, that the unit ball in $X^*$ is sequentially compact, under the assumption that $X$ is also seperable. 
+\begin{thm} Let $X$ be a separable normed space. Then the closed unit ball $k_{X^*}$ in $X^*$ is sequentially compact, w.r.t. the $\tau_W^*$ topology. 
+\end{thm}
+\subsection{Reflexivity and compactness}
+In this section, we consider reflexive Banach spaces and we show that, under appropriate assumptions, the closed unit ball in $X$ is compact and sequential compact w.r.t the $\tau_W$ topology. 
+\begin{prop} Let $X$ be a Banach space. Then $X$ is reflexive if and only if $k_X= \lbrace x \in X : \|x\| \leq 1\rbrace$ is compact w.r.t the $\tau_W$ topology. 
+\end{prop}
+\newpage
+\noindent For reflexive Banach spaces, $k_X$ is not only compact, it is also sequentially compact w.r.t. the topology $\tau_W$. 
+\begin{thm} Let $X$ be a reflexive Banach space. Then the closed unit ball $k_X$ is sequentially compact w.r.t. the topology $\tau_W$. In other words, every bounded sequence in $X$ has a $\tau_W$-convergent subsequence. 
+\end{thm}
+\subsection{Weak topology and convexity}
+A weakly convergent sequence $(x_n)_{n \in \mathbb{N}}$ in a Banach space $X$ has one additional neat property, that is often useful. If $x_n$ converges weakly, there exists namely another sequence, consisting of convex combinations of the elements of $x_n$, converging strongly (i.e. w.r.t. the norm topology). This results is known as the Lemma of Mazur. 
+\begin{thm} Let $X$ be a normed space over $\mathbb{K}$ and $A \subset X$ covex. Then $\overline{A}^{\tau_{\| \cdot \|}} = \overline{A}^{ \tau_W}$, i.e. the closure of $A$ w.r.t. the (strong) norm topology is the same as the closure of $A$ w.r.t. the weak topology. 
+\end{thm}
+\begin{cor}[Mazur's Lemma] Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in a Banach space $(X, \| \cdot \|)$, converging weakly towards $x$. Then there exists a sequence $(y_k)_{k \in \mathbb{N}}$ so that every $y_k$ is a finite convex combination of the elements $x_n$, i.e. for every $k \in \mathbb{N}$ we have
+\begin{align*}
+&y_k = \sum_{n \in \mathbb{N}} t_n^{(k)} x_n, \text{ s.t. for every fixed $k \in \mathbb{N}$, } t_n^{(k)} \neq 0 \text{ for only finitely many n} \\
+&\text{and } \sum_{n \in \mathbb{N}} t_n^{(k)} = 1
+\end{align*}
+and $y_k \to x$ wr.t. the norm topology (i.e. strongly). 
+\end{cor}
+\begin{proof}
+Let $A= \lbrace$finite convex combinations of $(x_n)_{n \in \mathbb{N}} \rbrace$. Then $A$ is convex and thanks to the above theorem we have $\overline{A}^{ \tau_{ \| \cdot \|}} = \overline{A}^{ \tau_W}$. Since $x_n \wto x $ we have $x \in \overline{A}^{ \tau_W}=\overline{A}^{ \tau_{ \| \cdot \|}}$. Hence, there exists a sequence $(y_k)_{k \in \mathbb{N}}$ in $A$ such that $y_k \to x$, because the norm closure of $A$ is exactly the set of all norm limits of sequences in $A$. 
+\end{proof}
 \end{document}
