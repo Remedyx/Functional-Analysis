@@ -110,9 +110,10 @@ Since $K$ is Hausdorff, for every $x \neq y$ we can find two open neighbourhoods
 \item $A \subset X$ is dense if and only if $\forall x \in X, \exists (x_n)_{n \in \mathbb{N}}$ sequence in $A$ with $x_n \to x$. 
 \item The function $f: X \to Y$ between the two metric spaces $(X,d_1), (Y,d_2)$ is continuous at the point $x \in X$ if and only if for every sequence $(x_n)_{n \in \mathbb{N}}$ in $X$ with $x_n \to x$ we have $f(x_n) \to f(x)$. 
 \end{enumerate}
+\newpage
+\item It is clear that all topologies taht are induced by a metric are Hausdorff. Hence, non-Hausdorff topologies are never metrizable. Example: Zariski Topology.
 \end{enumerate}
 \end{rem}
-\newpage
 \begin{defn} Let $(X,d)$ be a metric space. A sequence $(x_n)_{n \in \mathbb{N}}$ in $X$ is called a Cauchy sequence (or is said to have the Cauchy property) if $d(x_n,x_m) \to 0$ as $n,m \to \infty$. Every convergent sequence is indeed Cauchy. The metric space $(X,d)$ is called complete, if every Cauchy sequence is convergent. 
 \end{defn}
 \subsection{Normed spaces}
@@ -949,4 +950,78 @@ and $y_k \to x$ wr.t. the norm topology (i.e. strongly).
 \begin{proof}
 Let $A= \lbrace$finite convex combinations of $(x_n)_{n \in \mathbb{N}} \rbrace$. Then $A$ is convex and thanks to the above theorem we have $\overline{A}^{ \tau_{ \| \cdot \|}} = \overline{A}^{ \tau_W}$. Since $x_n \wto x $ we have $x \in \overline{A}^{ \tau_W}=\overline{A}^{ \tau_{ \| \cdot \|}}$. Hence, there exists a sequence $(y_k)_{k \in \mathbb{N}}$ in $A$ such that $y_k \to x$, because the norm closure of $A$ is exactly the set of all norm limits of sequences in $A$. 
 \end{proof}
+\newpage
+\section{Spectral Theorem for Compact Operators}
+In this entire section we consider bounded linear operators defined on a Banach space over $\mathbb{C}$.
+\subsection{The spectrum of bounded operators}
+Let $X$ be a Banach space over $\mathbb{C}$. 
+\begin{defn} Let $T \in \mathcal{L}(X)$. We define the resolvent set of $T$ as 
+\begin{align*}
+\rho(T)= \lbrace \lambda \in \mathbb{C}: \ker( \lambda Id-T)= \lbrace 0 \rbrace \text{ and } \text{ran}( \lambda Id-T)=X \rbrace 
+\end{align*}
+i.e. $\rho(T)$ is the set of all $\lambda \in \mathbb{C}$ such that $ \lambda Id-T$ is invertible. The spectrum of $T$ is then defined as the complement of the resolvent set, i.e. $\sigma(T)= \mathbb{C} \setminus \rho(T)$. The spectrum $\sigma(T)$ can be further decomposed into the point spectrum 
+\begin{align*}
+\sigma_p(T)= \lbrace \lambda \in \mathbb{C}:  \ker( \lambda Id-T) \neq \lbrace 0 \rbrace \rbrace,
+\end{align*}
+the continuous spectrum 
+\begin{align*}
+\sigma_c(T)= \lbrace \lambda \in C : \ker( \lambda Id-T)= \lbrace 0 \rbrace, \text{ran}( \lambda Id-T) \neq X, \text{ but } \overline{\text{ran}(\lambda Id-T)}= X \rbrace 
+\end{align*}
+and finally the residual spectrum
+\begin{align*}
+\sigma_r(T)= \lbrace \lambda \in \mathbb{C}: \ker( \lambda Id-T)= \lbrace 0 \rbrace,\ \overline{\text{ran}(\lambda Id-T)} \neq X \rbrace 
+\end{align*}
+\end{defn}
+\begin{rem} \ 
+\begin{enumerate}
+\item We have $\lambda \in \sigma_p(T)$ if and only if there exists $x \neq 0$ with $Tx= \lambda x$. Such an $x$ is called an eigenvector of $T$ associated with the eigenvalue $\lambda$. We call $\ker( \lambda-T)$ the eigen space of $T$ with eigenvalue $\lambda$. 
+\item For $\lambda \in \rho(T),$ the operator $( \lambda-T)$ is bijetive and invertible. It follows from the inverse function theorem that the inverse $( \lambda-T)^{-1}$ is automatically continuous and thus contained in the space $\mathcal{L}(X)$. 
+\end{enumerate}
+\end{rem}
+\begin{defn} For $ \lambda \in P(T)$ we define $R_T( \lambda) = ( \lambda-T)^{-1} \in \mathcal{L}(X)$ (defined on $\rho(T))$, the function $R_T$ is called the resolvent of $T$. 
+\end{defn}
+\begin{thm} The resolvent set $\rho(T)$ of $T$ is open and the resolvent $R_T( \lambda)$ is an analytic function on $\rho(T)$ with values in $\mathcal{L}(X)$, such that $\|R_T( \lambda)\| \geq 1/ \text{dist}( \lambda, \sigma(T))$. 
+\end{thm}
+\begin{rem} Recall that a map $F: D \to Y$, where $D \subset \mathbb{C}$ is open and $Y$ is a Banach space, is called analytic if for all $\lambda \in D$, there exists a ball $B_{r_0}( \lambda) \subset D$ such that 
+\begin{align*}
+F ( \mu) = \sum_{n=0}^\infty A_n( \mu- \lambda)^n
+\end{align*}
+where $A_n \in Y$ for all $n \in \mathbb{N}$ and the series above is absolutely convergent. 
+\end{rem}
+\newpage
+In order to prove the previous Theorem we will use the following lemma. 
+\begin{lem}[Von Neumann Series] Let $T \in \mathcal{L}(X)$, with $\| T \| < 1$. Then $1-T$ is bijective, with $(1-T)^{-1} \in \mathcal{L}(X)$ and 
+\begin{align*}
+(1-T)^{-1} = \sum_{j=0}^\infty T^n
+\end{align*}
+\end{lem}
+\begin{proof}
+Let $S_l = \sum_{n=0}^l T^n.$ Then for $k < l$ we have,
+\begin{align*}
+\|S_l-S_k\| \leq \sum_{n=k+1}^l \|T^n\| \leq \sum_{n=k+1}^l \|T\|^n \to 0
+\end{align*}
+as $k,l \to \infty$, because $\|T\|<1$ and the geometric series converges, hence the tail has to vanish. In other words, $S_l$ is a Cauchy sequence in $\mathcal{L}(X)$ and since $X$ is a Banach space, we know that $\mathcal{L}(X)$ is complete. Hence $S_l$ convergeces, let $S:= \lim S_l$. Then we obtain
+\begin{align*}
+(1-T)S= \lim_{l \to \infty} (1-T)S_l \overset{\text{Tele.}}= \lim_{l \to \infty} 1-T^{l+1}=1
+\end{align*}
+because $\|T^{l+1}\| \leq \|T\|^{l+1} \to 0$ as $l \to \infty$ thanks to $\|T\| < 1$. 
+\end{proof}
+\begin{thm}[Spectral radius] The spectrum $\sigma(T)$ of $T$ is a compact, non-emptyset (if $X \neq \lbrace 0 \rbrace$) and 
+\begin{align*}
+\sup_{ \lambda \in \sigma(T)} | \lambda| = \lim_{m \to \infty} \| T^m \|^{1/m} \leq \|T\|
+\end{align*}
+\end{thm}
+\noindent To conclude this section, we study the relation between the spectrum of $T \in \mathcal{L}(X)$ and the spectrum of the adjoint operator $T^* \in \mathcal{L}(X^*)$, defined through $(T^*f)(x) = f(Tx)$ for all $f \in X^*$ and $x \in X$. 
+\begin{prop} Let $T \in \mathcal{L}(X)$. Then $\sigma(T)= \sigma(T^*)$. 
+\end{prop}
+\begin{proof}
+The proof follows from the fact that $T \in \mathcal{L}(X)$ is invertible if and only if $T^*$ is invertible (covered in exercises). Then 
+\begin{align*}
+\lambda \in \rho (T) &\iff \lambda-T \text{ invertible} \iff ( \lambda- T)^* \text{ invertible} \\
+& \iff \lambda-T^* \text{ invertible} \iff \lambda \in \rho(T^*)
+\end{align*}
+thus, since the resolvent sets are equal we have in particular $\sigma(T)= \sigma(T^*)$. 
+\end{proof}
+\newpage
+\subsection{Compact Operators on Banach Spaces}
 \end{document}
