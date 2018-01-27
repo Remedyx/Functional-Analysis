@@ -313,6 +313,36 @@ since this convergences in uniform over all $x \in K$, we conclude that $f$ is i
 \end{rem}
 \begin{thm}[Stone-Weierstrass Theorem, $\mathbb{K}= \mathbb{R}$] Let $\mathbb{A}$ be a subalgebra of $C_\mathbb{R}(K)$ separating the points of $K$. Then we have either $\overline{\mathbb{A}}= C_\mathbb{R}(K)$ or there exists a unique point $x_0 \in K$ such that $\overline{\mathbb{A}}= \lbrace f \in C_\mathbb{R}(K) : f(x_0)=0 \rbrace$. 
 \end{thm}
+\begin{proof}
+We first assume that for all $x \in K$ there exists $f \in \mathbb{A}$ with $f(x) \neq 0$, under this assumption we then want to show that $\overline{\mathbb{A}} = C_\mathbb{R}(K)$. To establish this result we require 6 steps.
+
+
+\begin{itemize}
+\item Step 1: Let $x_1, x_2 \in \mathbb{K}$ with $x_1 \neq x_2$ and $\alpha_1, \alpha_2 \in \mathbb{R}$ then we have that that there exists $f \in \mathbb{A}$ such that $f(x_1)= \alpha_1$ and $f(x_2)= \alpha_2$. 
+\begin{itemize}
+\item This can be shown by using that $\mathbb{A}$ separates the points of $K$. 
+\end{itemize}
+\item Step 2: $\overline{\mathbb{A}}$ is a subalgebra. (Was an Exercise)
+\item Step 3: $f \in \mathbb{A} \implies |f| \in \overline{\mathbb{A}}$
+\begin{itemize}
+\item W.l.o.g. we can assume that $f$ is uniformly bounded by $1$. We then write $|f| = \sqrt{f^2}$ and approximate $\sqrt{s}$ uniformly on $[0,1]$ through polynomials. With such a sequence $p_n$ the claim follows because $f \in \mathbb{A} \implies p_n(f^2)\in \mathbb{A}$ for all $n$ and because $p_n(f^2) \to |f|$ and since $\overline{\mathbb{A}}$ is closed we conclude that $|f| \in \overline{\mathbb{A}}$.
+\end{itemize}
+\item Step 4: For $f,g \in \overline{\mathbb{A}}$ we have $\min \{f,g\}, \max\{f,g\} \in \overline{\mathbb{A}}$. 
+\begin{itemize}
+\item Trivial because $\min \{f,g\} = \frac{1}{2}(f+g)- \frac{1}{2}| f-g|$ and identity for max is just $\max\{f,g\} = \frac{1}{2}(f+g)+\frac{1}{2}|f+g|$.
+\end{itemize}
+\item Step 5: Let $g \in C_\mathbb{R}(K)$ be arbitrary and $\epsilon >0$. Then $\forall x \in K$ there exists $f_x \in \overline{\mathbb{A}}$ with $f_x(x)=g(x)$ and $f_x(y) \leq g(y) + \epsilon$ for all $y \in K$. 
+\begin{itemize}
+\item By step 1 we find $f_{x,y} \in \mathbb{A}$ for $x,y \in K$ such that $f_{x,y}(x)=g(x)$ and $f_{x,y}=g(y)$. Then $U_{x,y}:= \lbrace z \in K : f_{x,y}(z)< g(z) + \epsilon \rbrace \ni y$ is an open covering of the compact $K$. Hence we can set $f_x:= \min \{f_{x,y_1}, f_{x,y_2}, \dots , f_{x,y_n} \}$ , by step 4 $f_x \in \overline{\mathbb{A}}$ and satisfies the claim. 
+\end{itemize}
+\newpage 
+\item Step 6: Let $g \in C_\mathbb{R}(K)$ be arbitrary and $\epsilon >0$, then there exists $f \in \overline{\mathbb{A}}$ with $\|f-g\| < \epsilon$, which entails that $\overline{\mathbb{A}}= C_\mathbb{R}(K)$. 
+\begin{itemize}
+\item We use step 5 and have for $x \in K$ that $V_x:= \{ z \in K : f_x(z) > g(z) - \epsilon \}$ is an open covering of the compact $K$ and hence $f:= \max \{ f_{x_1}, \dots , f_{x_m} \}$ is in $\overline{\mathbb{A}}$ by step 4 and satisfies $|f(x)-g(x)| < \epsilon$ for all $x \in K$. 
+\end{itemize}
+\end{itemize}
+Assume now that  $ \exists x_0 \in K$ with $f(x_0)=0$ for all $f \in \mathbb{A}$ and we want to show that $\overline{\mathbb{A}}= \{ f \in C_\mathbb{K}(K) : f(x_0)=0 \}$. The uniqueness of $x_0$ follows because $\mathbb{A}$ separates the points of $K$. For the existence notice that $f \in \overline{\mathbb{A}}$ gives $f(x_0)=0$ and thus one inclusion is trivial, then $\mathbb{B}=\{ f + \lambda: f \in \mathbb{A}, \lambda \in \mathbb{R} \}$ is a subalgebra of $C_\mathbb{R}(K)$ that separates the points of $K$ gives "$\supset$".
+\end{proof}
 \begin{rem} The Stone-Weierstrass Theorem allows us for example to approximate continuous functions on compact subsets of $\mathbb{R}^n$ through series of polynomials, see next example.
 \end{rem}
 \begin{exmp} Let $K \subset \mathbb{R}^n$ be compact and $\mathbb{A}$ be the set of all polynomials in the variables $x_1, \dots , x_n$, i.e. 
@@ -326,6 +356,13 @@ It is then easy to check that $\mathbb{A}$ is a subalgebra of $C_\mathbb{K}(K)$,
 \exists ! x_0 \in K \text{ with } \overline{\mathbb{A}}= \lbrace f \in C_\mathbb{C}(K) : f(x_0)=0 \rbrace. 
 \end{align*}
 \end{thm}
+\begin{proof}
+We consider $\mathbb{A}_\mathbb{R}:= C_\mathbb{R}(K) \cap \mathbb{A}$ and notice that $\mathbb{A}_\mathbb{R}$ is a subalgebra of $C_\mathbb{R}(K)$ that also separates the points of $K$. Moreover $f \in \mathbb{A}$ implies both that Re$f$ and  Im $f$ are in $\mathbb{A}_\mathbb{R}$. The claim then follows by noticing that
+\begin{align*}
+\overline{\mathbb{A}}= \overline{\mathbb{A}_\mathbb{R} + i \mathbb{A}_\mathbb{R}} = \overline{\mathbb{A}_\mathbb{R}}+ i \overline{\mathbb{A}_\mathbb{R}}
+\end{align*}
+\end{proof}
+\newpage 
 \subsection{Lebesgue Spaces}
 This should already be known, we will only repeat the most relevant results without much explanation in this section. We work on some measure space $(\Omega, \Sigma, \mu)$ and consider the space 
 \begin{align*}
@@ -336,7 +373,6 @@ This should already be known, we will only repeat the most relevant results with
 \left| \int_\Omega fg d \mu \right| \leq \int_\Omega |f| |g| d \mu \leq \|f\|_p \cdot \|g|_q
 \end{align*}
 \end{thm}
-\newpage
 \begin{thm}[Fischer-Riesz] Let $( \Omega, \Sigma, \mu)$ be a measure space and $1 \leq p \leq \infty$. Then $L^p( \Omega, \Sigma, \mu)$ is complete. 
 \end{thm}
 \begin{rem} For $p=2$ the Lebesgue space $L^2$ is even a Hilbert space with scalar product on $L^2( \Omega, \Sigma, \mu)$ given by 
@@ -374,7 +410,6 @@ L(f)= \int_\Omega \overline{g(x)} f(x) d \mu(x)
 \end{align*}
 for a $g \in L^q(\Omega, \mathcal{A}, \mu)$ with $\frac{1}{p} + \frac{1}{q}=1$. 
 \end{rem}
-\newpage
 Our last goal in this section is to show that smooth functions are dense in $L^p$, for all $1 \leq p < \infty$. For simplicity we work on $\mathbb{R}^n$, then the next theorem shows how to approximate $L^p$-functions with sequences of $C^\infty$-functions.
 \begin{thm} Let $j \in L^1 ( \mathbb{R}^n)$ with $\int j d \lambda_n(x) =1$. For $\epsilon >0$ we let $j_\epsilon(x) = \epsilon^{-1} j(x/ \epsilon)$ so that $\int j_\epsilon d\lambda_n =1$ for all $\epsilon >0$. Let now $f \in L^p( \mathbb{R}^n)$ for a $1 \leq p < \infty$ and set $f_ \epsilon = f * j_\epsilon$. Then $f_\epsilon \in L^p( \mathbb{R}^n)$ with $\|f_\epsilon \|_p \leq \|j\|_1 \|f\|_p$ and $f_\epsilon\to f $ in $L^p( \mathbb{R}^n)$ as $\epsilon \to 0$. If $j \in C_c^\infty ( \mathbb{R}^n)$, then we have $f_\epsilon \in C^\infty ( \mathbb{R}^n)$ and $D^\alpha f_\epsilon = (D^\alpha j_\epsilon) * f$ for all multi-indices $\alpha= ( \alpha_1, \dots, \alpha_n) \in \mathbb{N}^n$. 
 \end{thm}
@@ -420,7 +455,6 @@ then we have $f=0$.
 \begin{rem} If $f \in L^p( \Omega) \cap C^m( \Omega)$, then the classical derivates $D^\alpha f$ coincide with the weak derivatives, this can be shown by using integration by parts. The advantage of the weak derivatives is of course the fact that they exist for a much larger class of functions.
 \end{rem}
 \noindent Next we show that the completeness of the $L^p$ spaces implies also the completeness of the Sobolev spaces. 
-\newpage 
 \begin{thm} For all $m \in \mathbb{N}, \ 1 \leq p \leq \infty, \ H^{m,p}( \Omega)$ is a Banach space. 
 \end{thm} 
 \begin{proof}
@@ -431,6 +465,14 @@ Let $(f_j)_{j \in \mathbb{N}}$ be a Cauchy sequence in $H^{m,p}( \Omega)$, then 
 \end{proof}
 \begin{thm}[Approximation Theorem] Let $f \in H^{m,p}(\Omega)$, $1 \leq p < \infty$, $m \in \mathbb{N}$. Then there exists a sequence in $H^{m,p}(\Omega) \cap C^\infty( \Omega)$ with $\| f_j-f\|_{H^{m,p}}$ as $j \to \infty$. Moreover, if $\Omega = \mathbb{R}^n$, then we can choose $f_k \in C_c^\infty( \mathbb{R}^n)$ with $\|f_k-f\|_{H^{m,p}} \to 0$ as $k \to \infty$.
 \end{thm}
+\begin{proof}
+We consider a Dirac sequence in order to show the existence of cutoff functions. Then we show the existence of the partition of the identity. To approximate functions in $H^{m,p}( \Omega)$ we first approximate them locally, then we use an appropriate partition of the identity to reduce the global problem to a local one.\\
+\\
+Finally we find a locally finite covering of $\Omega$ and then take $( \eta_k)_{k \in \mathbb{N}}$ to be the corresponding partition of the identity, we than have $f_{k, \epsilon} \in C^\infty (U_k)$ and ultimately 
+\begin{align*}
+f_\epsilon := \sum_{k \in \mathbb{N}} \eta_k f_{k, \epsilon} \to f \text{ in } H^{m,p}( \Omega)
+\end{align*}
+\end{proof}
 \begin{rem} The theorem shows that, for all $1 \leq p < \infty$, $H^{m,p}(\Omega)$ is the completion of $C^\infty(\Omega)$ with respect to the norm of $H^{m,p}$. 
 \end{rem}
 \section{Compactness}
@@ -451,7 +493,6 @@ Let $(f_j)_{j \in \mathbb{N}}$ be a Cauchy sequence in $H^{m,p}( \Omega)$, then 
 \item $(A,d)$ is complete and $A$ is pre-compact. 
 \end{enumerate}
 \end{thm}
-\newpage
 \begin{rem} \ \begin{enumerate}
 \item We see that what's missing for a pre-compact set to be compact is completeness. 
 \item $A \subset X$ compact implies that $A$ is closed (since $A$ complete implies that $A$ is closed)
@@ -466,6 +507,7 @@ Let $(f_j)_{j \in \mathbb{N}}$ be a Cauchy sequence in $H^{m,p}( \Omega)$, then 
 \end{lem}
 \begin{cor} Every finite dimensional subspace of a normed space is complete and therefore closed. 
 \end{cor}
+\newpage
 \begin{thm}[Heine-Borel] Let $(X, \| \cdot\|)$ be a finite dimensional vector space. Then $A \subset X$ is compact if and only if $A$ is bounded and closed.  
 \end{thm}
 \begin{proof}
@@ -482,6 +524,15 @@ B_R(0) \subset \bigcup_{j=1}^{n(R, \epsilon)} B_\epsilon (x^{(j)})
 \end{proof}
 \begin{prop} \label{compactunitball} Let $X$ be a normed space. Then $\overline{B_1(0)}$ is compact if and only if $\dim X < \infty$
 \end{prop}
+\begin{proof}
+"$\Longleftarrow$" readily follows from the Theorem of Heine Borel, indeed since our normed space is of finite dimension and evidently $\overline{B_1(0)}$ is both closed and bounded, we the claim follows. 
+\\\\
+"$\implies$" Let $y_1, \dots , y_n \in X$ be such that 
+\begin{align*}
+\overline{B_1(0)} \subset \bigcup_{j=1}^n B_{1/2}(y_j) \tag{*}
+\end{align*}
+and let $Y= \text{span} \{ y_1, \dots , y_n \rbrace \subset X$ , then since $Y$ is a finite dimensional subspace of the normed space $X$ it is complete and in particular closed (see previous corollary). Assume then for contradiction that $Y \neq X$, then for all $\theta \in (0,1)$ we can find $x_\theta \in X \setminus Y$ with $\|x_\theta\| =1$ (i.e. $x_\theta \in \overline{B_1(0)}$) and dist$(x_\theta, Y) \geq \theta$. Choosing $\theta > 1/2$ then yields a contradiction to (*) above. 
+\end{proof}
 
 \subsection{Compact Subsets of $C(K)$}
 For finite dimensional normed spaces we found a simple characterization of compactness, namely if $\dim X < \infty$ then $A \subset X$ is compact if and only if $A$ is closed and bounded. We try to find a similar simple characterization of compact subsets for the case of infinite dimensional spaces. We denote $C(K)=C_\mathbb{K}(K)$ where $\mathbb{K}= \mathbb{R}$ or $\mathbb{C}$. 
@@ -540,10 +591,13 @@ which shows that $S$ is pre-compact.
 \begin{enumerate}
 \item $A$ is bounded 
 \item $\displaystyle \sup_{f \in A} \|f( \cdot + h) -f \|_p \to 0$ as $h \to 0$
-\item $\displaystyle \sup_{f \in A} \|f\|_{L^p( \mathbb{R}^N \setminus B_r(0)) } \to 0$ as $R \to \infty$.
+\item $\displaystyle \sup_{f \in A} \|f\|_{L^p( \mathbb{R}^n \setminus B_r(0)) } \to 0$ as $R \to \infty$.
 \end{enumerate}
 \end{thm}
-\begin{rem} The theorem holds true for subsets of $L^p( \mathbb{R}^n)$. There are also extensions to subsets of $L^p( \Omega)$, for measurable $\Omega \subset \mathbb{R}^n$. 
+\begin{rem} \  \begin{enumerate}
+\item The conditions 2 and 3 are nontrivial in the theorem of Riesz because they have to uniformly. If we drop the uniformity they are trivial (3 for instance follows by dominated convergence). 
+\item The theorem holds true for subsets of $L^p( \mathbb{R}^n)$. There are also extensions to subsets of $L^p( \Omega)$, for measurable $\Omega \subset \mathbb{R}^n$. 
+\end{enumerate} 
 \end{rem}
 \newpage
 \section{Linear Operators \& Functionals on Normed Spaces}
@@ -710,11 +764,43 @@ Then indeed $\tilde{x}$ is continuous since $f \in X^*$ is continuous, hence we 
 \end{thm}
 \subsection{Hilbert Space Methods}
 Hilbert spaces can be identified with their dual spaces, this is the subject of Riesz's Representation Theorem. 
-\begin{thm}[Riesz's Representation Theorem] Let $(H,( \cdot , \cdot))$ be an Hilbert space. Let $v \in H$ be arbitrary. The map $R_H^v : H \to H^*$ defined through $R_H^v(u)=(u,v)=\langle u,v\rangle_{H^*}$ is an anti-linear isometric isomorphism. 
+\begin{thm}[Riesz's Representation Theorem] Let $(H,( \cdot , \cdot))$ be an Hilbert space. Let $v \in H$ be arbitrary. The map $R_H^v : H \to H^*$ defined through $R_H^v(u)=(u,v)=\langle u,v\rangle_{H}$ is an anti-linear isometric isomorphism. 
 \end{thm}
-\begin{rem} The theorem states that every element of $H^*$ can be written uniquely in this form. We also use the notation $(R_H(u))(v)=(u,v)$. 
+\begin{proof}
+$\bullet$ $R_H$ is well defined because $R_H(u)$ is clearly linear and by $|(R_H(u))(v)| \leq | \langle u,v \rangle | \leq \|u \| \|v\|$ it follows that $R_H(u)$ is continuous. \\
+$\bullet$ $R_H$ is anti-linear, because of the anti-linearity of the inner product in its first argument. \\
+$\bullet$ $R_H$ is isometric (and thus injective) because from our first point we immediatly get $\|R_H(u)\| \leq \|u\|$ and since $R_H(u)= \langle u,u \rangle = \|u\|^2$ it follows that $\|R_H(u)\| \geq \|u\|$.
+\\\\
+It remains to show that $R_H$ is surjective. Let $L \in H^*$ and set $M :=\ker L = \lbrace u \in H : L(u)=0 \rbrace$. Then clearly $M$ is a libear subspace of $H$. Moreoever, since $L$ is continuous, the set $M$ is also (quite trivially) closed. Thus we know that we can decompose our Hilbert space as $H= M \oplus M^\perp$. \\\\
+W.l.o.g. we can assume that $L \neq 0$. Then it follows that $\dim M^\perp = 1$, because if $u,v \in M^\perp$ then by the linearty of $L$ we get that
+\begin{align*}
+L(L(v)u-L(u)v)=0 &\implies L(v)u-L(u)v \in M \cap M^\perp = \lbrace 0 \rbrace \\ 
+&\implies L(v)u=L(u)v \implies u= \frac{L(u)}{L(v)}v
+\end{align*} 
+i.e. $u,v \in M^\perp$ are related in the sense of $u = \lambda v$, thus $M^\perp = \mathbb{K}v$ for an appropriate $v \in H \setminus \lbrace 0 \rbrace$ which gives us dimension 1. \\
+\\
+We claim now that 
+\begin{align*}
+L(u)= \left( \frac{\overline{L(v)}}{\|v\|^2}v,u \right), \text{ for all } u \in H,
+\end{align*}
+which entails that $L = R_H( \overline{L(v)}/\|v\|^2 v)$, i.e. $R_H$ is surjective. To verify our claim we use the decomposition of $H$ and write for $H \ni u = \tilde{u} + \lambda v$ for $\tilde{u} \in M = \ker L$ and $\lambda \in \mathbb{K}$. Then 
+\begin{align*}
+\left( \frac{\overline{L(v)}}{\|v\|^2}v,u \right) = \left( \frac{\overline{L(v)}}{\|v\|^2}v, \lambda v \right) = \lambda L(v)= L(u)
+\end{align*}
+\end{proof}
+\begin{rem} \ \begin{enumerate}
+\item It follows from Riesz's Representation Theorem that $H^*$ also has the structure of a Hilbert space (clearly $H^*$ is a Banach space). For $f,g \in H^*$ we define 
+\begin{align*}
+\langle f,g \rangle_{H^*} := \langle R_H^{-1} g, R_H^{-1} f \rangle_H
+\end{align*}
+then it is simple to check that $\langle . , , \rangle$ is a scalar product and that 
+\begin{align*}
+\|f\|_{H^*}^2 = \langle f,f \rangle_{H^*} = \langle R_H^{-1} f, R_H^{-1} f \rangle_H = \| R_H^{-1} f \|_H^2
+\end{align*}
+since $R_H$ and thus also $R_H^{-1}$ are isometric. 
+\item The theorem states that every element of $H^*$ can be written uniquely in this form. We also use the notation $(R_H(u))(v)=(u,v)$. 
+\end{enumerate} 
 \end{rem}
-\newpage
 \begin{cor} Every Hilbert space is reflexive.
 \end{cor}
 \begin{proof}
@@ -789,8 +875,9 @@ We have that
 \begin{align*}
 \bigcup_{k=1}^\infty A_k = X.
 \end{align*}
-From Baire's Category Theorem (see condition 1, contraposition of that) we obtain that there exists $k_0 \in \mathbb{N}$ with $A_{k_0}^\circ \neq emptyset$.
-\newpage We find therefore $x_0 \in X$ and $\epsilon_0 >$ with $\overline{B_{ \epsilon_0}(x_0)} \subset A_{k_0}^\circ$. Hence for any $y \in X$ with $\| y \| \leq \epsilon_0$ we get 
+From Baire's Category Theorem (see condition 1, contraposition of that) we obtain that there exists $k_0 \in \mathbb{N}$ with $A_{k_0}^\circ \neq \emptyset$.
+\\\\
+ We find therefore $x_0 \in X$ and $\epsilon_0 >$ with $\overline{B_{ \epsilon_0}(x_0)} \subset A_{k_0}^\circ$. Hence for any $y \in X$ with $\| y \| \leq \epsilon_0$ we get 
 \begin{align*}
 \|Ty\| \leq \| T(y+x_0)\| + \|Tx_0\| \leq k_0 + c_{x_0}, \text{ for all } T \in \mathcal{F}.
 \end{align*}
@@ -826,7 +913,6 @@ Hence $T^{-1}$ is bounded and therefore continuous.
 \item $T$ is continuous.
 \end{enumerate}
 \end{thm}
-\newpage
 \begin{proof}
 "2) $\implies$ 1)". Let $(x,y) \in \overline{\text{graph}(T)}$. Then there exists a sequence $(x_k)_{k \in \mathbb{N}}$ in $X$ with $(x_k, T_{x_k}) \to (x,y)$. Hence $x_k \to x$ in $X$ and $T_{x_k} \to y$ in $Y$. Since $T$ is continuous, we have that $y=Tx$ and thus $(x,y) \in \text{graph}(T)$. Thus graph$(T)$ is closed. 
 \\\\
@@ -859,10 +945,10 @@ $\bullet$ $X=A+B$ is clear, since $x=Px + x -Px = Px + (1-P)x$.
 \\\\
 $\bullet$ $A \cap B = \lbrace 0 \rbrace$. If $x \in A$ then we have $x=Px$ (because if $x=Py$ then $Px=P^2y=Py=x$) and if $x \in B$ we have $x=(1-P)x$, thus $x=Px=P(1-P)x=0$. 
 \end{proof}
-\newpage
 It follows from the last theorem that finite dimensional subspaces always have a topological complement.
 \begin{thm} Let $X$ be a Banach space, $A \subset X$ a finite dimensional linear subspace. Then there exists a closed subspace $B \subset X$ with $X = A \oplus B$. 
 \end{thm}
+\newpage
 \section{Weak Topologies on normed spaces}
 \subsection{The weak and the weak-* topologies}
 Let $X$ be a set and let $\mathcal{F}$ denote a family of maps $f: X \to Y_f$, where $Y_f$ is a topological space. On $X$, we introduce the topology $\tau_\mathcal{F}$, defined as the smallest topology on $X$ so that all functions in $\mathcal{F}$ are continuous. We know that the arbitrary union of a family of topologies on $X$ is again a topology on $X$, thus for 
