@@ -810,6 +810,126 @@ We claim that $J_H = R_{H^*} \circ R_H$. Then $J_H$ is surjective, as the compos
  & = \langle R_H^{-1}f, u \rangle_H = ( R_H(R_H^{-1} f))(u)=f(u)=(J_Hu)(f)
 \end{align*}
 \end{proof}
+\subsubsection{Partial differential equations}
+A consequence of Riesz's representation theorem which is very useful in applications to the study of partial differential equations is the following result of Lax-Milgram.
+\begin{thm}[Lax-Milgram] Let $H$ be a Hilbert space over $\mathbb{K}$ and let $a: H \times H \to \mathbb{K}$ be a sesquilinear form (i.e. $a$ is linear in the second argument and antilinear in the first argument). Suppose that there are constants $0 < c_0 \leq C_0$ with 
+\begin{align*}
+|a(x,y)| &\leq C_0 \| x \| \|y \|, \text{ for all } x,y \in H \text{ (continuity)} \\
+\text{Re } a(x,x) &\geq c_0 \|x\|^2, \text{ for all } x \in H \text{ (coercivity)} 
+\end{align*}
+Then there exists a linear operator $A: H \to H$ with
+\begin{align*}
+A(x,y) = (Ax,y), \text{ for all } x,y \in H
+\end{align*}
+Moreover $A \in \mathcal{L}(H)$ is invertible with 
+\begin{align*}
+\|A\| \leq C_0 \text{ and } \|A^{-1} \| \leq \frac{1}{c_0}
+\end{align*}
+\end{thm}
+\begin{proof}
+For all fixed $x \in H$, the map $y \mapsto a(x,y)$ is in $H^*$ and we have 
+\begin{align*}
+\| a(x, \cdot) \|_{H^*} = \sup_{ \|y \| \leq 1 } | a(x,y)| \leq C_0 \|x\|
+\end{align*}
+From Riesz's representation Theorem there exists for arbitrary $x \in H$, exactly one $A(x) \in H$ such that $a(x,y)=(A(x),y)$ for all $y \in H$ with $\|A(x)\| = \| a(x, \cdot) \|_{H^*} \leq C_0 \|x\|$. 
+\\\\
+Moreover, we have that $A$ is linear because 
+\begin{align*}
+(A(x_1 + \lambda x_2), y)&= a(x_1 + \lambda x_2, y) = a(x_1,y) + \overline{\lambda}a (x_2,y)\\
+& = (A(x_1), y) + \overline{\lambda}(A(x_2),y) \\
+& = (A(x_1) + \lambda A(x_2),y), \text{ for all } y \in H,
+\end{align*}
+hence we have $A(x_1 + \lambda x_2)= A(x_1) + \lambda A(x_2)$ and thus $A \in \mathcal{L}(H)$ with $\| A \| \leq C_0$. We now show that $A$ is invertible, as follows: \\
+\\
+To show that $A$ is injective we use the coercivity assumption, i.e. 
+\begin{align*}
+c_0 \| x \|^2 \leq \text{Re } a(x,x) = \text{Re } (A(x),x) \leq | (Ax,x)| \leq \| Ax\| \| x \| \\
+\implies \|Ax\| \geq c_0 \|x\| >0, \text{ for all } x \in H \setminus \lbrace 0 \rbrace
+\end{align*}
+this shows that $\ker A = \lbrace 0 \rbrace$, and thus $A$ is injective. 
+\\\\
+To show that $A$ is surjective, we first establish that Ran$A$= $\lbrace Ax: x \in H \rbrace$ is closed, we can use the inequality established in the injectivity part to entail this. Let $Ax_n$ be a sequence in Ran$A$ with $Ax_n \to y \in H$, then indeed $Ax_n$ is Cauchy in $H$ (since it convergent) but also (from the above inequality)
+\begin{align*}
+c_0 \| x_n - x_l \| \leq \| Ax_n - Ax_l \| \to 0 \text{ as } n,l \to \infty 
+\end{align*}
+Thus $x_n$ is a Cauchy sequence in $H$ and therefore there exists $x \in H$ such that $x_n \to x$. Because of continuity of $A$ we conclude that $Ax_n \to Ax=y$ because the limit in unique and thus $y \in \ $Ran$A$. Thus Ran$A$ is indeed a closed (linear) subspace of $H$ and we decompose our Hilbert space as $H= \text{Ran}A \oplus \text{Ran}A^\perp$. 
+\\\\
+Assume now for contradiction that Ran$A \neq H$. Then there exists $x_0 \in \text{Ran}A^\perp$ with $x_0 \neq 0$ with $(y,x_0)=0$ for all $y \in \text{Ran}A$ and in particular $(Ax_0,x_0)=0$ which implies that 
+\begin{align*}
+\underbrace{\text{Re } (Ax_0,x_0)}_{=0}  \geq c_0 \|x_0\| > 0, \text{ because } x_0 \neq 0. 
+\end{align*}
+Hence Ran$A=H$ and $A$ is bijective. Thus $A^{-1}$ is well defined and linear. If we use again the inequality established in the injectivity part we get for all $x \in H$
+\begin{align*}
+c_0 \| A^{-1} x \| \leq \| A(A^{-1} x) \| = \|x\| \implies \|A^{-1} \| \leq \frac{1}{c_0}
+\end{align*}
+\end{proof}
+\newpage
+We next show how to use the Theorem of Lax-Milgram to prove the existence and uniqueness of solutions of certain partial differential equations. 
+\\\\
+\textbf{Abstract setting:} We work with $a: H \times H \to \mathbb{K}$ as in the Theorem of Lax-Milgram and fix $x \in H^*$. The unique solution of the problem 
+\begin{align*}
+a(x,y) = x^*(y), \text{ for all } y \in H
+\end{align*}
+is given by $x=A^{-1}R_H^{-1}x^*$. Indeed we have, thanks to Lax Milgram, for all $y \in H$ 
+\begin{align*}
+a(x,y)=(Ax,y)=(AA^{-1}R_H^{-1} x^*,y)= (R_H^{-1} x^*,y)=R_H(R_H^{-1} x^*)(y) = x^*(y)
+\end{align*}
+Moreover we notice that the problem $a(x,y)=x^*(y)$ is stable in the following sense, given $x_1^*, x_2^* \in H^*$ the corresponding solutions $x_1 = A^{-1}R_H^{-1} x_1^*, x_2= A^{-1} R_H^{-1} x_2^*$ have distance
+\begin{align*}
+\|x_1-x_2\|_H = \| A^{-1} R_H^{-1} (x_1^*-x_2^*) \| \leq \frac{1}{c_0}\|x_1^*-x_2^*\|_{H^*}
+\end{align*}
+where in the last inequality we used Lax-Milgram Thm and the fact that $R_H^{-1}$ is an isometry. We apply now this general theory to solve so called elliptic boundary value problems.
+\\\\
+\textbf{Elliptic boundary value problem:} Let $\Omega \subset \mathbb{R}^n$ be open and bounded, we consider functions on $\Omega$ with values in $\mathbb{K}= \mathbb{R}$. We look for a function $u \in C^2( \Omega)$, solving hte partial differential equation 
+\begin{align*}
+- \sum_{i=1}^n \partial_i \sum_{j=1}^n a_{ij} \partial_j u + bu + f =0 \tag{*}
+\end{align*}
+Here $b,f \in C( \Omega)$ have values in $\mathbb{R}$ and the coefficients $a_{ij} = a_{if}(x) \in C^1(\Omega)$ are real valued and satisfy the positivity condition 
+\begin{align*}
+\sum_{i,j=1}^n a_{ij}(x) z_i z_j \geq c_0 |z|^2, \text{ for all } z \in \mathbb{R}^n, x \in \Omega
+\end{align*}
+We say that the matrix $(a_{ij}(x))$ satisfying the above condition is uniformly elliptic. We can also notice that (*) is a generalization of the Poisson equation ($- \Delta + b)u = -f$. 
+\newpage 
+\textbf{Boundary conditions:} In order to find a unique solution of (*) we have to specify boundary conditions. We investigate two kind of boundary conditions. 
+\begin{itemize}
+\item \textbf{Dirichlet boundary conditions:} In this case, we lok for $u \in C^2( \Omega) \cap C( \overline{\Omega})$ solving (*) in $\Omega$ and so that $u = g$ on $\partial \Omega$ for a given $ g \in C( \partial \Omega)$.
+\item \textbf{Neumann boundary conditions:} In this case, we look for $u \in C^2( \Omega) \cap C^1( \overline{\Omega})$ solving (*) in $\Omega$ and such that 
+\begin{align*}
+- \sum_{i=1}^n \nu_i \sum_{j=1}^n a_{ij} \partial_j u = g, \text{ on } \partial\Omega \text{ for a given } g \in C( \partial \Omega)
+\end{align*}
+Here $\nu = ( \nu_1, \dots , \nu_)$ denotes the outwards pointing normal to $\partial \Omega$. 
+\end{itemize}
+\begin{rem} In Dirichlet boundary value problems, we specify the values of $u$ on the boundary $\partial \Omega$. In the Neumann boundary value problems, we specify the values of the normal derivates of $u$ on the boundary $\partial \Omega$. 
+\end{rem}
+\textbf{Reduction to a homogeneous problem:} We can show that it is enough to solve the boundary value problems with homogenoeous boundary conditions, i.e. $g=0$ on $\partial \Omega$. 
+\\\\
+\textbf{Integral formulation of boundary value problems:} We can show that the elliptic problem (*) is equivalent to solving (w.l.o.g. boundary $g=0$ by the above) 
+\begin{align*}
+\int \left( \sum_{i=1}^n \partial_i \xi \sum_{j=1}^n a_{ij} \partial_j u + \xi (bu+f) \right)=0, \text{ for all } \xi \in C_0^\infty( \Omega)
+\end{align*}
+\textbf{Weak solutions of boundary value problems:} Let $\Omega \subset \mathbb{R}^n$ be open and bounded, $b \in L^\infty ( \Omega)$ and $f \in L^2( \Omega)$ and $a_{ij} \in L^\infty( \Omega)$ such that the uniform elliptic condition holds for almost all $x \in \Omega$. 
+\begin{itemize}
+\item We call $u$ a \textbf{weak solution of the homogeneous Dirichlet problem}, if $u \in H_0^1( \Omega)=H_0^{1,2}(\Omega)$ and 
+\begin{align*}
+\int \left( \sum_{i=1}^n \partial_i \xi \sum_{j=1}^n a_{ij} \partial_j u + (bu+f) \xi \right)=0, \text{ for all } \xi \in H_0^1( \Omega)
+\end{align*}
+(since $u \in H^1( \Omega)$ enough to verify the above for all $\xi \in C_0^\infty ( \Omega)$).
+\item We call $u$ a \textbf{weak solution of the homogeneous Neumann problem}, if $u \in H^1( \Omega)$ and 
+\begin{align*}
+\int \left( \sum_{i=1}^n \partial_i \xi \sum_{j=1}^n a_{ij} \partial_j u + (bu+f) \xi \right) =0, \text{ for all } \xi \in H^1( \Omega)
+\end{align*}
+(enough to verify for all $\xi \in C^\infty( \overline{\Omega})$)
+\end{itemize}
+\newpage
+\textbf{Relationship between weak and classical solutions of boundary value problems:} So far, we argued that every classical solution of the original boundary value problem is also a weak solution. It is natural to ask whether weak solutions, satisfying the Dirichlet/Neumann boundary value problems in a weak sense, are also classical solutions. To prove that this is the case, one needs to know that weak solutions are regular enough (in order to be able to integrate by parts). One should keep in mind, that once the existence and uniqueness of weak solution is know, one can typically conclude existence and uniqueness of classical solutions of boundary value problems, proving that weak solutions are regular and therefore also classical solutions. 
+\\\\
+\textbf{Existence and uniqueness of weak solutions of boundary value problems:} Making use of the Lax-Milgram theorem we can prove, the existence and uniqueness of the weak solutions of Neumann boundary value problems. 
+\begin{thm} We assume that all conditions for the NBVP are satisfied. Furthermore, we assume that there is $b_0 >0$ with $b(x) \geq b_0$ for almost every $x \in \Omega$. Then there exists exactly one weak solution $u \in H^1( \Omega)$ of the Neumann boundary value problem. Moreoever, there exists $C>0$ with $\|u\|_{H^1( \Omega)} \leq C \|f \|_2$. 
+\end{thm}
+\noindent For weak solutions of Dirichlet problems, the same result holds true. In fact, for Dirichlet problems, we do not need to assume that $b$ is strictly positive, $b \geq 0$ is enough. This is a consequence of the Poincaré inequality. 
+\begin{thm} We assume that all conditions in the definition of weak solutions for DBVP are satisfied. We assume furthermore that $b(x) \geq 0$ for almost every $x \in \Omega$. Then there exists exactly one weak solution $u \in H_0^1( \Omega)$ of the Dirichlet problem. Moreover, there is a constant $C>0$ with $\|u \|_{H^1( \Omega)} \leq C\|f\|_2$.
+\end{thm}
+\newpage 
 \section{Baire Category Theorem and Consequences}
 \subsection{Theorems of Baire and of Banach-Steinhaus}
 \begin{lem} Let $(X, \tau)$ be a topological space The following statements are equivalent.
@@ -1060,7 +1180,7 @@ and finally the residual spectrum
 \end{defn}
 \begin{rem} \ 
 \begin{enumerate}
-\item We have $\lambda \in \sigma_p(T)$ if and only if there exists $x \neq 0$ with $Tx= \lambda x$. Such an $x$ is called an eigenvector of $T$ associated with the eigenvalue $\lambda$. We call $\ker( \lambda-T)$ the eigen space of $T$ with eigenvalue $\lambda$. 
+\item We have $\lambda \in \sigma_p(T)$ if and only if there exists $x \neq 0$ with $Tx= \lambda x$. Such an $x$ is called an eigenvector of $T$ associated with the eigenvalue $\lambda$. We call $\ker( \lambda-T)$ the eigenspace of $T$ with eigenvalue $\lambda$. 
 \item For $\lambda \in \rho(T),$ the operator $( \lambda-T)$ is bijetive and invertible. It follows from the inverse function theorem that the inverse $( \lambda-T)^{-1}$ is automatically continuous and thus contained in the space $\mathcal{L}(X)$. 
 \end{enumerate}
 \end{rem}
@@ -1110,4 +1230,76 @@ thus, since the resolvent sets are equal we have in particular $\sigma(T)= \sigm
 \end{proof}
 \newpage
 \subsection{Compact Operators on Banach Spaces}
+If $\dim X < \infty$ the spectrum of $T \in \mathcal{L}(X)$ consists only of finitely many eigenvalues. If instead $\dim X= \infty$, the spectrum can be more complicated. In this section, we consider a class of bounded operators, known as compact operators, whose spectrum is similar to the case $\dim X < \infty$. 
+\begin{defn} Let $X,Y$ be Banach spaces and $B_X= \lbrace x \in X : \|x \| < 1 \rbrace$ denote the open unit ball in $X$. An operator $T \in \mathcal{L}(X,Y)$ is called compact if $TB_X$ is pre-compact, i.e. if for all $\epsilon >0$, $TB_X$ has a finite covering with $\epsilon$-balls. In other words, the operator $T$ is comapct if $\overline{TB_X}$ is compact. Equivalently, $T$ is compact, if  for every bounded sequence $(x_n)_{n \in \mathbb{N}}$ in $X$, the sequence $Tx_n$ in $Y$ has a convergent subsequence. We denote by $\mathcal{K}(X,y)$ the set of all compact operators from $X$ to $Y$. We also denote $\mathcal{K}(X)= \mathcal{K}(X,X)$. 
+\end{defn}
+\begin{exmp} We say that the operator $T \in \mathcal{L}(X,Y)$ has finite rank, if $\dim TX < \infty$. Every finite rank operator is compact. Indeed, if $x_n$ is a bounded sequence in $X$, then $Tx_n$ is a bounded sequence in Ran$T$. Since $\dim$ Ran$T< \infty$ it follows that $Tx_n$ has a convergent subsequence since Ran$T$ is closed (because dim Ran $T< \infty$). In particular, every continuous linear function $f \in X^*$ is compact, because $\dim f(X) \leq 1$. 
+\end{exmp}
+\noindent The next theorem gives some important properties of compact operators. 
+\begin{thm} Let $X,Y,Z$ be Banach spaces.
+\begin{enumerate}
+\item $\mathcal{K}(X,Y)$ is a closed subspace of $\mathcal{L}(X,Y)$.
+\item $T \in \mathcal{K}(X,Y), S \in \mathcal{L}(Y,Z), R \in \mathcal{L}(Z,X)$. Then $ST \in \mathcal{K}(X,Z), TR \in \mathcal{K}(Z,Y)$. 
+\item Let $T \in \mathcal{L}(X,Y)$. Then $T \in \mathcal{K}(X,Y)$ if and only if $T^* \in \mathcal{K}(Y^*, X^*)$. 
+\end{enumerate}
+\end{thm}
+We consider now the spectrum of compact operators. We will also use the notion of Fredholm operator. 
+\begin{defn} Let $X,Y$ be Banach spaces. $A \in \mathcal{L}(X,Y)$ is called a Fredholm operator if $\dim \ker (A) < \infty, \text{Ran}(A)$ is closed and codim Ran$(A) < \infty$. The index of $A$ is then defined as ind$(A)= \dim \ker(A)- \text{codim Ran}(A)$. 
+\end{defn}
+\begin{rem} The codimension codim $Z$ of a closed subspace $Z \subset X$ is the dimension of the quotient space $X/\sim$ where $\sim$ is the equivalence relation defined on $X$ by $x \sim y : \iff x-y \in Z$. If $Z$ has codimension $m < \infty$, then there exist linear independent $x_1, \dots , x_m \in X$ with $X= Z \oplus \text{span}(x_1, \dots , x_m)$. 
+\end{rem}
+The next Theorem shows how we can get a Fredholm operator out of a compact operator.
+\newpage
+\begin{thm} Let $T \in \mathcal{K}(X)$. Then $A=1-T$ is a Fredholm operator with index $0$. 
+\end{thm}
+\begin{proof}
+The proof is divided into 5 steps. 
+\\
+\textbf{Step 1:} $\dim \ker A < \infty$ . \\
+Let $Ax=0$, then it follows that $Tx=x$. Hence $B_1(0) \cap \ker A \subset T(B_1(0))$. Since $T$ is a compact operator, $T(B_1(0))$ is pre-compact, hence $B_1(0) \cap \ker A$ is also pre-compact. But we know that this can only be the case if $\dim \ker A < \infty$ from Prop. $\ref{compactunitball}$. 
+\\\\
+\textbf{Step 2:} Ran$A$ is closed.\\
+Let $x \in \overline{\text{Ran}A}$ and $Ax_n \to x$ as $n \to \infty$. We can assume that
+\begin{align*}
+\| x_n \| \leq 2 d_n, \text{ where } d_n = \text{dist}(x_n \ker A)
+\end{align*}
+and we can show that $d_n$ is bounded, thus $x_n$ is bounded. Thus there is a subsequence $x_{n_j}$ of $x_n$ and $z \in X$ with $Tx_{n_j} \to z$ as $j \to \infty$. Hence 
+\begin{align*}
+x = \lim_{j \to \infty} Ax_{n_j} = \lim_{j \to \infty} A(Ax_{n_j} Tx_{n_j}) = A(x + z) \implies x \in \text{Ran}A. 
+\end{align*}
+\textbf{Step 3:} $\ker A = \lbrace 0 \rbrace$ implies that Ran$A=X$. \\
+Assume that $\ker A= \lbrace 0 \rbrace$ and for condratiction that there exists $x \in X \setminus \text{Ran}A$. Then we can shows that $A^nx \in \text{Ran}A^n \setminus \text{Ran}A^{n+1}$. We can then show that Ran$A^{n+1}$ is closed. We can then construct a sequence $x_n$ in Ran$A^n$ which is bounded but $\| Tx_n -Tx_m\| \geq 1/2$ i.e. the sequence $Tx_n$ has no convergent subsequence, although $x_n$ is a bounded sequence in $X$, which is contradiction to the compactness of $T$.\\
+\\
+\textbf{Step 4:} codim Ran $A \leq \dim \ker A$. \\
+From Step 1 we know that $\dim \ker A < \infty$. Let $x_1, \dots , x_n$ be a basis of $\ker A$. Then there are $f_1, \dots , f_n \in X^*$ with $f_i(x_l) = \delta_{il}$. If the claim was wrong, there would be linearly independent $y_1, \dots , y_n \in X$ such that span$\lbrace y_1, \dots , y_n \rbrace \oplus \text{Ran}A \subset X$ would be a proper subspace of $X$. Then for
+\begin{align*}
+\tilde{T}x:= Tx + \sum_{k=1}^n f_k(x)y_k
+\end{align*}
+$\tilde{T} \in \mathcal{K}(X)$ and $\ker \tilde{A}= \lbrace 0 \rbrace$ where $\tilde{A}= 1- \tilde{T}$. Step 3 then implies that Ran$\tilde{A}=X \subset \text{Ran}A \oplus \text{span} \{ y_1, \dots , y_n\}$ which is a condtradiction. \\
+\\
+\textbf{Step 5:} $\dim \ker A \leq \text{codim}$ Ran$A$.\\
+Let $A^*=1-T^* \in \mathcal{L}(X^*)$. Then by Step 4 we have Ran$A^* \leq \dim \ker A^*$. The claim follows if we can provfe that 1) $\dim \ker A \leq \dim \ker A^{**}$ and 2) $\dim \ker A^* = \text{codim Ran} A$ because then we have
+\begin{align*}
+\dim \ker A \leq \dim \ker A^{**} = \text{codim Ran } A^* \leq \dim \ker A^* = \text{codim Ran } A.
+\end{align*} 
+\end{proof}
+\newpage
+We use the last theorem to describe the spectrum of compact operators. 
+\begin{thm}[Spectral theorem for compact operators; Riesz-Schauder] Let $T \in \mathcal{K}(X)$, then we have
+\begin{enumerate}
+\item The set $\sigma(T) \setminus \lbrace 0 \rbrace$ consists of countably (finite or infinite) many eigenvalues with $0$ as the only possible accumulation point.
+\item For $\lambda \in \sigma(T) \setminus \lbrace 0 \rbrace$ we have $\dim \ker ( \lambda -T) < \infty$ and 
+\begin{align*}
+1 \leq n_\lambda := \max \lbrace n \in \mathbb{N}: \ker( \lambda-T)^{n-1} \neq \ker ( \lambda -T)^n \rbrace < \infty
+\end{align*}
+$n_\lambda$ is called the order of $\lambda$, $\dim \ker ( \lambda-T)$ the multiplicity of $\lambda$.
+\item For $\lambda \in \sigma(T) \setminus \lbrace 0 \rbrace$ we have the decomposition
+\begin{align*}
+X= \text{Ran}( \lambda-T)^{n_\lambda} \oplus \ker ( \lambda-T)^{n_\lambda}.
+\end{align*}
+Both subspaces are closed and invariant w.r.t. $T$ and we have that $\dim \ker ( \lambda-T)^{n_\lambda} < \infty$.
+\item For $\lambda \in \sigma(T) \setminus \{0 \}$ we have $\sigma(T_{ \mid \text{Ran}(\lambda-T)^{n_\lambda}}) = \sigma(T) \setminus \lbrace \lambda \rbrace$. 
+\item For $\lambda \in \sigma(T) \setminus \{0\}$ let $E_\lambda$ denote the projection on $\ker( \lambda-T)^{n_\lambda} $ along Ran$(\lambda-T)^{n_\lambda}$. Then $E_\lambda E_\mu = \delta_{\lambda, \mu} E_\lambda$ for all $\lambda, \mu \in \sigma(T) \setminus \{0 \}$. 
+\end{enumerate}
+\end{thm}
 \end{document}
