@@ -22,6 +22,7 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 \section{Structures}
 \subsection{Topological spaces}
 We will deal with various structures, in a sense, they build a certain hierachy. Topological spaces as a framework, then metric spaces, normed spaces, Banach spaces and conclusively Hilbert Spaces. 
@@ -76,9 +77,10 @@ i.e. if for every open covering of $X$ there exists a finite sub-covering.
 \end{defn}
 \begin{thm} Let $(X, \tau)$ be a compact space and $(x_n)_{n \in \mathbb{N}}$ be a sequence in $X$. Then there exists at least one accumulation point of $x_n$ on $X$. 
 \end{thm}
-\begin{thm}[Lemma von Urysohn] Let $(X, \tau)$ be a compact space and $A,B \subset X$ disjoint, non-empty, closed subsets of $X$. Then there exists a continuous function $g: X \to [0,1]$ with $g(A)=0$ and $g(B)=1$. 
+\begin{thm}[Lemma of Urysohn] Let $(X, \tau)$ be a compact space and $A,B \subset X$ disjoint, non-empty, closed subsets of $X$. Then there exists a continuous function $g: X \to [0,1]$ with $g(A)=0$ and $g(B)=1$. 
 \end{thm}
-\begin{rem} The Lemma of Urysohn is important because it helps us avoid some of the pathological situations (like only constant functions being continuous). In particular, the theorem implies that on compact spaces the topology is large enough for us to do some meaningful analysis on. 
+\begin{rem} The Lemma of Urysohn is important because it helps us avoid some of the pathological situations (like only constant functions being continuous). In particular, the theorem implies that on compact spaces the topology is large enough for us to do some meaningful analysis on. \\\\
+Another way to think about is that the Hausdorff property in a topological space $(X, \tau)$ guarantees that there are 'enough' open disjoint sets for us to work with, coupled with the Lemma of Urysohn we know that in compact spaces there are enough closed subsets which are disjoint and we can define 'meaningful' functions between them (i.e. non constant). 
 \end{rem}
 \newpage
 \begin{defn} Let $K$ be a compact space. We define
@@ -587,6 +589,7 @@ S \subset \bigcup_{i=1}^m B_{ 3 \epsilon} (f_i).
 which shows that $S$ is pre-compact. 
 \end{proof}
 \subsection{Compact Subsets of $L^p$-Spaces}
+We can ask the same question as in the previous section but now for subsets of $L^p$-spaces. In this case the description of compact subsets is given by the Theorem of Riesz.
 \begin{thm}[Riesz's Theorem] Let $1 \leq p < \infty$, $A \subset L^p( \mathbb{R}^n)$. Then $A$ is pre-compact if and only if the following conditions are satisfied:
 \begin{enumerate}
 \item $A$ is bounded 
@@ -595,10 +598,45 @@ which shows that $S$ is pre-compact.
 \end{enumerate}
 \end{thm}
 \begin{rem} \  \begin{enumerate}
-\item The conditions 2 and 3 are nontrivial in the theorem of Riesz because they have to uniformly. If we drop the uniformity they are trivial (3 for instance follows by dominated convergence). 
+\item The conditions 2 and 3 are nontrivial in the theorem of Riesz because they have to hold uniformly. If we drop the uniformity they are trivial (3 for instance follows by dominated convergence). 
 \item The theorem holds true for subsets of $L^p( \mathbb{R}^n)$. There are also extensions to subsets of $L^p( \Omega)$, for measurable $\Omega \subset \mathbb{R}^n$. 
 \end{enumerate} 
 \end{rem}
+\newpage
+\begin{proof}
+"$\implies$" Since $A \subset L^p( \mathbb{R}^n$ is pre-compact, we have for arbitrary $\epsilon >0$ the existence of $g_1, \dots , g_n \in L^p( \mathbb{R}^n)$ with $A \subset \cup_{j=1}^n B_\epsilon (g_j).$ Now for $f \in A$ we find $f \in B_\epsilon(g_j)$ for an appropriate $j=1, \dots , n$ and thus 
+\begin{align*}
+\sup_{f \in A} \| f\|_p \leq \epsilon + \max_{j=1, \dots ,n} \| g_j\|
+\end{align*}
+and therefore 
+\begin{align*}
+\sup_{f \in A} \| f(. + h )-f \|_p &\leq 2 \epsilon + \max_{j=1, \dots , n} \|g_j(. + h) -g_j\|_p \\
+\sup_{f \in A} \| f\|_{L^p( \mathbb{R}^n \setminus B_R(0))} & \leq \epsilon + \max_{j=1, \dots , n} \|g_j\|_{L^p( \mathbb{R}^n \setminus B_R(0))}
+\end{align*}
+The RHS of the two inequalities above are certainly smaller than $3 \epsilon$, respecitively, $2 \epsilon$ if $|h|$ is small enough, respectively, if $R$ is large enough. To summarize, in a sketch of the proof we could say that "$\implies$" is trivial. 
+\\\\
+"$\Longleftarrow"$ Let $(\varphi_\epsilon)_{\epsilon >0}$ be a standard Dirac sequence and $R_\epsilon$ be such that $R_\epsilon \to \infty$ as $\epsilon \to 0$. For $f \in A$ let 
+\begin{align*}
+T_\epsilon f(x) = \int_{B_{R_\epsilon}(0)} \varphi_\epsilon (x-y)f(y)dy =( \varphi_ \epsilon * 1_{B_{R_\epsilon}(0)}f)(x)
+\end{align*}
+We then know that $T_\epsilon f \in L^p( \mathbb{R}^n)$ and with Hölder's inequality we can estimate 
+\begin{align*}
+\|T_ \epsilon f -f \|_p^p \leq \left( \sup_{|h| \leq \epsilon} \sup_{f \in A} \| f ( . + h)-f\|^p + \sup_{f \in A} \|f\|^p_{L^p( \mathbb{R}^n \setminus B_{R_\epsilon - \epsilon} (0)} \right)^p =: \kappa_\epsilon^p
+\end{align*}
+From the assumption we have $\kappa_\epsilon \to 0$ as $\epsilon \to 0$. Moreover we have $T_\epsilon f \in C_c^\infty ( B_{R_\epsilon + \epsilon}(0))$. The set 
+\begin{align*}
+B= \lbrace T_ \epsilon f : f \in A \rbrace \subset C( \overline{B_{R_\epsilon +\epsilon}(0)})
+\end{align*}
+is a bounded and equicontinuous subset of $C( \overline{B_{R_\epsilon +\epsilon}(0)})$ for every $\epsilon >0$. The equicontinuity follows from 
+\begin{align*}
+|T_\epsilon f(x) - T_\epsilon f(y)| \leq \| \Delta T_\epsilon f \|_\infty |x-y| \leq C(\epsilon)|x-y|
+\end{align*}
+where $C(\epsilon)$ depends on $\epsilon >0$ but not on $f \in A$. So from Arzela-Ascoli Theorem we can conclude that $B$ is pre-compact and thus cover it with epsilon balls. We then use that the $L^p$ norm on $ \overline{B_{R_\epsilon +\epsilon}(0)}$ can be estimated by the $C$-norm and we obtain that we can find $g_1, \dots , g_n \in L^p ( \mathbb{R}^n$ such that
+\begin{align*}
+A \subset \bigcup_{j=1}^n B_{\epsilon'} (g_j)
+\end{align*}
+which entails that $A\subset L^p(\mathbb{R}^n)$ is pre-compact. 
+\end{proof}
 \newpage
 \section{Linear Operators \& Functionals on Normed Spaces}
 \subsection{Continuous Operators}
@@ -1300,6 +1338,72 @@ X= \text{Ran}( \lambda-T)^{n_\lambda} \oplus \ker ( \lambda-T)^{n_\lambda}.
 Both subspaces are closed and invariant w.r.t. $T$ and we have that $\dim \ker ( \lambda-T)^{n_\lambda} < \infty$.
 \item For $\lambda \in \sigma(T) \setminus \{0 \}$ we have $\sigma(T_{ \mid \text{Ran}(\lambda-T)^{n_\lambda}}) = \sigma(T) \setminus \lbrace \lambda \rbrace$. 
 \item For $\lambda \in \sigma(T) \setminus \{0\}$ let $E_\lambda$ denote the projection on $\ker( \lambda-T)^{n_\lambda} $ along Ran$(\lambda-T)^{n_\lambda}$. Then $E_\lambda E_\mu = \delta_{\lambda, \mu} E_\lambda$ for all $\lambda, \mu \in \sigma(T) \setminus \{0 \}$. 
+\end{enumerate}
+\end{thm}
+\subsection{Normal compact operators}
+Let $X$ be a Banach space and $T \in \mathcal{L}(X)$. We recall again that the adjoint operator $T^* \in \mathcal{L}(X^*)$ is defined through $T^*f(x)=f(Tx)$ for all $f \in X^*,x \in X$. We already know that $\|T^*\| = \|T\|$ and $(T + \lambda S)^*=T^* + \lambda S^*$, $(TS)^*= S^*T^*$ and also $\sigma(T^*)= \sigma(T)$, finally we have already seen that $T$ is compact if and only if $T^*$ is compact. 
+\\\\
+If $H$ is a Hilbert space, then by the Riesz's Representation Theorem we can identify $H^*$ with $H$ through the map $R_H: H \to H^*$ which is an anti-linear isometric bijection between $H$ and $H^*$. (Recall that $(R_H(x))(y)= \langle x,y \rangle_H$). Thus we can interprete the adjoint operator in this case as a map in $\mathcal{L}(H)$. In other words, we can define the adjoint to $T \in \mathcal{L}(H)$ as 
+\begin{align*}
+T^\dag = R_H^{-1}T^* R_H
+\end{align*}
+Then $T^\dag \in \mathcal{L}(H)$ is characterized by the equation for all $x \in H$:
+\begin{align*}
+R_H T^\dag (x) = T^* R_H(x) &\iff (R_H T^\dag x)(y) = (R_Hx)(Ty), \text{ for all } y \in H \\
+& \iff \langle T^\dag x, y \rangle = \langle x, Ty \rangle, \text{ for all }  y \in H.
+\end{align*}
+From the above we deduce that $T^\dag \in \mathcal{L}(H)$ is the adjoint to $T \in \mathcal{L}(H)$ if and only if $\langle x,Ty \rangle = \langle T^*x, y \rangle$ for all $x,y \in H$. \newpage
+It is easy to derive from the properties of $T^* \in \mathcal{L}(H^*)$, the corresponding properties of $T^\dag \in \mathcal{L}(H)$. For $T,S \in \mathcal{L}(H), \lambda \in \mathbb{C}$ we have $(T+ \lambda S)^\dag = T^\dag + \overline{\lambda}S^\dag$ (because $R_H$ is anti-linear). Moreover $(TS)^\dag = S^\dag T^\dag$, $\|T^\dag\| = \|T\|$ and $T$ is compact if and only if $T^\dag$ is compact and $\sigma(T^\dag)= \overline{\sigma(T)}$.
+\begin{lem} Let $H$ be a Hilbert space, $T \in \mathcal{L}(H)$. Then $\ker T^\dag = (\text{Ran}T)^\perp$ and Ran$T^\dag = (\ker T)^\perp$
+\end{lem} 
+\begin{proof} Follows easily from
+\begin{align*}
+x \in \ker T^\dag &\iff T^\dag x=0 \iff \langle T^\dag x, y \rangle =0 \text{ for all } y \in H \\
+&\iff \langle x,Ty \rangle =0 \text{ for all } y \in H \iff x \perp \text{Ran}T.
+\end{align*}
+\end{proof}
+\begin{defn} An operator $T \in \mathcal{L}(H)$ is called self-adjoint if $T^\dag = T$ i.e. if $\langle x,Ty \rangle = \langle Tx, y \rangle$ for all $x,y \in H$. $T \in \mathcal{L}(H)$ is called normal if $T$ and $T^\dag$ commute, i.e. if $TT^\dag = T^\dag T$. Every self-adjoint operator is also normal. 
+\end{defn}
+\noindent A couple of important properties of normal operators are collected in the next theorem.
+\begin{thm} Let $T \in \mathcal{L}(H)$. Then 
+\begin{enumerate}
+\item $T$ normal implies that $T- \lambda$ is normal for all $\lambda \in \mathbb{C}$.
+\item $T$ is normal if and only if $\|Tx\| = \|T^\dag x \| $ for all $x \in H$.
+\item $T$ normal implies that $\ker( \lambda-T) = \ker ( \overline{\lambda}-T^\dag)$. 
+\end{enumerate}
+\end{thm}
+\noindent Another important property of normal operators is proved in the following lemma.
+\begin{lem} Let $T \in \mathcal{L}(H)$ be normal. Then $\|T^m \| = \|T\|^m$ for all $m \in \mathbb{N}$. 
+\end{lem}
+\noindent With the help of the above Lemma we immediately arrive that 
+\begin{cor}[Spectral radius for normal operators] Let $T \in \mathcal{L}(H)$ be normal. Then 
+\begin{align*}
+\sup_{ \lambda \in \sigma(T)} | \lambda| = \|T\|
+\end{align*}
+\end{cor}
+\newpage 
+\begin{thm}[Spectral theorem for normal compact operators] Let $H$ be a Hilbert space over $\mathbb{C},T \in \mathcal{K}(H)$ be also normal, $T \neq 0$. Then we have
+\begin{enumerate}
+\item There exists an orthonormal system $(e_k)_{k \in N}$ in $H$ and a sequence $( \lambda_k)_{k \in N}$ in $\mathbb{C}$ with $N \subset \mathbb{N}$, such that $\lambda_k \neq 0$ for all $k \in N$ and 
+\begin{align*}
+Te_k & &= \lambda_k e_k, \text{ for all } k \in N \\
+\sigma(T) \setminus \lbrace 0 \rbrace = \lbrace \lambda_k : k \in N \rbrace
+\end{align*}
+Moreover, if $|N|= \infty$, then $\lambda_k \to 0$ (notice that in this statement, the $\lambda_k$ do not need to be all different). 
+\item For all $k \in N$, we have 
+\begin{align*}
+n_{\lambda_k} = \max \lbrace n \in \mathbb{N}: \ker ( \lambda_k -T)^{n-1} \neq \ker( \lambda_k -T)^n \rbrace = 1
+\end{align*}
+\item We can decompose
+\begin{align*}
+H= \ker T \oplus \overline{\text{span} \{e_k : k \in N \}}
+\end{align*}
+and the two spaces are orthogonal to each other. 
+\item For all $ h \in H$, we have
+\begin{align*}
+Tx = \sum_{k \in N} \lambda_k \langle e_k, x \rangle e_k
+\end{align*}
+i.e. $T = \sum_{k \in N} \lambda_k P_k$, where $P_k$ is the orthogonal projection onto $e_k$. 
 \end{enumerate}
 \end{thm}
 \end{document}
