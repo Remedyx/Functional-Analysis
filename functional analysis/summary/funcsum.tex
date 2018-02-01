@@ -578,7 +578,7 @@ Then $\lbrace U_x\rbrace_{x \in K}$ is an open covering of $K$. I.e. there exist
 \begin{align*}
 R= \lbrace (f(x_1), \dots , f(x_n)) : f \in S \rbrace
 \end{align*}
-is a bounded subset of $\mathbb{C}^n$, equipped with the max-norm. Therefore, $R$ is pre-compact in $\mathbb{C}^n$, i.e. there exists $f_1, \dots , f_m \in S$, with 
+is a bounded subset of $\mathbb{C}^n$, equipped with the max-norm. Therefore, $R$ is pre-compact in $\mathbb{C}^n$ (since $\mathbb{C}^n$ is of finite dimension), i.e. there exists $f_1, \dots , f_m \in S$, with 
 \begin{align*}
 R \subset \bigcup_{i=1}^m B_\epsilon ( (f_i(x_1), \dots , f_i(x_n))
 \end{align*}
@@ -787,7 +787,7 @@ As $n \to \infty$ we find that $\|f\|_{M^*} \geq 1$. We summarize, $f \in M^*$ w
 \subsection{Reflexive normed spaces}
 Let $X$ be a normed space. Apart from the dual space $X^*$ also the bidual space $X^{**}$ plays an important role. We construct the canonical inclusion of $X$ in $X^{**}$ as follows: For $x \in X$ we define the linear function $\tilde{x}:X^* \to \mathbb{K}$ through 
 \begin{align*}
-\tilde{f}(x):=f(x)
+\tilde{x}(f):=f(x)
 \end{align*}
 Then indeed $\tilde{x}$ is continuous since $f \in X^*$ is continuous, hence we have $\tilde{x} \in X^{**}$. We define $J_X: X \to X^{**}$ as $J_X(x)= \tilde{x}$ and call it the canonical inclusion of $X$ in $X^{**}$. 
 \begin{thm} Let $X$ be a normed vector space over $\mathbb{K}$. Then the canonical inclusion $J_X:X \to X^{**}$ is a linear isometry. 
@@ -802,7 +802,7 @@ Then indeed $\tilde{x}$ is continuous since $f \in X^*$ is continuous, hence we 
 \end{thm}
 \subsection{Hilbert Space Methods}
 Hilbert spaces can be identified with their dual spaces, this is the subject of Riesz's Representation Theorem. 
-\begin{thm}[Riesz's Representation Theorem] Let $(H,( \cdot , \cdot))$ be an Hilbert space. Let $v \in H$ be arbitrary. The map $R_H^v : H \to H^*$ defined through $R_H^v(u)=(u,v)=\langle u,v\rangle_{H}$ is an anti-linear isometric isomorphism. 
+\begin{thm}[Riesz's Representation Theorem] Let $(H,( \cdot , \cdot))$ be an Hilbert space. Let $v \in H$ be arbitrary. The map $R_H^v : H \to H^*$ defined through $R_H^v(u)=(R_H(u))(v)=(u,v)=\langle u,v\rangle_{H}$ is an anti-linear isometric isomorphism. 
 \end{thm}
 \begin{proof}
 $\bullet$ $R_H$ is well defined because $R_H(u)$ is clearly linear and by $|(R_H(u))(v)| \leq | \langle u,v \rangle | \leq \|u \| \|v\|$ it follows that $R_H(u)$ is continuous. \\
@@ -857,7 +857,7 @@ A consequence of Riesz's representation theorem which is very useful in applicat
 \end{align*}
 Then there exists a linear operator $A: H \to H$ with
 \begin{align*}
-A(x,y) = (Ax,y), \text{ for all } x,y \in H
+a(x,y) = (Ax,y), \text{ for all } x,y \in H
 \end{align*}
 Moreover $A \in \mathcal{L}(H)$ is invertible with 
 \begin{align*}
@@ -869,7 +869,7 @@ For all fixed $x \in H$, the map $y \mapsto a(x,y)$ is in $H^*$ and we have
 \begin{align*}
 \| a(x, \cdot) \|_{H^*} = \sup_{ \|y \| \leq 1 } | a(x,y)| \leq C_0 \|x\|
 \end{align*}
-From Riesz's representation Theorem there exists for arbitrary $x \in H$, exactly one $A(x) \in H$ such that $a(x,y)=(A(x),y)$ for all $y \in H$ with $\|A(x)\| = \| a(x, \cdot) \|_{H^*} \leq C_0 \|x\|$. 
+From Riesz's representation Theorem there exists for arbitrary $x \in H$, exactly one $A(x) \in H$ such that $a(x,y)=(A(x),y)=(R_H(A(x)))(y)$ for all $y \in H$ with $\|A(x)\| = \| a(x, \cdot) \|_{H^*} \leq C_0 \|x\|$. 
 \\\\
 Moreover, we have that $A$ is linear because 
 \begin{align*}
@@ -1154,6 +1154,12 @@ Let $X$ be a normed space. As every topology, the weak topology $\tau_W$ induces
 \| x \| \leq \liminf_{k \to \infty} \|x_k\|
 \end{align*}
 \end{prop}
+\begin{proof}
+By assumption $f(x_k) \to f(x)$ for all $f \in X^*$. Hence, for every $f \in X^*$ there exists $c_f >0$ such that  $|J(x_k)(f)| = |f(x_k)| \leq c_f$ and thanks to Banach Steinhaus there exists $c>0$ such that $\|J(x_k)\| \leq c$ which implies that $\|x_k\| \leq c$. From Hahn-Banach there exists $f \in X^*$ with $\|f\|=1$ and $f(x)=\|x\|$ and thus we have 
+\begin{align*}
+\|x\| = f(x) = \lim f(x_k) \leq \liminf\| f\| \|x_k\| = \liminf \|x_k\|
+\end{align*}
+\end{proof}
 \newpage
 \subsection{Weak-* topology and compactness}
 For finite dimensional normed spaces, it is very easy to characterize compact sets thanks to the Heine Borel Theorem, a set $M$ is compact if and only if $M$ is bounded and closed. For infinite dimensional normed spaces, this is no longer true. We have also seen in Proposition \ref{compactunitball} that the closed unit ball $\overline{B_1(0)}$ is compact if and only if $\dim X < \infty$, in particular in the infinite dimensional case $\overline{B_1(0)}$ is neither covering nor sequentially compact. 
@@ -1169,6 +1175,18 @@ Equivalently, the product topology is the smallest topology on $X$, so that all 
 \end{rem}
 \begin{thm}[Banach-Alaoglu] Let $X$ be a normed space and $X^*$ its dual space. Then the closed unit ball $k_{X^*} = \lbrace f \in X^* : \| f \| \leq 1 \rbrace$ in $X^*$ is compact w.r.t the weak-* topology $\tau_W^*$. 
 \end{thm}
+\begin{proof}
+For $x \in X$ let $D_x:= \lbrace \alpha \in \mathbb{K}: | \alpha | \leq \|x\| \rbrace$., then $D_x$ is a compact space (in $\mathbb{K}$). If we set $P= \prod_{x \in X} D_x$ and equip it with the product topology $\tau_P$ then thanks to Tychonov's Theorem $P$ is also compact. We have $k_{X^*} = X^* \cap P$ because elements in $P$ can be thought of as maps $\varphi(x)= \alpha_x$ i.e. $| \varphi(x)| \leq \|x\|$. \\\\
+We show that $k_{X^*}$ is a closed subset of $P$ w.r.t. $\tau_P$ which implies that it's compact w.r.t to $\tau_P$. This follows because for $\sigma_{x,y, \lambda}:P \to \mathbb{K}$ given by 
+\begin{align*}
+\sigma_{x,y, \lambda} ( \varphi)= \varphi(x+ \lambda y)- \varphi(x)- \lambda \varphi(y)
+\end{align*}
+is continuous w.r.t to $\tau_P$ and since $\lbrace 0 \rbrace \subset \mathbb{K}$ is closed it also follows that $\sigma_{x,y, \lambda}^{-1}( \{0 \})$ is closed in $P$ but then 
+\begin{align*}
+k_{X^*} = \bigcap_{x,y \in X, \lambda \in \mathbb{K}} \sigma_{x,y, \lambda}^{-1}(\{0 \}), \text{ is closed in P}
+\end{align*}
+We then show that $ \tau_{W^*} \mid_{k_{X^*}} \subset \tau_P \mid_{k_{X^*}}$ and conclude the statement. 
+\end{proof}
 \noindent Since in general the weak-* topology is not metrizable, the notion of sequentially compactness is not equivalent to the notion of (covering) compactness. In fact, in general the unit ball in $X^*$ is not sequentially compact w.r.t $\tau_W^*$. The next theorem shows, however, that the unit ball in $X^*$ is sequentially compact, under the assumption that $X$ is also seperable. 
 \begin{thm} Let $X$ be a separable normed space. Then the closed unit ball $k_{X^*}$ in $X^*$ is sequentially compact, w.r.t. the $\tau_W^*$ topology. 
 \end{thm}
@@ -1176,14 +1194,33 @@ Equivalently, the product topology is the smallest topology on $X$, so that all 
 In this section, we consider reflexive Banach spaces and we show that, under appropriate assumptions, the closed unit ball in $X$ is compact and sequential compact w.r.t the $\tau_W$ topology. 
 \begin{prop} Let $X$ be a Banach space. Then $X$ is reflexive if and only if $k_X= \lbrace x \in X : \|x\| \leq 1\rbrace$ is compact w.r.t the $\tau_W$ topology. 
 \end{prop}
-\newpage
 \noindent For reflexive Banach spaces, $k_X$ is not only compact, it is also sequentially compact w.r.t. the topology $\tau_W$. 
 \begin{thm} Let $X$ be a reflexive Banach space. Then the closed unit ball $k_X$ is sequentially compact w.r.t. the topology $\tau_W$. In other words, every bounded sequence in $X$ has a $\tau_W$-convergent subsequence. 
 \end{thm}
 \subsection{Weak topology and convexity}
 A weakly convergent sequence $(x_n)_{n \in \mathbb{N}}$ in a Banach space $X$ has one additional neat property, that is often useful. If $x_n$ converges weakly, there exists namely another sequence, consisting of convex combinations of the elements of $x_n$, converging strongly (i.e. w.r.t. the norm topology). This results is known as the Lemma of Mazur. 
-\begin{thm} Let $X$ be a normed space over $\mathbb{K}$ and $A \subset X$ covex. Then $\overline{A}^{\tau_{\| \cdot \|}} = \overline{A}^{ \tau_W}$, i.e. the closure of $A$ w.r.t. the (strong) norm topology is the same as the closure of $A$ w.r.t. the weak topology. 
+\begin{thm}[Separation theorem] Let $X$ be a normed space over $\mathbb{K}$ and $M \subset X$ closed and convex and $x_0 \in X \setminus M$. Then there exists $F \in X^*$ and $\alpha \in \mathbb{R}$ with 
+\begin{align*}
+\text{Re } F(x) &\leq \alpha, \text{ for all } x \in M \text{ and } \\ 
+\text{Re } F(x_0) &> \alpha 
+\end{align*}
+i.e. $M$ and $x_0$ are divided/separated by the hyperplane Re $F(x) = \alpha$. 
 \end{thm}
+\begin{proof}
+Consider only $\mathbb{K}= \mathbb{R}$. 
+W.l.o.g. assume that $0$ is contained in the interior of $M$ and thus $\exists \rho >0$ such that $B_\rho(0) \subset M$. We define then the Minkowski function $p(x) := \inf \{ r>0: x/r \in M \}$ for all $x \in X$. We can then show that $p$ is a sublinear function and satisfies $p(x) \leq 1$ for all $x \in M$ and $p(x_0) >1$. Moreover we have $p(x) \leq 1/\rho \| x\|$
+\newpage
+Let now $f: \mathbb{R} \cdot x_0 \to \mathbb{R}$ be given by $f( \lambda x_0) = \lambda p(x_0)$ then we can show that $f(x) \leq p(x)$ for all $x \in \mathbb{R} \cdot x_0$ and thus from Hahn-Banach theorem there exists $F: X \to \mathbb{R}$ linear with $F_{ \mid \mathbb{R} \cdot x_0 } = f$ and $F(X) \leq p(x)$ for all $x \in X$. Therefore $F(X) \leq 1$ for all $x \in M$ and $F(x_0)= p(x_0) >1$. Moreover we can easily show that $|F(x)| \leq (1/ \rho) \|x\|$ and thus $F \in X^*$. 
+\end{proof}
+\begin{thm} Let $X$ be a normed space over $\mathbb{K}$ and $A \subset X$ convex. Then $\overline{A}^{\tau_{\| \cdot \|}} = \overline{A}^{ \tau_W}$, i.e. the closure of $A$ w.r.t. the (strong) norm topology is the same as the closure of $A$ w.r.t. the weak topology. 
+\end{thm}
+\begin{proof}
+Consider only $\mathbb{K}= \mathbb{R}$ Since $\tau_W \subset \tau_{ \|. \|}$ we have $\overline{A}^{ \tau_W} \supset \overline{A}^{ \tau_{ \| . \|}}$. Let now $x_0 \in \overline{A}^{ \tau_W}$ and assume for contradiction that $x_0 \notin \overline{A}^{ \tau_{ \|.\|}}$. Now $\overline{A}^{ \tau_{ \|.\|}}$ is closed and convex w.r.t $\tau_W$ we get from the separation theorem that there are $f \in X^*$ and $\alpha \in \mathbb{R}$ such that $f(x) \leq \alpha$ for all $x \in \overline{A}^{ \tau_{ \|.\|}}$ and $f(x_0) > \alpha$. Since
+\begin{align*}
+(f^{-1}((- \infty, \alpha]))^c = \{ x \in X : f(x) > \alpha \} = f^{-1}(( \alpha, \infty)) \in \tau_W
+\end{align*}
+we get that $f^{-1}((- \infty, \alpha])$ is $\tau_W$ closed and thus $\overline{A}^{ \tau_W} \subset f^{-1}((- \infty, \alpha])$ since the closure of $A$ w.r.t $\tau_W$ is the smallest closed set containing $A$. But we assumed that $x_0 \in \overline{A}^{\tau_W}\subset f^{-1}((- \infty, \alpha])$ and thus $f(x_0) < \alpha$ which is a contradiction to $f(x_0) > \alpha$. 
+\end{proof}
 \begin{cor}[Mazur's Lemma] Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in a Banach space $(X, \| \cdot \|)$, converging weakly towards $x$. Then there exists a sequence $(y_k)_{k \in \mathbb{N}}$ so that every $y_k$ is a finite convex combination of the elements $x_n$, i.e. for every $k \in \mathbb{N}$ we have
 \begin{align*}
 &y_k = \sum_{n \in \mathbb{N}} t_n^{(k)} x_n, \text{ s.t. for every fixed $k \in \mathbb{N}$, } t_n^{(k)} \neq 0 \text{ for only finitely many n} \\
@@ -1386,8 +1423,8 @@ x \in \ker T^\dag &\iff T^\dag x=0 \iff \langle T^\dag x, y \rangle =0 \text{ fo
 \begin{enumerate}
 \item There exists an orthonormal system $(e_k)_{k \in N}$ in $H$ and a sequence $( \lambda_k)_{k \in N}$ in $\mathbb{C}$ with $N \subset \mathbb{N}$, such that $\lambda_k \neq 0$ for all $k \in N$ and 
 \begin{align*}
-Te_k & &= \lambda_k e_k, \text{ for all } k \in N \\
-\sigma(T) \setminus \lbrace 0 \rbrace = \lbrace \lambda_k : k \in N \rbrace
+Te_k & = \lambda_k e_k, \text{ for all } k \in N \\
+\sigma(T) \setminus \lbrace 0 \rbrace &= \lbrace \lambda_k : k \in N \rbrace
 \end{align*}
 Moreover, if $|N|= \infty$, then $\lambda_k \to 0$ (notice that in this statement, the $\lambda_k$ do not need to be all different). 
 \item For all $k \in N$, we have 
@@ -1401,7 +1438,7 @@ H= \ker T \oplus \overline{\text{span} \{e_k : k \in N \}}
 and the two spaces are orthogonal to each other. 
 \item For all $ h \in H$, we have
 \begin{align*}
-Tx = \sum_{k \in N} \lambda_k \langle e_k, x \rangle e_k
+Th = \sum_{k \in N} \lambda_k \langle e_k, h \rangle e_k
 \end{align*}
 i.e. $T = \sum_{k \in N} \lambda_k P_k$, where $P_k$ is the orthogonal projection onto $e_k$. 
 \end{enumerate}
